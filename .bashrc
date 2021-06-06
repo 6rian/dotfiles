@@ -1,6 +1,8 @@
 export TERM=xterm-256color
 
 alias vimg='ristretto'
+alias xcopy='xclip -selection c'
+alias xpaste='xclip -selection c -o'
 
 # colorize aliases
 alias ls='grc ls'
