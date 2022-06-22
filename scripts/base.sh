@@ -12,4 +12,4 @@
   htop \
   grc \
   jq \
-  ifconfig
+  net-tools
