@@ -51,19 +51,25 @@ return packer.startup(function(use)
   -- Tab/Buffer line
   use { "akinsho/bufferline.nvim" }
 
-
+  -- Preserve layout when closing buffers
   use { "moll/vim-bbye" }
 
+  -- Helper functions
+  use { "nvim-lua/plenary.nvim" }
+
+  -- Terminal
+  use { "akinsho/toggleterm.nvim" } 
+
   --use { "windwp/nvim-autopairs", commit = "4fc96c8f3df89b6d23e5092d31c866c53a346347" } -- Autopairs, integrates with both cmp and treesitter
-  --use { "nvim-lua/plenary.nvim", commit = "4b7e52044bbb84242158d977a50c4cbcd85070c7" } -- Useful lua functions used by lots of plugins
   --use { "numToStr/Comment.nvim", commit = "97a188a98b5a3a6f9b1b850799ac078faa17ab67" }
   --use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "4d3a68c41a53add8804f471fcc49bb398fe8de08" }
-  --use { "akinsho/toggleterm.nvim", commit = "2a787c426ef00cb3488c11b14f5dcf892bbd0bda" }
   --use { "ahmedkhalf/project.nvim", commit = "628de7e433dd503e782831fe150bb750e56e55d6" }
   --use { "lewis6991/impatient.nvim", commit = "b842e16ecc1a700f62adb9802f8355b99b52a5a6" }
   --use { "lukas-reineke/indent-blankline.nvim", commit = "db7cbcb40cc00fc5d6074d7569fb37197705e7f6" }
+  --use {"folke/which-key.nvim"}
+  
+  -- Home screen
   --use { "goolord/alpha-nvim", commit = "0bb6fc0646bcd1cdb4639737a1cee8d6e08bcc31" }
-	--use {"folke/which-key.nvim"}
 
 	-- Colorschemes
   use { "folke/tokyonight.nvim" }
@@ -89,13 +95,16 @@ return packer.startup(function(use)
   --use { "RRethy/vim-illuminate", commit = "a2e8476af3f3e993bb0d6477438aad3096512e42" }
 
 	-- Telescope
-	--use { "nvim-telescope/telescope.nvim", commit = "76ea9a898d3307244dce3573392dcf2cc38f340f" }
+	use { "nvim-telescope/telescope.nvim" } 
 
-	-- Treesitter
-	--use {
-		--"nvim-treesitter/nvim-treesitter",
-		--commit = "8e763332b7bf7b3a426fd8707b7f5aa85823a5ac",
-	--}
+  -- Treesitter
+  use {
+      "nvim-treesitter/nvim-treesitter",
+      run = function()
+          local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+          ts_update()
+      end,
+  }
 
 	-- Git
 	--use { "lewis6991/gitsigns.nvim", commit = "2c6f96dda47e55fa07052ce2e2141e8367cbaaf2" }
