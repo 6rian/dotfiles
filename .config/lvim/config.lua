@@ -11,6 +11,9 @@ lvim.colorscheme = "tokyodark"
 
 lvim.format_on_save = true
 
+vim.o.relativenumber = true
+vim.o.number = true
+
 -- =====================================================================
 -- = Keybindings
 -- =====================================================================
