@@ -5,9 +5,11 @@
 
 lvim.plugins = {
   { "tiagovla/tokyodark.nvim" },
+  { "EdenEast/nightfox.nvim" },
 }
 
-lvim.colorscheme = "tokyodark"
+-- lvim.colorscheme = "tokyodark"
+lvim.colorscheme = "carbonfox"
 
 lvim.format_on_save = true
 
