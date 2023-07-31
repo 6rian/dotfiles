@@ -7,6 +7,7 @@ lvim.plugins = {
   { "tiagovla/tokyodark.nvim" },
   { "EdenEast/nightfox.nvim" },
   { "dasupradyumna/midnight.nvim" },
+  { "f-person/git-blame.nvim" },
 }
 
 -- lvim.colorscheme = "tokyodark"
