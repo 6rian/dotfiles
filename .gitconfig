@@ -1,0 +1,15 @@
+[user]
+  name = Brian Griffin
+  email = wbgriffin@pm.me
+  username = 6rian
+[core]
+  editor = nvim
+[init]
+  defaultBranch = main
+[alias]
+  c = commit
+  cm = commit -m
+  co = checkout
+  lol = log --oneline --decorate --graph
+  ss = status -s
+
