@@ -19,4 +19,11 @@
         - When switching to an application, switch to a Space with open windows for the application: On
         - Group windows by application: Off
         - Displays have separate Spaces: On
+- Keyboard ->
+    - Keyboard Shortcuts ->
+        - Mission Control ->
+            - Turn Do Not Disturb On/Off: Shift+Cmd+D
+            - Mission Control -> Check everything.
+        - Modifier Keys ->
+            - Caps Lock: Control
 
