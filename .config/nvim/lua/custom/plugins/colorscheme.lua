@@ -1,14 +1,35 @@
 return {
-  'tiagovla/tokyodark.nvim',
+  'scottmckendry/cyberdream.nvim',
+  lazy = false,
+  priority = 1000,
   opts = {
-    -- custom options here
-    transparent_background = true,
+    transparent = true,
+    borderless_telescope = false, -- removes bg color from telescope
+    italic_comments = true,
+    theme = {
+      saturation = 1,
+    },
+    -- extensions = {
+    --   lualine = false,
+    -- },
   },
   config = function(_, opts)
-    require('tokyodark').setup(opts) -- calling setup is optional
-    vim.cmd [[colorscheme tokyodark]]
+    require('cyberdream').setup(opts)
+    vim.cmd [[colorscheme cyberdream]]
   end,
 }
+
+-- return {
+--   'tiagovla/tokyodark.nvim',
+--   opts = {
+--     -- custom options here
+--     transparent_background = true,
+--   },
+--   config = function(_, opts)
+--     require('tokyodark').setup(opts) -- calling setup is optional
+--     vim.cmd [[colorscheme tokyodark]]
+--   end,
+-- }
 
 -- return {
 --   'olivercederborg/poimandres.nvim',
