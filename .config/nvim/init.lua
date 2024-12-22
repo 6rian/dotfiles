@@ -941,6 +941,7 @@ require('lazy').setup({
         'markdown',
         'markdown_inline',
         'php',
+        'prettier',
         'python',
         'query',
         'ssh_config',
