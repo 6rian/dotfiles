@@ -1,23 +1,49 @@
 return {
-  'scottmckendry/cyberdream.nvim',
+  '0xstepit/flow.nvim',
   lazy = false,
   priority = 1000,
+  tag = 'v1.0.0',
   opts = {
-    transparent = true,
-    borderless_telescope = false, -- removes bg color from telescope
-    italic_comments = true,
     theme = {
-      saturation = 1,
+      style = 'dark', --  "dark" | "light"
+      contrast = 'high', -- "default" | "high"
+      transparent = true, -- true | false
     },
-    -- extensions = {
-    --   lualine = false,
-    -- },
+    colors = {
+      mode = 'default', -- "default" | "dark" | "light"
+      fluo = 'pink', -- "pink" | "cyan" | "yellow" | "orange" | "green"
+    },
+    ui = {
+      borders = 'theme', -- "theme" | "inverse" | "fluo" | "none"
+      aggressive_spell = false, -- true | false
+    },
   },
   config = function(_, opts)
-    require('cyberdream').setup(opts)
-    vim.cmd [[colorscheme cyberdream]]
+    require('flow').setup(opts)
+    vim.cmd 'colorscheme flow'
   end,
 }
+
+-- return {
+--   'scottmckendry/cyberdream.nvim',
+--   lazy = false,
+--   priority = 1000,
+--   opts = {
+--     transparent = true,
+--     borderless_telescope = false, -- removes bg color from telescope
+--     italic_comments = true,
+--     theme = {
+--       saturation = 1,
+--     },
+--     -- extensions = {
+--     --   lualine = false,
+--     -- },
+--   },
+--   config = function(_, opts)
+--     require('cyberdream').setup(opts)
+--     vim.cmd [[colorscheme cyberdream]]
+--   end,
+-- }
 
 -- return {
 --   'tiagovla/tokyodark.nvim',
