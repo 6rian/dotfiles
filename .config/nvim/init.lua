@@ -112,6 +112,8 @@ vim.opt.showmode = false
 -- Insert 2 spaces for a tab
 vim.opt.tabstop = 2
 
+vim.opt.shiftwidth = 2
+
 -- Convert tabs to spaces
 vim.opt.expandtab = true
 
