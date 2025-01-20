@@ -1,0 +1,22 @@
+## vim:fileencoding=utf-8
+
+# ghostty +list-themes to see all available themes
+theme = "hardcore"
+
+# ghostty +list-fonts to see all available fonts
+font-family = "Hack Nerd Font Mono"
+font-size = 14
+
+background = "#000000"
+background-opacity = 0.7
+background-blur-radius = 20
+
+cursor-style = "underline"
+
+macos-titlebar-style = "tabs"
+macos-option-as-alt = true
+
+macos-icon = "custom-style"
+macos-icon-frame = "beige"
+macos-icon-ghost-color = "#4E00A1"
+macos-icon-screen-color = "#1D003D"
