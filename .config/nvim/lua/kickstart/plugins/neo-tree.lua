@@ -19,6 +19,11 @@ return {
         hide_dotfiles = false,
         hide_hidden = false,
       },
+      follow_current_file = {
+        enabled = true,
+        leave_dirs_open = false,
+      },
+      hijack_netrw_behavior = 'open_default',
       window = {
         mappings = {
           ['\\'] = 'close_window',
