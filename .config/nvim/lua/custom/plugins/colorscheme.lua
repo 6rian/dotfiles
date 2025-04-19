@@ -1,28 +1,40 @@
 return {
-  '0xstepit/flow.nvim',
+  'srt0/codescope.nvim',
   lazy = false,
   priority = 1000,
-  tag = 'v2.0.1',
-  opts = {
-    theme = {
-      style = 'dark', --  "dark" | "light"
-      contrast = 'high', -- "default" | "high"
-      transparent = true, -- true | false
-    },
-    colors = {
-      mode = 'default', -- "default" | "dark" | "light"
-      fluo = 'pink', -- "pink" | "cyan" | "yellow" | "orange" | "green"
-    },
-    ui = {
-      borders = 'theme', -- "theme" | "inverse" | "fluo" | "none"
-      aggressive_spell = false, -- true | false
-    },
-  },
-  config = function(_, opts)
-    require('flow').setup(opts)
-    vim.cmd 'colorscheme flow'
+  config = function()
+    require('codescope').setup {
+      transparent = true, -- Set to true for transparency
+    }
+    vim.cmd.colorscheme 'codescope'
   end,
 }
+
+-- return {
+--   '0xstepit/flow.nvim',
+--   lazy = false,
+--   priority = 1000,
+--   tag = 'v2.0.1',
+--   opts = {
+--     theme = {
+--       style = 'dark', --  "dark" | "light"
+--       contrast = 'high', -- "default" | "high"
+--       transparent = true, -- true | false
+--     },
+--     colors = {
+--       mode = 'default', -- "default" | "dark" | "light"
+--       fluo = 'pink', -- "pink" | "cyan" | "yellow" | "orange" | "green"
+--     },
+--     ui = {
+--       borders = 'theme', -- "theme" | "inverse" | "fluo" | "none"
+--       aggressive_spell = false, -- true | false
+--     },
+--   },
+--   config = function(_, opts)
+--     require('flow').setup(opts)
+--     vim.cmd 'colorscheme flow'
+--   end,
+-- }
 
 -- return {
 --   'scottmckendry/cyberdream.nvim',
