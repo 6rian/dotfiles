@@ -10,6 +10,8 @@ return {
   { import = 'plugins.editor.neo-tree' },
   { import = 'plugins.editor.tmux' },
 
+  { import = 'plugins.formatting.conform' },
+
   { import = 'plugins.ui.colorschemes.tokyonight' },
   { import = 'plugins.ui.treesitter-context' },
 
