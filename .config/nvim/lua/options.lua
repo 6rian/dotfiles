@@ -71,10 +71,10 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
--- -- Insert 2 spaces for a tab
--- vim.o.tabstop = 2
---
--- vim.o.shiftwidth = true
+-- Insert 2 spaces for a tab
+vim.o.tabstop = 2
+
+vim.o.shiftwidth = 2
 
 -- Convert tabs to spaces
 vim.o.expandtab = true
