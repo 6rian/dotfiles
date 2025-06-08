@@ -1,4 +1,5 @@
 return {
+  { import = 'plugins.coding.highlights' },
   { import = 'plugins.coding.todo-comments' },
 
   { import = 'plugins.editor.completions' },
