@@ -1,5 +1,6 @@
 return {
   { import = 'plugins.coding.highlights' },
+  { import = 'plugins.coding.lsp' },
   { import = 'plugins.coding.todo-comments' },
 
   { import = 'plugins.editor.completions' },
@@ -9,6 +10,7 @@ return {
   { import = 'plugins.editor.neo-tree' },
   { import = 'plugins.editor.tmux' },
 
+  { import = 'plugins.ui.colorschemes.tokyonight' },
   { import = 'plugins.ui.treesitter-context' },
 
   { import = 'plugins.utils.which-key' },
