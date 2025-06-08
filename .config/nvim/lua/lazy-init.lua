@@ -26,16 +26,9 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   { import = 'plugins' },
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-
-  -- NOTE: Plugins can also be added by using a table,
-  -- with the first argument being the link and the following
-  -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
-
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
@@ -50,19 +43,6 @@ require('lazy').setup({
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`.
   --
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
