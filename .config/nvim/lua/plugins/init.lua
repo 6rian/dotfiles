@@ -5,6 +5,7 @@ return {
   { import = 'plugins.editor.gitsigns' },
   { import = 'plugins.editor.guess-indent' },
   { import = 'plugins.editor.lazygit' },
+  { import = 'plugins.editor.neo-tree' },
   { import = 'plugins.editor.tmux' },
 
   { import = 'plugins.ui.treesitter-context' },
