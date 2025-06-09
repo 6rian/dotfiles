@@ -6,10 +6,27 @@ return {
     config = function()
       local fm = require 'fluoromachine'
 
+      function overrides(c, color)
+        -- local darken = color.darken
+        -- local lighten = color.lighten
+        -- local blend = color.blend
+        -- local shade = color.shade
+        -- local tint = color.tint
+        return {
+          -- TelescopeResultsBorder = { fg = c.purple, bg = 'NONE' },
+          TelescopeResultsNormal = { fg = '#ffffff', bg = 'NONE' },
+          -- TelescopePreviewNormal = { bg = c.bg },
+          -- TelescopePromptBorder = { fg = c.bgdark, bg = c.bgdark },
+          -- TelescopeTitle = { fg = c.red, bg = shade(c.red, 5) },
+          -- TelescopePromptPrefix = { fg = c.purple },
+        }
+      end
+
       fm.setup {
         glow = true,
-        theme = 'fluoromachine',
+        theme = 'fluoromachine', -- 'fluoromachine', 'delta', 'retrowave'
         transparent = true,
+        overrides = overrides,
       }
 
       vim.cmd.colorscheme 'fluoromachine'
