@@ -18,7 +18,8 @@ return {
 
   { import = 'plugins.formatting.conform' },
 
-  -- { import = 'plugins.ui.colorschemes.citruszest' },
+  { import = 'plugins.ui.colorschemes.catpuccin' },
+  { import = 'plugins.ui.colorschemes.citruszest' },
   { import = 'plugins.ui.colorschemes.flouromachine' },
   { import = 'plugins.ui.colorschemes.tokyonight' },
   { import = 'plugins.ui.treesitter-context' },

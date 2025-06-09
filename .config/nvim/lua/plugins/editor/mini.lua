@@ -41,7 +41,13 @@ return {
     require('mini.colors').setup()
     require('mini.move').setup()
     require('mini.operators').setup()
-    require('mini.splitjoin').setup()
+    require('mini.splitjoin').setup {
+      mappings = {
+        toggle = 'gst',
+        split = 'gsp',
+        join = 'gsj',
+      },
+    }
 
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     --
