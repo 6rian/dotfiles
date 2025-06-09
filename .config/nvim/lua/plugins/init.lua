@@ -1,4 +1,7 @@
 return {
+  { import = 'plugins.ai.copilot' },
+
+  { import = 'plugins.coding.autotag' },
   { import = 'plugins.coding.highlights' },
   { import = 'plugins.coding.lsp' },
   { import = 'plugins.coding.todo-comments' },
@@ -18,5 +21,6 @@ return {
   { import = 'plugins.ui.colorschemes.tokyonight' },
   { import = 'plugins.ui.treesitter-context' },
 
+  { import = 'plugins.utils.hardtime' },
   { import = 'plugins.utils.which-key' },
 }
