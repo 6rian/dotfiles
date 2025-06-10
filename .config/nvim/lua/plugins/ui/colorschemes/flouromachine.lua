@@ -13,6 +13,10 @@ return {
         -- local shade = color.shade
         -- local tint = color.tint
         return {
+          -- Snacks.nvim
+          NormalFloat = { fg = '#ffffff', bg = 'NONE' },
+
+          TelescopeNormal = { fg = '#ffffff', bg = 'NONE' },
           -- TelescopeResultsBorder = { fg = c.purple, bg = 'NONE' },
           TelescopeResultsNormal = { fg = '#ffffff', bg = 'NONE' },
           -- TelescopePreviewNormal = { bg = c.bg },
