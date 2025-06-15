@@ -13,9 +13,15 @@ return {
         -- local shade = color.shade
         -- local tint = color.tint
         return {
+          -- LSP
+          String = { fg = '#ffffff' },
+          ['@lsp.type.parameter'] = { fg = '#a6e12d' },
+          ['@variable.parameter'] = { fg = '#a6e12d' },
+
           -- Snacks.nvim
           NormalFloat = { fg = '#ffffff', bg = 'NONE' },
 
+          -- Telescope
           TelescopeNormal = { fg = '#ffffff', bg = 'NONE' },
           -- TelescopeResultsBorder = { fg = c.purple, bg = 'NONE' },
           TelescopeResultsNormal = { fg = '#ffffff', bg = 'NONE' },
