@@ -8,8 +8,8 @@
   defaultBranch = main
 [alias]
   c = commit
-  cm = commit -m
   co = checkout
+  cm = commit -m
   lol = log --oneline --decorate --graph
+  po = push origin
   ss = status -s
-
