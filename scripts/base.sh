@@ -7,9 +7,19 @@
 
  sudo apt install -y curl \
   git \
-  tmux \
-  vim \
-  htop \
   grc \
+  fzf \
+  htop \
   jq \
-  net-tools
+  net-tools \
+  nmap \
+  ripgrep \
+  tmux \
+  unzip \
+  vim \
+  wget
+
+
+
+# neovim
+# lazygit
