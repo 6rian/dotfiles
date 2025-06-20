@@ -23,6 +23,7 @@ return {
   { import = 'plugins.ui.colorschemes.cyberdream' },
   { import = 'plugins.ui.colorschemes.flouromachine' },
   { import = 'plugins.ui.colorschemes.material' },
+  { import = 'plugins.ui.colorschemes.rosepine' },
   { import = 'plugins.ui.colorschemes.tokyonight' },
   { import = 'plugins.ui.treesitter-context' },
 
