@@ -1,5 +1,6 @@
 return {
-  { import = 'plugins.ai.copilot' },
+  -- { import = 'plugins.ai.copilot' },
+  { import = 'plugins.ai.avante' },
 
   { import = 'plugins.coding.autotag' },
   { import = 'plugins.coding.highlights' },
@@ -19,14 +20,13 @@ return {
   { import = 'plugins.formatting.conform' },
 
   { import = 'plugins.ui.colorschemes.catpuccin' },
-  { import = 'plugins.ui.colorschemes.citruszest' },
-  { import = 'plugins.ui.colorschemes.cyberdream' },
-  { import = 'plugins.ui.colorschemes.flouromachine' },
-  { import = 'plugins.ui.colorschemes.material' },
-  { import = 'plugins.ui.colorschemes.rosepine' },
-  { import = 'plugins.ui.colorschemes.tokyonight' },
-  { import = 'plugins.ui.treesitter-context' },
+  -- { import = 'plugins.ui.colorschemes.citruszest' },
+  -- { import = 'plugins.ui.colorschemes.cyberdream' },
+  -- { import = 'plugins.ui.colorschemes.flouromachine' },
+  -- { import = 'plugins.ui.colorschemes.material' },
+  -- { import = 'plugins.ui.colorschemes.rosepine' },
+  -- { import = 'plugins.ui.colorschemes.tokyonight' },
+  -- { import = 'plugins.ui.treesitter-context' },
 
-  { import = 'plugins.utils.hardtime' },
   { import = 'plugins.utils.which-key' },
 }

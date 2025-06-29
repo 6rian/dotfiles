@@ -17,9 +17,8 @@
   tmux \
   unzip \
   vim \
-  wget
-
-
+  wget \
+  zsh
 
 # neovim
 # lazygit
