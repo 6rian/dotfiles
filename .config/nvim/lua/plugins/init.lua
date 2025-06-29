@@ -20,7 +20,7 @@ return {
 
   { import = 'plugins.formatting.conform' },
 
-  { import = 'plugins.ui.colorschemes.catpuccin' },
+  { import = 'plugins.ui.colorschemes.catppuccin' },
   -- { import = 'plugins.ui.colorschemes.citruszest' },
   -- { import = 'plugins.ui.colorschemes.cyberdream' },
   -- { import = 'plugins.ui.colorschemes.flouromachine' },
