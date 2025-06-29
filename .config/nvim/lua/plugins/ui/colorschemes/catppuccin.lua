@@ -14,7 +14,7 @@ return {
     dim_inactive = {
       enabled = true, -- dims the background color of inactive window
       shade = 'dark',
-      percentage = 0.5, -- percentage of the shade to apply to the inactive window
+      percentage = 0.7, -- percentage of the shade to apply to the inactive window
     },
     no_italic = false, -- Force no italic
     no_bold = false, -- Force no bold
@@ -94,14 +94,26 @@ return {
     custom_highlights = {},
     default_integrations = true,
     integrations = {
+      blink_cmp = {
+        style = 'bordered',
+      },
       cmp = true,
       gitsigns = true,
+      fzf = true,
+      markdown = true,
+      mason = true,
+      neotree = true,
       nvimtree = true,
       treesitter = true,
+      treesitter_context = true,
       notify = false,
       mini = {
         enabled = true,
         indentscope_color = '',
+      },
+      snacks = {
+        enabled = false,
+        indent_scope_color = '', -- catppuccin color (eg. `lavender`) Default: text
       },
       telescope = {
         enabled = true,
