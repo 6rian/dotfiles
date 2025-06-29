@@ -39,6 +39,7 @@ return {
 
     require('mini.bracketed').setup()
     require('mini.colors').setup()
+    require('mini.icons').setup()
     require('mini.move').setup()
     require('mini.operators').setup()
     require('mini.splitjoin').setup {

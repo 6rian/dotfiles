@@ -100,6 +100,7 @@ return {
       cmp = true,
       gitsigns = true,
       fzf = true,
+      lsp_trouble = true,
       markdown = true,
       mason = true,
       neotree = true,

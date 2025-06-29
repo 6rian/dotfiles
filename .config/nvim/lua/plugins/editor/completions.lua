@@ -30,6 +30,10 @@ return {
       opts = {},
     },
     'folke/lazydev.nvim',
+    'mgalliou/blink-cmp-tmux',
+    'alexandre-abrioux/blink-cmp-npm.nvim',
+    'Kaiser-Yang/blink-cmp-avante',
+    'bydlw98/blink-cmp-env',
   },
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
@@ -72,12 +76,81 @@ return {
       -- By default, you may press `<c-space>` to show the documentation.
       -- Optionally, set `auto_show = true` to show the documentation after a delay.
       documentation = { auto_show = false, auto_show_delay_ms = 500 },
+      menu = {
+        draw = {
+          components = {
+            kind_icon = {
+              text = function(ctx)
+                local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+                return kind_icon
+              end,
+              -- (optional) use highlights from mini.icons
+              highlight = function(ctx)
+                local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                return hl
+              end,
+            },
+            kind = {
+              -- (optional) use highlights from mini.icons
+              highlight = function(ctx)
+                local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                return hl
+              end,
+            },
+          },
+        },
+      },
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev' },
+      default = { 'avante', 'lsp', 'path', 'snippets', 'lazydev', 'npm', 'tmux', 'env' },
       providers = {
+        avante = {
+          module = 'blink-cmp-avante',
+          name = 'Avante',
+          opts = {
+            -- options for blink-cmp-avante
+          },
+        },
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        npm = {
+          name = 'npm',
+          module = 'blink-cmp-npm',
+          async = true,
+          -- optional - make blink-cmp-npm completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+          -- optional - blink-cmp-npm config
+          ---@module "blink-cmp-npm"
+          ---@type blink-cmp-npm.Options
+          opts = {
+            ignore = {},
+            only_semantic_versions = true,
+            only_latest_version = false,
+          },
+        },
+        tmux = {
+          module = 'blink-cmp-tmux',
+          name = 'tmux',
+          -- default options
+          opts = {
+            all_panes = false,
+            capture_history = false,
+            -- only suggest completions from `tmux` if the `trigger_chars` are
+            -- used
+            triggered_only = false,
+            trigger_chars = { '.' },
+          },
+        },
+        env = {
+          name = 'Env',
+          module = 'blink-cmp-env',
+          --- @type blink-cmp-env.Options
+          opts = {
+            item_kind = require('blink.cmp.types').CompletionItemKind.Variable,
+            show_braces = false,
+            show_documentation_window = true,
+          },
+        },
       },
     },
 
