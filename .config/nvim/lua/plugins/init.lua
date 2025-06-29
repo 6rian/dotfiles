@@ -6,6 +6,7 @@ return {
   { import = 'plugins.coding.highlights' },
   { import = 'plugins.coding.lsp' },
   { import = 'plugins.coding.todo-comments' },
+  { import = 'plugins.coding.trouble' },
 
   { import = 'plugins.editor.completions' },
   { import = 'plugins.editor.gitsigns' },
