@@ -39,7 +39,7 @@ return {
         overrides = overrides,
       }
 
-      vim.cmd.colorscheme 'fluoromachine'
+      -- vim.cmd.colorscheme 'fluoromachine'
     end,
   },
 }
