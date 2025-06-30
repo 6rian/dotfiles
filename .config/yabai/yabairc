@@ -32,3 +32,4 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
 yabai -m rule --add app="^Stickies$" manage=off
 yabai -m rule --add app="^Bear$" manage=off
+yabai -m rule --add app="^ColorSlurp$" manage=off
