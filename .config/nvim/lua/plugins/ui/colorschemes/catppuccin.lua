@@ -124,6 +124,7 @@ return {
     },
     init = function()
       vim.cmd.colorscheme 'catppuccin'
+      vim.api.nvim_set_hl(0, 'FloatermBorder', { fg = '#AD6FF7', bg = '#000000' }) -- fg=pink, bg=black
     end,
   },
 }

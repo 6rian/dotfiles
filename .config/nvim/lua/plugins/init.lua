@@ -8,7 +8,7 @@ return {
   { import = 'plugins.coding.todo-comments' },
   { import = 'plugins.coding.trouble' },
 
-  { import = 'plugins.editor.completions' },
+  { import = 'plugins.editor.blink' },
   { import = 'plugins.editor.gitsigns' },
   { import = 'plugins.editor.guess-indent' },
   { import = 'plugins.editor.lazygit' },
@@ -30,5 +30,6 @@ return {
   -- { import = 'plugins.ui.colorschemes.tokyonight' },
   -- { import = 'plugins.ui.treesitter-context' },
 
+  { import = 'plugins.utils.vim-floaterm' },
   { import = 'plugins.utils.which-key' },
 }
