@@ -30,6 +30,7 @@ return {
   -- { import = 'plugins.ui.colorschemes.tokyonight' },
   -- { import = 'plugins.ui.treesitter-context' },
 
+  { import = 'plugins.utils.cmdpallette' },
   { import = 'plugins.utils.vim-floaterm' },
   { import = 'plugins.utils.which-key' },
 }
