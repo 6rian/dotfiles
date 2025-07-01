@@ -33,7 +33,7 @@ return {
     'mgalliou/blink-cmp-tmux',
     'alexandre-abrioux/blink-cmp-npm.nvim',
     'Kaiser-Yang/blink-cmp-avante',
-    'bydlw98/blink-cmp-env',
+    -- 'bydlw98/blink-cmp-env',
   },
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
@@ -75,8 +75,13 @@ return {
     completion = {
       -- By default, you may press `<c-space>` to show the documentation.
       -- Optionally, set `auto_show = true` to show the documentation after a delay.
-      documentation = { auto_show = false, auto_show_delay_ms = 500 },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+        window = { border = 'single' },
+      },
       menu = {
+        border = 'single',
         draw = {
           components = {
             kind_icon = {
@@ -103,7 +108,7 @@ return {
     },
 
     sources = {
-      default = { 'avante', 'lsp', 'path', 'snippets', 'lazydev', 'npm', 'tmux', 'env' },
+      default = { 'avante', 'lsp', 'path', 'snippets', 'lazydev', 'npm', 'tmux' },
       providers = {
         avante = {
           module = 'blink-cmp-avante',
@@ -141,16 +146,16 @@ return {
             trigger_chars = { '.' },
           },
         },
-        env = {
-          name = 'Env',
-          module = 'blink-cmp-env',
-          --- @type blink-cmp-env.Options
-          opts = {
-            item_kind = require('blink.cmp.types').CompletionItemKind.Variable,
-            show_braces = false,
-            show_documentation_window = true,
-          },
-        },
+        -- env = {
+        --   name = 'Env',
+        --   module = 'blink-cmp-env',
+        --   --- @type blink-cmp-env.Options
+        --   opts = {
+        --     item_kind = require('blink.cmp.types').CompletionItemKind.Variable,
+        --     show_braces = false,
+        --     show_documentation_window = true,
+        --   },
+        -- },
       },
     },
 
@@ -166,6 +171,9 @@ return {
     fuzzy = { implementation = 'lua' },
 
     -- Shows a signature help window while you type arguments for a function
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      window = { border = 'single' },
+    },
   },
 }
