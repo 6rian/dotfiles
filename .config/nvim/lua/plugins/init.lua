@@ -28,7 +28,8 @@ return {
   -- { import = 'plugins.ui.colorschemes.material' },
   -- { import = 'plugins.ui.colorschemes.rosepine' },
   -- { import = 'plugins.ui.colorschemes.tokyonight' },
-  -- { import = 'plugins.ui.treesitter-context' },
+  { import = 'plugins.ui.markdown' },
+  { import = 'plugins.ui.treesitter-context' },
 
   { import = 'plugins.utils.fine-cmdline' },
   { import = 'plugins.utils.vim-floaterm' },
