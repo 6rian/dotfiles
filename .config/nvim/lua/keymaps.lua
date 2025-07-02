@@ -5,6 +5,9 @@ local opts = { noremap = true, silent = true }
 keymap.set('i', 'jk', '<ESC>', opts)
 keymap.set('i', 'jk', '<ESC>', opts)
 
+-- Close quickfix list
+keymap.set('n', '<leader>qc', '<cmd>cclose<CR>', { desc = 'Close quickfix list', noremap = true })
+
 -- [[ Basic Keymaps ]]
 --  See `:help keymap.set()`
 
