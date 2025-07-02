@@ -78,3 +78,9 @@ vim.o.shiftwidth = 2
 
 -- Convert tabs to spaces
 vim.o.expandtab = true
+
+-- Enable true color
+vim.o.termguicolors = true
+
+-- Always show the tabline
+vim.o.showtabline = 1

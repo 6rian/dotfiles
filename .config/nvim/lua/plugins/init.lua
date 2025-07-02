@@ -1,3 +1,12 @@
+-- Custom Plugin Keymaps
+local keymap = vim.keymap
+
+-- Colorizer
+keymap.set('n', '<leader>ca', '<cmd>ColorizerAttachToBuffer<CR>', { desc = 'Colorizer: Attach to buffer', noremap = true })
+keymap.set('n', '<leader>cd', '<cmd>ColorizerDetachFromBuffer<CR>', { desc = 'Colorizer: Attach to buffer', noremap = true })
+keymap.set('n', '<leader>ct', '<cmd>ColorizerReloadAllBuffers<CR>', { desc = 'Colorizer: Attach to buffer', noremap = true })
+keymap.set('n', '<leader>cr', '<cmd>ColorizerToggle<CR>', { desc = 'Colorizer: Attach to buffer', noremap = true })
+
 return {
   -- { import = 'plugins.ai.copilot' },
   { import = 'plugins.ai.avante' },
@@ -9,6 +18,7 @@ return {
   { import = 'plugins.coding.trouble' },
 
   { import = 'plugins.editor.blink' },
+  { import = 'plugins.editor.bufferline' },
   { import = 'plugins.editor.gitsigns' },
   { import = 'plugins.editor.guess-indent' },
   { import = 'plugins.editor.lazygit' },
@@ -21,6 +31,7 @@ return {
 
   { import = 'plugins.formatting.conform' },
 
+  { import = 'plugins.ui.colorizer' },
   { import = 'plugins.ui.colorschemes.catppuccin' },
   -- { import = 'plugins.ui.colorschemes.citruszest' },
   -- { import = 'plugins.ui.colorschemes.cyberdream' },
