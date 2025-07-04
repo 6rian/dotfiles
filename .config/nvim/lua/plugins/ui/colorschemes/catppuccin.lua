@@ -1,3 +1,32 @@
+local myColors = {
+  rosewater = '#F5B8AB',
+  flamingo = '#F29D9D',
+  pink = '#AD6FF7',
+  mauve = '#FF8F40',
+  red = '#E66767',
+  maroon = '#EB788B',
+  peach = '#FAB770',
+  yellow = '#FACA64',
+  green = '#70CF67',
+  teal = '#4CD4BD',
+  sky = '#61BDFF',
+  sapphire = '#4BA8FA',
+  blue = '#00BFFF',
+  lavender = '#00BBCC',
+  text = '#C1C9E6',
+  subtext1 = '#A3AAC2',
+  subtext0 = '#8E94AB',
+  overlay2 = '#7D8296',
+  overlay1 = '#676B80',
+  overlay0 = '#464957',
+  surface2 = '#3A3D4A',
+  surface1 = '#2F313D',
+  surface0 = '#1D1E29',
+  base = '#0b0b12',
+  mantle = '#11111a',
+  crust = '#191926',
+}
+
 return {
   'catppuccin/nvim',
   name = 'catppuccin',
@@ -62,36 +91,14 @@ return {
       end,
     },
     color_overrides = {
-      macchiato = {
-        rosewater = '#F5B8AB',
-        flamingo = '#F29D9D',
-        pink = '#AD6FF7',
-        mauve = '#FF8F40',
-        red = '#E66767',
-        maroon = '#EB788B',
-        peach = '#FAB770',
-        yellow = '#FACA64',
-        green = '#70CF67',
-        teal = '#4CD4BD',
-        sky = '#61BDFF',
-        sapphire = '#4BA8FA',
-        blue = '#00BFFF',
-        lavender = '#00BBCC',
-        text = '#C1C9E6',
-        subtext1 = '#A3AAC2',
-        subtext0 = '#8E94AB',
-        overlay2 = '#7D8296',
-        overlay1 = '#676B80',
-        overlay0 = '#464957',
-        surface2 = '#3A3D4A',
-        surface1 = '#2F313D',
-        surface0 = '#1D1E29',
-        base = '#0b0b12',
-        mantle = '#11111a',
-        crust = '#191926',
-      },
+      macchiato = myColors,
     },
-    custom_highlights = {},
+    custom_highlights = function(colors)
+      return {
+        FloatermBorder = { fg = myColors.pink, bg = '#000000' },
+        SnacksPickerPathHidden = { fg = myColors.teal },
+      }
+    end,
     default_integrations = true,
     integrations = {
       blink_cmp = {
@@ -113,7 +120,7 @@ return {
         indentscope_color = '',
       },
       snacks = {
-        enabled = false,
+        enabled = true,
         indent_scope_color = '', -- catppuccin color (eg. `lavender`) Default: text
       },
       telescope = {
@@ -124,7 +131,7 @@ return {
     },
     init = function()
       vim.cmd.colorscheme 'catppuccin'
-      vim.api.nvim_set_hl(0, 'FloatermBorder', { fg = '#AD6FF7', bg = '#000000' }) -- fg=pink, bg=black
+      -- vim.api.nvim_set_hl(0, 'FloatermBorder', { fg = '#AD6FF7', bg = '#000000' }) -- fg=pink, bg=black
     end,
   },
 }

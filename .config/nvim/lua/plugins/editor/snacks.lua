@@ -39,7 +39,10 @@ return {
     },
     debug = { enabled = true },
     dim = { enabled = true },
-    explorer = { enabled = true },
+    explorer = {
+      enabled = true,
+      replace_netrw = true,
+    },
     git = { enabled = true },
     gitbrowse = { enabled = true },
     health = { enabled = true },
