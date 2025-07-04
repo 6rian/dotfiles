@@ -5,12 +5,15 @@
 
  sudo timedatectl set-timezone America/New_York
 
- sudo apt install -y curl \
+ sudo apt install -y \
+  curl \
+  gcc \
   git \
   grc \
   fzf \
   htop \
   jq \
+  make \
   net-tools \
   nmap \
   ripgrep \
@@ -18,7 +21,9 @@
   unzip \
   vim \
   wget \
+  xclip \
   zsh
 
-# neovim
-# lazygit
+ # download and install neovim prebuilt binary to get the latest version
+
+ # loop through programs, make each executable and run it

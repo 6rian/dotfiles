@@ -1,5 +1,22 @@
 # 6rian's dotfiles
 
+## Dev Env Setup Process
+
+- [ ] `ssh-keygen -t ed25519 -C "wbgriffin@pm.me"
+
+- [ ] [add to Github](https://github.com/settings/keys)
+
+- [ ] `mkdir ~/repos && cd ~/repos`
+
+- [ ] `git clone git@github.com:6rian/dotfiles`
+
+- [ ] `cd dotfiles`
+
+- [ ] `./scripts/base.sh`
+
+> [!IMPORTANT] Your terminal must have a [Nerd Font](https://www.nerdfonts.com/) installed.
+
+
 ## Mac Setup
 
 ### System Settings
