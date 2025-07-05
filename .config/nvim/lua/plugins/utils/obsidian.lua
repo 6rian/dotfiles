@@ -26,7 +26,7 @@ return {
       workspaces = {
         {
           name = 'personal',
-          path = '~/Documents/Obsidian Vaults/techn0tes/',
+          path = '/Users/brian/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/techn0tes/',
           -- overrides = {
           --   notes_subdir = 'notes',
           -- },

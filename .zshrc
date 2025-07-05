@@ -1,13 +1,7 @@
-###########################################################
-# LOAD PRIVATE CONFIG
-###########################################################
-if [ -f "$HOME/.zshrc.private" ]; then
-  source "$HOME/.zshrc.private"
-fi
-
-###########################################################
-# COLORIZE ALIASES
-###########################################################
+# ALIASES
+alias ai='llm'
+alias cl='clear'
+alias dots='cd $HOME/repos/dotfiles/ && nvim ./README.md'
 alias ls='grc ls'
 alias ifconfig='grc ifconfig'
 alias df='grc df'
@@ -19,19 +13,19 @@ alias nmap='grc nmap'
 alias netstat='grc netstat'
 alias dig='grc dig'
 
-###########################################################
+# OBSIDIAN
+alias oo='cd $HOME/library/Mobile\ Documents/com~apple~CloudDocs/Documents/Obsidian\ Vaults/techn0tes && nvim .'
+alias or='nvim $HOME/library/Mobile\ Documents/com~apple~CloudDocs/Documents/Obsidian\ Vaults/techn0tes/inbox/*.md'
+
 # AVANTE AI FOR NVIM CONFIG
-###########################################################
 # export AVANTE_ANTHROPIC_API_KEY=your-anthropic-api-key
-# export AVANTE_OPENAI_API_KEY=your-openai-api-key
+export AVANTE_OPENAI_API_KEY=your-openai-api-key
 # export AVANTE_AZURE_OPENAI_API_KEY=your-azure-api-key
 # export AVANTE_GEMINI_API_KEY=your-gemini-api-key
 # export AVANTE_CO_API_KEY=your-cohere-api-key
 # export AVANTE_AIHUBMIX_API_KEY=your-aihubmix-api-key
 
-###########################################################
 # OHMYZSH CONFIG
-###########################################################
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -141,4 +135,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# LOAD PRIVATE CONFIG
+if [ -f "$HOME/.zshrc.private" ]; then
+  source "$HOME/.zshrc.private"
+fi
 
