@@ -31,7 +31,7 @@ return {
   { import = 'plugins.editor.lazygit' },
   { import = 'plugins.editor.lualine' },
   { import = 'plugins.editor.mini' },
-  { import = 'plugins.editor.neo-tree' },
+  -- { import = 'plugins.editor.neo-tree' },
   { import = 'plugins.editor.snacks' },
   { import = 'plugins.editor.telescope' },
   { import = 'plugins.editor.tmux' },
