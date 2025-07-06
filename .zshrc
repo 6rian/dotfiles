@@ -1,7 +1,10 @@
+export PATH=$PATH:~/repos/dotfiles/bin
+
 # ALIASES
 alias ai='llm'
 alias cl='clear'
-alias dots='cd $HOME/repos/dotfiles/ && nvim ./README.md'
+alias cdots="cd $HOME/repos/dotfiles"
+alias dots="cd $HOME/repos/dotfiles/ && nvim ./README.md"
 alias ls='grc ls'
 alias ifconfig='grc ifconfig'
 alias df='grc df'
@@ -14,8 +17,11 @@ alias netstat='grc netstat'
 alias dig='grc dig'
 
 # OBSIDIAN
-alias oo='cd $HOME/library/Mobile\ Documents/com~apple~CloudDocs/Documents/Obsidian\ Vaults/techn0tes && nvim .'
-alias or='nvim $HOME/library/Mobile\ Documents/com~apple~CloudDocs/Documents/Obsidian\ Vaults/techn0tes/inbox/*.md'
+export OBSIDIAN_VAULT='$HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Documents/Obsidian\ Vaults/techn0tes/'
+# (o)pen (o)bsidian
+alias oo="$OBSIDIAN_VAULT && nvim ."
+# (o)pen inbox files for (r)
+alias or="$OBSIDIAN_VAULT/inbox/*.md"
 
 # AVANTE AI FOR NVIM CONFIG
 # export AVANTE_ANTHROPIC_API_KEY=your-anthropic-api-key
