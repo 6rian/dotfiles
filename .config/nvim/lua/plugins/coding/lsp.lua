@@ -209,8 +209,9 @@ return {
       tailwindcss = {},
       cssls = {},
       jsonls = {},
-      --
-
+      phpcs = {},
+      pylsp = {},
+      pyright = {},
       lua_ls = {
         -- cmd = { ... },
         -- filetypes = { ... },
