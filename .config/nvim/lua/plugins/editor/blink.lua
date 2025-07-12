@@ -108,7 +108,7 @@ return {
     },
 
     sources = {
-      default = { 'avante', 'lsp', 'path', 'snippets', 'lazydev', 'npm', 'tmux' },
+      default = { 'avante', 'lsp', 'buffer', 'npm' },
       providers = {
         avante = {
           module = 'blink-cmp-avante',
@@ -117,7 +117,6 @@ return {
             -- options for blink-cmp-avante
           },
         },
-        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         npm = {
           name = 'npm',
           module = 'blink-cmp-npm',
