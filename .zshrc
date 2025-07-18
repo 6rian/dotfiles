@@ -3,8 +3,13 @@ export PATH=$PATH:~/repos/dotfiles/bin
 # ALIASES
 alias ai='llm'
 alias cl='clear'
+
+# Filesystem shortcuts
 alias cdots="cd $HOME/repos/dotfiles"
 alias dots="cd $HOME/repos/dotfiles/ && nvim ./README.md"
+alias repos="cd $HOME/repos"
+
+# Colorize with grc
 alias ls='grc ls'
 alias ifconfig='grc ifconfig'
 alias df='grc df'
