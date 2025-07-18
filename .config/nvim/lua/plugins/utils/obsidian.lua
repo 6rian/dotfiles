@@ -152,16 +152,15 @@ return {
       end,
 
       -- Optional, for templates (see https://github.com/obsidian-nvim/obsidian.nvim/wiki/Using-templates)
-      -- TODO: figure out templates
-      -- templates = {
-      --   folder = 'templates',
-      --   date_format = '%Y-%m-%d',
-      --   time_format = '%H:%M',
-      --   -- A map for custom variables, the key should be the variable and the value a function.
-      --   -- Functions are called with obsidian.TemplateContext objects as their sole parameter.
-      --   -- See: https://github.com/obsidian-nvim/obsidian.nvim/wiki/Template#substitutions
-      --   substitutions = {},
-      -- },
+      templates = {
+        folder = '_system/templates',
+        date_format = '%Y-%m-%d',
+        time_format = '%H:%M',
+        --   -- A map for custom variables, the key should be the variable and the value a function.
+        --   -- Functions are called with obsidian.TemplateContext objects as their sole parameter.
+        --   -- See: https://github.com/obsidian-nvim/obsidian.nvim/wiki/Template#substitutions
+        substitutions = {},
+      },
 
       -- Sets how you follow URLs
       ---@param url string
