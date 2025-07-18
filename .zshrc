@@ -3,6 +3,8 @@ export PATH=$PATH:~/repos/dotfiles/bin
 # ALIASES
 alias ai='llm'
 alias cl='clear'
+alias h='cd $HOME'
+alias ll='ls -lah'
 
 # Filesystem shortcuts
 alias cdots="cd $HOME/repos/dotfiles"
@@ -45,13 +47,15 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="gnzh"
+ZSH_THEME="re5et"
+# re5et
+# lukerandall
+# nicoulaj
+# jispwoso
 # gnzh
 # jtriley
-# jispwoso
 # jonathan
 # xiong-chiamiov-plus
-# nicoulaj
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
