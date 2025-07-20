@@ -6,6 +6,7 @@ alias cl='clear'
 alias h='cd $HOME'
 alias lg='lazygit'
 alias ll='ls -lah'
+alias oc='opencode'
 alias v='nvim'
 
 # Filesystem shortcuts
