@@ -8,10 +8,12 @@ alias lg='lazygit'
 alias ll='ls -lah'
 alias oc='opencodde'
 alias v='nvim'
+alias z="source $HOME/.zshrc"
 
 # Filesystem shortcuts
 alias cdots="cd $HOME/repos/dotfiles"
 alias dots="cd $HOME/repos/dotfiles/ && nvim ./README.md"
+alias lab="cd $HOME/repos/homelab"
 alias repos="cd $HOME/repos"
 
 # Colorize with grc
