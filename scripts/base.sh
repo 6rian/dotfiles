@@ -1,11 +1,11 @@
 #!/bin/bash
 
- sudo apt update -y
- sudo apt upgrade -y
+sudo apt update -y
+sudo apt upgrade -y
 
- sudo timedatectl set-timezone America/New_York
+sudo timedatectl set-timezone America/New_York
 
- sudo apt install -y \
+sudo apt install -y \
   curl \
   gcc \
   git \
@@ -24,6 +24,7 @@
   xclip \
   zsh
 
- # download and install neovim prebuilt binary to get the latest version
 
- # loop through programs, make each executable and run it
+# download and install neovim prebuilt binary to get the latest version
+
+# loop through programs, make each executable and run it
