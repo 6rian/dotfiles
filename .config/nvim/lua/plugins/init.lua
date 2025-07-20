@@ -15,8 +15,9 @@ vim.keymap.set('n', 'tn', '<cmd>FloatermNext<CR>', { desc = 'Next Floaterm', nor
 vim.keymap.set('n', 'tk', '<cmd>FloatermKill<CR>', { desc = 'Kill Floaterm', noremap = true })
 
 return {
-  -- { import = 'plugins.ai.copilot' },
   -- { import = 'plugins.ai.avante' },
+  -- { import = 'plugins.ai.copilot' },
+  { import = 'plugins.ai.opencode' },
 
   { import = 'plugins.coding.autotag' },
   { import = 'plugins.coding.highlights' },
