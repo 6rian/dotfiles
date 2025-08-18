@@ -5,6 +5,10 @@ local opts = { noremap = true, silent = true }
 keymap.set('i', 'jk', '<ESC>', opts)
 keymap.set('i', 'jk', '<ESC>', opts)
 
+-- Buffer navigation
+keymap.set('n', 'bn', '<cmd>BufferLineCycleNext<CR>', { desc = 'Next Buffer', noremap = true })
+keymap.set('n', 'bp', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Previous Buffer', noremap = true })
+
 -- Close quickfix list
 keymap.set('n', '<leader>qc', '<cmd>cclose<CR>', { desc = 'Close quickfix list', noremap = true })
 
