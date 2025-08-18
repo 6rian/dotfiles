@@ -1,4 +1,5 @@
 export PATH=$PATH:~/repos/dotfiles/bin
+export PATH=$PATH:/opt/homebrew/bin
 
 # ALIASES
 alias ai='llm'
@@ -6,6 +7,7 @@ alias cl='clear'
 alias h='cd $HOME'
 alias lg='lazygit'
 alias ll='ls -lah'
+alias pn='pnpm'
 alias oc='opencode'
 alias v='nvim'
 
