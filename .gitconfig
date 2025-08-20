@@ -13,3 +13,5 @@
   lol = log --oneline --decorate --graph
   po = push origin
   ss = status -s
+[pull]
+  rebase = false
