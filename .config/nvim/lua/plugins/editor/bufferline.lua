@@ -82,5 +82,12 @@ return {
         show_tab_indicators = true,
       },
     }
+
+    vim.keymap.set('n', '<space>bn', '<cmd>BufferLineCycleNext<CR>', { desc = 'Next Buffer', noremap = true })
+    vim.keymap.set('n', '<space>bp', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Previous Buffer', noremap = true })
+    vim.keymap.set('n', '<space>bco', '<cmd>BufferLineCloseOthers<CR>', { desc = 'Close Other Buffers', noremap = true })
+    vim.keymap.set('n', '<space>bcl', '<cmd>BufferLineCloseLeft<CR>', { desc = 'Close Left', noremap = true })
+    vim.keymap.set('n', '<space>bcr', '<cmd>BufferLineCloseRight<CR>', { desc = 'Close Right', noremap = true })
+    vim.keymap.set('n', '<space>btp', '<cmd>BufferLineTogglePin<CR>', { desc = 'Toggle Pin', noremap = true })
   end,
 }
