@@ -31,6 +31,7 @@ return {
   { import = 'plugins.editor.guess-indent' },
   { import = 'plugins.editor.lazygit' },
   { import = 'plugins.editor.lualine' },
+  { import = 'plugins.editor.marks' },
   { import = 'plugins.editor.mini' },
   -- { import = 'plugins.editor.neo-tree' },
   { import = 'plugins.editor.snacks' },
