@@ -24,6 +24,7 @@ return {
   { import = 'plugins.coding.lsp' },
   { import = 'plugins.coding.todo-comments' },
   { import = 'plugins.coding.trouble' },
+  { import = 'plugins.coding.typescript' },
 
   { import = 'plugins.editor.blink' },
   { import = 'plugins.editor.bufferline' },
