@@ -8,10 +8,30 @@
   defaultBranch = main
 [alias]
   c = commit
+  # create and switch to new branch
+  cb = checkout -b
   co = checkout
+  # commit with message
   cm = commit -m
+  # delete branch
+  db = branch -D
+  f = fetch
+  # log one line with graph and decorations
   lol = log --oneline --decorate --graph
   po = push origin
+  # remote branches
+  rb = branch -r
+  # rename branch
+  rnb = branch -m
+  s = status
+  # short status
   ss = status -s
+  st = stash
+  stp = stash pop
+  # copy branch
+  yb = branch -c
 [pull]
   rebase = false
+[push]
+  default = current
+  autoSetupRemote = true
