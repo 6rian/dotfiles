@@ -7,9 +7,7 @@ alias cl='clear'
 alias h='cd $HOME'
 alias lg='lazygit'
 alias ll='ls -lah'
-alias oc='opencodde'
 alias pn='pnpm'
-alias oc='opencode'
 alias sz='source ~/.zshrc'
 alias v='nvim'
 alias z="source $HOME/.zshrc"
@@ -139,11 +137,11 @@ fi
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+    export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -167,7 +165,7 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # pnpm
-export PNPM_HOME="/Users/bgriffin/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
