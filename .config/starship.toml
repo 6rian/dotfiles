@@ -5,9 +5,6 @@ add_newline = true
 # [character] # The name of the module we are configuring is 'character'
 # success_symbol = '[➜](bold green)'
 format = """
-$username\
-$hostname\
-$localip\
 $shlvl\
 $directory\
 $vcsh\
@@ -38,30 +35,30 @@ $env_var\
 $custom\
 $sudo\
 $cmd_duration\
-$line_break\
 $jobs\
-$battery\
-$time\
-$status\
 $container\
+$fill\
+$username\
+$hostname\
+$localip\
+$battery\
+$status\
+$time\
+$line_break\
 $character"""
 
 [localip]
 ssh_only = false
 disabled = false
-# format = "[$localipv4]($style)"
+format = ":[$localipv4]($style)"
 
 [hostname]
 ssh_only = false
+format = "[$ssh_symbol$hostname]($style)"
 
 [time]
 disabled = false
-format = "[$time]($style) "
-
-# [memory_usage]
-# disabled = false
-# # format = "[mem:$ram( | $swap)] "
-# threshold = -1  # always show; set a % to show only above that
+format = " [$time]($style) "
 
 [battery]
 disabled = false  # still only shows if a battery is detected
