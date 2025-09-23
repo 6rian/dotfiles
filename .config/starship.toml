@@ -1,0 +1,67 @@
+# Get editor completions based on the config schema
+"$schema" = "https://starship.rs/config-schema.json"
+# Inserts a blank line between shell prompts
+add_newline = true
+# [character] # The name of the module we are configuring is 'character'
+# success_symbol = '[➜](bold green)'
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$fill\
+$docker_context\
+$c\
+$golang\
+$java\
+$lua\
+$nodejs\
+$php\
+$python\
+$ruby\
+$rust\
+$terraform\
+$vagrant\
+$nix_shell\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$container\
+$character"""
+
+[localip]
+ssh_only = false
+disabled = false
+# format = "[$localipv4]($style)"
+
+[hostname]
+ssh_only = false
+
+[time]
+disabled = false
+format = "[$time]($style) "
+
+# [memory_usage]
+# disabled = false
+# # format = "[mem:$ram( | $swap)] "
+# threshold = -1  # always show; set a % to show only above that
+
+[battery]
+disabled = false  # still only shows if a battery is detected
