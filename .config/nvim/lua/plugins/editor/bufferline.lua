@@ -35,35 +35,6 @@ return {
     }
 
     require('bufferline').setup {
-      highlights = require('catppuccin.groups.integrations.bufferline').get {
-        custom = {
-          all = {
-            fill = {
-              fg = '#ffffff',
-              bg = colors.surface0,
-            },
-            buffer_visible = {
-              fg = colors.crust,
-              bg = colors.pink,
-            },
-            buffer_selected = {
-              fg = colors.pink,
-            },
-            modified = {
-              fg = colors.yellow,
-            },
-            offset_separator = {
-              fg = colors.green,
-            },
-            separator = {
-              fg = colors.surface0,
-            },
-            separator_selected = {
-              fg = colors.surface0,
-            },
-          },
-        },
-      },
       options = {
         indicator = {
           style = 'underline',
