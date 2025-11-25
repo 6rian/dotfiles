@@ -3,9 +3,9 @@ local keymap = vim.keymap
 
 -- Colorizer
 keymap.set('n', '<leader>ca', '<cmd>ColorizerAttachToBuffer<CR>', { desc = 'Colorizer: Attach to buffer', noremap = true })
-keymap.set('n', '<leader>cd', '<cmd>ColorizerDetachFromBuffer<CR>', { desc = 'Colorizer: Attach to buffer', noremap = true })
-keymap.set('n', '<leader>ct', '<cmd>ColorizerReloadAllBuffers<CR>', { desc = 'Colorizer: Attach to buffer', noremap = true })
-keymap.set('n', '<leader>cr', '<cmd>ColorizerToggle<CR>', { desc = 'Colorizer: Attach to buffer', noremap = true })
+keymap.set('n', '<leader>cd', '<cmd>ColorizerDetachFromBuffer<CR>', { desc = 'Colorizer: Detach from buffer', noremap = true })
+keymap.set('n', '<leader>cr', '<cmd>ColorizerReloadAllBuffers<CR>', { desc = 'Colorizer: Reload all buffers', noremap = true })
+keymap.set('n', '<leader>ct', '<cmd>ColorizerToggle<CR>', { desc = 'Colorizer: Toggle', noremap = true })
 
 -- Floaterm
 vim.keymap.set('n', 'to', '<cmd>FloatermNew --width=0.8 --height=0.8<CR>', { desc = 'Open New Floaterm', noremap = true })
