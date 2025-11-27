@@ -149,7 +149,7 @@ return {
 
         SnacksPickerBorder = { fg = myCyberpunkColors.overlay0 }, -- lazygit, file picker border
         SnacksPickerDirectory = { fg = myCyberpunkColors.green },
-        SnacksPickerPathHidden = { fg = myCyberpunkColors.overlay0 },
+        SnacksPickerPathHidden = { fg = myCyberpunkColors.red },
       }
     end,
     default_integrations = true,
