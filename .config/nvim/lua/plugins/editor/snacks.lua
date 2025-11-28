@@ -8,9 +8,16 @@ return {
     bufdelete = { enabled = true },
     dashboard = {
       enabled = true,
+      pane_gap = 8,
       sections = {
         { section = 'header' },
-        { section = 'keys', gap = 1, padding = 1 },
+        {
+          pane = 2,
+          section = 'terminal',
+          cmd = 'colorscript -e pukeskull',
+          height = 40,
+        },
+        { section = 'keys', gap = 3, padding = 3 },
         { section = 'startup' },
       },
       preset = {
@@ -42,7 +49,14 @@ return {
       enabled = true,
       timeout = 3000,
     },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      hidden = true, -- show dotfiles by default
+      find = {
+        hidden = true, -- ensure ripgrep respects it too
+        follow = true, -- (optional) follow symlinks
+      },
+    },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scratch = { enabled = true },
