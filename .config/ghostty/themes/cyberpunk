@@ -1,0 +1,40 @@
+# cyberpunk theme for ghostty
+
+background = #000000
+foreground = #975edb
+cursor-color = #f7ff2b
+cursor-text = #000000
+selection-foreground = #ffbdf9
+selection-background = #444343
+
+# Black
+palette = 0=#030315
+palette = 8=#ffffff
+
+# Red
+palette = 1=#be2ec6
+palette = 9=#be2ec6
+
+# Green
+palette = 2=#a6e12e
+palette = 10=#a6e12d
+
+# Yellow
+palette = 3=#732ec6
+palette = 11=#732ec6
+
+# Blue
+palette = 4=#4b2bc4
+palette = 12=#4b2bc4
+
+# Magenta
+palette = 5=#9c2bc3
+palette = 13=#9c2bc3
+
+# Cyan
+palette = 6=#00d7ff
+palette = 14=#00d7ff
+
+# White
+palette = 7=#b084d8
+palette = 15=#b084d8

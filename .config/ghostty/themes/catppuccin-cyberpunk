@@ -1,0 +1,40 @@
+# Catppuccin Cyberpunk theme for Ghostty
+
+background = #000000
+foreground = #B1FF8A
+cursor-color = #A78BFA
+cursor-text = #08050E
+selection-foreground = #08050E
+selection-background = #B1FF8A
+
+# Black
+palette = 0=#06040B
+palette = 8=#26233A
+
+# Red
+palette = 1=#FF006E
+palette = 9=#FF006E
+
+# Green
+palette = 2=#40D432
+palette = 10=#40D432
+
+# Yellow
+palette = 3=#D4FF00
+palette = 11=#D4FF00
+
+# Blue
+palette = 4=#00E8FF
+palette = 12=#00E8FF
+
+# Magenta
+palette = 5=#FF1493
+palette = 13=#FF1493
+
+# Cyan
+palette = 6=#00E0FF
+palette = 14=#00E0FF
+
+# White
+palette = 7=#B1FF8A
+palette = 15=#8FB4FF

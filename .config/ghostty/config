@@ -1,7 +1,7 @@
 ## vim:fileencoding=utf-8
 
 # ghostty +list-themes to see all available themes
-theme = "hardcore"
+theme = "catppuccin-cyberpunk"
 
 # ghostty +list-fonts to see all available fonts
 #font-family = "Hack Nerd Font"
