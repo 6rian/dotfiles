@@ -5,6 +5,12 @@ local opts = { noremap = true, silent = true }
 keymap.set('i', 'jk', '<ESC>', opts)
 keymap.set('i', 'jk', '<ESC>', opts)
 
+-- Deletes and changes do NOT affect clipboard or yank register
+keymap.set({ 'n', 'v' }, 'd', '"_d', opts)
+keymap.set({ 'n', 'v' }, 'c', '"_c', opts)
+keymap.set('n', 'D', '"_D', opts)
+keymap.set('n', 'C', '"_C', opts)
+
 -- Close quickfix list
 keymap.set('n', '<leader>qc', '<cmd>cclose<CR>', { desc = 'Close quickfix list', noremap = true })
 
