@@ -83,4 +83,4 @@ vim.o.expandtab = true
 vim.o.termguicolors = true
 
 -- Always show the tabline
-vim.o.showtabline = 1
+vim.o.showtabline = 2
