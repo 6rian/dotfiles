@@ -36,19 +36,21 @@ return {
 
     require('bufferline').setup {
       options = {
+        diagnostics = 'nvim_lsp',
         indicator = {
           style = 'underline',
         },
         offsets = {
           {
-            filetype = 'neo-tree',
+            filetype = 'NvimTree',
             text = 'FILE EXPLORER',
             highlight = 'Directory',
             separator = true, -- use a "true" to enable the default, or set your own character
           },
         },
         tab_size = 18,
-        separator_style = 'slope',
+        themable = true,
+        separator_style = 'slant', -- 'slope',
         show_buffer_close_icons = false,
         show_tab_indicators = true,
       },

@@ -1,35 +1,3 @@
-local myCyberpunkColors = {
-  rosewater = '#FF10F0',
-  flamingo = '#D946EF',
-  pink = '#FF1493',
-  mauve = '#B24BF3',
-  red = '#FF006E',
-  maroon = '#C026D3',
-  peach = '#FFA329',
-  yellow = '#D4FF00',
-  green = '#40D432',
-  teal = '#00E5FF',
-  sky = '#00D7FF',
-  sapphire = '#00E0FF',
-  blue = '#00E8FF',
-  lavender = '#A78BFA',
-  text = '#B1FF8A',
-  subtext1 = '#8FB4FF',
-  subtext0 = '#7DA3E8',
-  overlay2 = '#8B5CF6',
-  overlay1 = '#7C3AED',
-  overlay0 = '#6D28D9',
-  -- surface2 = '#1E1B2E',
-  -- surface1 = '#130E29',
-  -- surface0 = '#0F0D17',
-  surface2 = '#3A3D4A',
-  surface1 = '#26233A',
-  surface0 = '#1D1E29',
-  base = '#08050E',
-  mantle = '#0A0811',
-  crust = '#06040B',
-}
-
 -- local myColors = {
 --   rosewater = '#F5B8AB',
 --   flamingo = '#F29D9D',
@@ -58,6 +26,37 @@ local myCyberpunkColors = {
 --   mantle = '#11111a',
 --   crust = '#191926',
 -- }
+
+local myCyberpunkColors = {
+  rosewater = '#FF10F0',
+  flamingo = '#D946EF',
+  pink = '#FF1493',
+  mauve = '#B24BF3',
+  red = '#FF006E',
+  maroon = '#C026D3',
+  peach = '#FFA329',
+  yellow = '#D4FF00',
+  green = '#40D432',
+  teal = '#00E5FF',
+  sky = '#00D7FF',
+  sapphire = '#00E0FF',
+  blue = '#00E8FF',
+  lavender = '#A78BFA',
+  text = '#B1FF8A',
+  subtext1 = '#8FB4FF',
+  subtext0 = '#7DA3E8',
+  overlay2 = '#8B5CF6',
+  overlay1 = '#7C3AED',
+  overlay0 = '#6D28D9',
+  surface2 = '#3A3D4A',
+  surface1 = '#26233A',
+  surface0 = '#1D1E29',
+  base = '#08050E',
+  mantle = '#0A0811',
+  crust = '#06040B',
+  black = '#000000',
+  white = '#FFFFFF',
+}
 
 return {
   'catppuccin/nvim',
@@ -130,7 +129,7 @@ return {
       return {
         -- Telescope
         FloatBorder = { fg = myCyberpunkColors.overlay0, bg = myCyberpunkColors.crust },
-        FloatTitle = { fg = myCyberpunkColors.yellow, bg = '#000000', style = { 'bold' } },
+        FloatTitle = { fg = myCyberpunkColors.yellow, bg = myCyberpunkColors.black, style = { 'bold' } },
         NormalFloat = { fg = myCyberpunkColors.sky, bg = myCyberpunkColors.crust },
         TelescopeSelection = {
           bg = myCyberpunkColors.crust,
@@ -141,15 +140,37 @@ return {
           fg = myCyberpunkColors.sky,
         },
 
-        FloatermBorder = { fg = myCyberpunkColors.overlay0, bg = '#000000' },
+        -- Floaterm
+        FloatermBorder = { fg = myCyberpunkColors.overlay0, bg = myCyberpunkColors.black },
 
+        -- Snacks
         SnacksDashboardKey = { fg = myCyberpunkColors.green },
         SnacksDashboardFooter = { fg = myCyberpunkColors.flamingo },
         SnacksDashboardTitle = { fg = myCyberpunkColors.yellow },
 
         SnacksPickerBorder = { fg = myCyberpunkColors.overlay0 }, -- lazygit, file picker border
+        SnacksPickerDir = { fg = myCyberpunkColors.green },
         SnacksPickerDirectory = { fg = myCyberpunkColors.green },
+        SnacksPickerFile = { fg = myCyberpunkColors.text },
         SnacksPickerPathHidden = { fg = myCyberpunkColors.red },
+
+        -- TabLine
+        TabLineFill = {
+          bg = myCyberpunkColors.surface2,
+        },
+        TabLine = {
+          fg = myCyberpunkColors.lavender,
+          bg = myCyberpunkColors.surface1,
+        },
+        TabLineSel = {
+          fg = myCyberpunkColors.pink,
+          bg = myCyberpunkColors.surface0,
+          style = { 'bold', 'underline' },
+        },
+        TabLineWin = {
+          fg = myCyberpunkColors.text,
+          bg = myCyberpunkColors.surface1,
+        },
       }
     end,
     default_integrations = true,

@@ -27,7 +27,7 @@ return {
   { import = 'plugins.coding.typescript' },
 
   { import = 'plugins.editor.blink' },
-  { import = 'plugins.editor.bufferline' },
+  -- { import = 'plugins.editor.bufferline' },
   { import = 'plugins.editor.gitsigns' },
   { import = 'plugins.editor.guess-indent' },
   { import = 'plugins.editor.lazygit' },
@@ -47,10 +47,11 @@ return {
   -- { import = 'plugins.ui.colorschemes.cyberdream' },
   -- { import = 'plugins.ui.colorschemes.flouromachine' },
   -- { import = 'plugins.ui.colorschemes.material' },
-  { import = 'plugins.ui.colorschemes.onenord' },
+  -- { import = 'plugins.ui.colorschemes.onenord' },
   -- { import = 'plugins.ui.colorschemes.rosepine' },
   -- { import = 'plugins.ui.colorschemes.tokyonight' },
   { import = 'plugins.ui.markdown' },
+  { import = 'plugins.ui.tabby' },
   { import = 'plugins.ui.treesitter-context' },
 
   { import = 'plugins.utils.fine-cmdline' },

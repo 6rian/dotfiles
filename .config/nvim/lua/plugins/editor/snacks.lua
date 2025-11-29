@@ -31,13 +31,22 @@ return {
  ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
 ]],
       },
+      -- pick = 'telescope.nvim',
+      keys = {
+        -- { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+        { icon = ' ', key = 'f', desc = 'Find File', action = ":lua Snacks.pick('files')" },
+        { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
+        { icon = ' ', key = 'g', desc = 'Find Text', action = ":lua Snacks.dashboard.pick('live_grep')" },
+        { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
+        { icon = ' ', key = 'c', desc = 'Config', action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+        { icon = ' ', key = 's', desc = 'Restore Session', section = 'session' },
+        { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+        { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+      },
     },
     debug = { enabled = true },
     dim = { enabled = true },
-    explorer = {
-      enabled = true,
-      replace_netrw = true,
-    },
+    explorer = { enabled = true, replace_netrw = true },
     git = { enabled = true },
     gitbrowse = { enabled = true },
     health = { enabled = true },
@@ -50,11 +59,28 @@ return {
       timeout = 3000,
     },
     picker = {
-      enabled = true,
+      -- optional: defaults for sources that *don’t* override these
       hidden = true, -- show dotfiles by default
-      find = {
-        hidden = true, -- ensure ripgrep respects it too
-        follow = true, -- (optional) follow symlinks
+      -- ignored = true, -- if you also want git-ignored files
+
+      sources = {
+        -- `Snacks.picker.files()`
+        files = {
+          hidden = true,
+          follow = true,
+        },
+
+        -- `Snacks.picker.grep()` / live grep
+        grep = {
+          hidden = true,
+          follow = true,
+        },
+
+        -- Snacks.explorer (explorer picker)
+        explorer = {
+          hidden = true,
+          -- ignored = false, -- or true if you want ignored files too
+        },
       },
     },
     quickfile = { enabled = true },
@@ -442,16 +468,16 @@ return {
     {
       '<leader>z',
       function()
-        Snacks.zen()
+        Snacks.zen.zoom()
       end,
-      desc = 'Toggle Zen Mode',
+      desc = 'Toggle Zoom Mode',
     },
     {
       '<leader>Z',
       function()
-        Snacks.zen.zoom()
+        Snacks.zen()
       end,
-      desc = 'Toggle Zoom',
+      desc = 'Toggle Zen Mode',
     },
     {
       '<leader>.',
