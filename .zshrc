@@ -23,8 +23,10 @@ alias repos="cd $HOME/repos"
 alias gb="git branch --all | sed "s/^..//" | fzf"
 # (g)it (m)erge
 alias gm="git branch --all | sed "s/^..//" | fzf | xargs git merge"
-# (g)it (c)heckoutjk
-alias gco="git branch --all | sed "s/^..//" | fzf | xargs git switch"
+# (g)it (c)heckout local branches
+alias gco="git branch | sed "s/^..//" | fzf | xargs git switch"
+# (g)it (c)heckout (r)emote branches
+alias gcr="git branch --all | sed "s/^..//" | fzf | xargs git switch"
 
 # Colorize with grc
 alias ls='grc ls'
