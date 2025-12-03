@@ -18,6 +18,11 @@ alias dots="cd $HOME/repos/dotfiles/ && nvim ./README.md"
 alias lab="cd $HOME/repos/homelab"
 alias repos="cd $HOME/repos"
 
+# fzf helpers
+alias gBranch="git branch --all | sed "s/^..//" | fzf"
+alias gMergeBranch="git branch --all | sed "s/^..//" | fzf | xargs git merge"
+alias gSwitchBranch="git branch --all | sed "s/^..//" | fzf | xargs git switch"
+
 # Colorize with grc
 alias ls='grc ls'
 alias ifconfig='grc ifconfig'
