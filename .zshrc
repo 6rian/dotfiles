@@ -19,9 +19,12 @@ alias lab="cd $HOME/repos/homelab"
 alias repos="cd $HOME/repos"
 
 # fzf helpers
-alias gBranch="git branch --all | sed "s/^..//" | fzf"
-alias gMergeBranch="git branch --all | sed "s/^..//" | fzf | xargs git merge"
-alias gSwitchBranch="git branch --all | sed "s/^..//" | fzf | xargs git switch"
+# (g)it (b)ranch
+alias gb="git branch --all | sed "s/^..//" | fzf"
+# (g)it (m)erge
+alias gm="git branch --all | sed "s/^..//" | fzf | xargs git merge"
+# (g)it (c)heckoutjk
+alias gco="git branch --all | sed "s/^..//" | fzf | xargs git switch"
 
 # Colorize with grc
 alias ls='grc ls'
