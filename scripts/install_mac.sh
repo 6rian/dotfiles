@@ -17,6 +17,7 @@
 #   - tree
 #   - tmux
 #   - starship
+#   - gh
 # - menu
 #   - instsall base
 #   - symlinks
