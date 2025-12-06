@@ -101,7 +101,14 @@ return {
   keys = {
     -- Top Pickers & Explorer
     {
-      '<leader><space>',
+      '<leader>sP',
+      function()
+        Snacks.picker.pickers()
+      end,
+      desc = 'Pickers',
+    },
+    {
+      '<leader>F',
       function()
         Snacks.picker.smart()
       end,
@@ -397,14 +404,14 @@ return {
       function()
         Snacks.picker.marks()
       end,
-      desc = 'Marks',
+      desc = '(m)arks',
     },
     {
       '<leader>sM',
       function()
         Snacks.picker.man()
       end,
-      desc = 'Man Pages',
+      desc = '(M)an Pages',
     },
     {
       '<leader>sp',
