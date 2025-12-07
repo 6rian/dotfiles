@@ -34,12 +34,13 @@ local myCyberpunkColors = {
   mauve = '#B24BF3',
   red = '#FF006E',
   maroon = '#C026D3',
-  peach = '#FFA329',
+  peach = '#FFC902',
   yellow = '#D4FF00',
   green = '#40D432',
   teal = '#00E5FF',
   sky = '#00D7FF',
-  sapphire = '#00E0FF',
+  -- sapphire = '#00E0FF',
+  sapphire = '#2602FF',
   blue = '#00E8FF',
   lavender = '#A78BFA',
   text = '#B1FF8A',
@@ -144,8 +145,10 @@ return {
         FloatermBorder = { fg = myCyberpunkColors.overlay0, bg = myCyberpunkColors.black },
 
         -- Snacks
-        SnacksDashboardKey = { fg = myCyberpunkColors.green },
-        SnacksDashboardFooter = { fg = myCyberpunkColors.flamingo },
+        SnacksDashboardHeader = { fg = myCyberpunkColors.sapphire },
+        SnacksDashboardDesc = { fg = myCyberpunkColors.peach },
+        SnacksDashboardKey = { fg = myCyberpunkColors.yellow, bold = true },
+        SnacksDashboardFooter = { fg = myCyberpunkColors.sky },
         SnacksDashboardTitle = { fg = myCyberpunkColors.yellow },
 
         SnacksPickerBorder = { fg = myCyberpunkColors.overlay0 }, -- lazygit, file picker border
