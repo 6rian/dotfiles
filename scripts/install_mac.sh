@@ -21,5 +21,8 @@
 # - menu
 #   - instsall base
 #   - symlinks
+# - symlink .zshrc
+# - create .zshrc.private if not exists
+# - download and install kitty
 
 
