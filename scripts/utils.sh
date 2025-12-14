@@ -20,9 +20,10 @@ function executable_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-function assert_executable() {
+function assert_executable_exists() {
     if ! executable_exists "$1"; then
         log_error "Required executable '$1' not found. Please install it and try again."
         exit 1
     fi
 }
+
