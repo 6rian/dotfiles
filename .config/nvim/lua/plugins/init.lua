@@ -54,7 +54,7 @@ return {
   { import = 'plugins.ui.tabby' },
   { import = 'plugins.ui.treesitter-context' },
 
-  { import = 'plugins.utils.fine-cmdline' },
+  -- { import = 'plugins.utils.fine-cmdline' },
   -- { import = 'plugins.utils.obsidian' },
   { import = 'plugins.utils.vim-floaterm' },
   { import = 'plugins.utils.which-key' },
