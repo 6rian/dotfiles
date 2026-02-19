@@ -14,12 +14,12 @@ keymap.set('n', 'C', '"_C', opts)
 -- Close quickfix list
 keymap.set('n', '<leader>qc', '<cmd>cclose<CR>', { desc = 'Close quickfix list', noremap = true })
 
--- [[ Basic Keymaps ]]
---  See `:help keymap.set()`
-
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Save without formatting
+keymap.set('n', 'swf', '<cmd>noautocmd write<cr>', { desc = 'Save Without Formatting' })
 
 -- Diagnostic keymaps
 keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
