@@ -70,6 +70,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# Add SSH keys to ssh-agent
+eval $(ssh-agent -s)
+ssh-add
 
 # LOAD PRIVATE CONFIG
 if [ -f "$HOME/.zshrc.private" ]; then
