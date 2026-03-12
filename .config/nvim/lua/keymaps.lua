@@ -14,6 +14,11 @@ keymap.set('n', 'C', '"_C', opts)
 -- Close quickfix list
 keymap.set('n', '<leader>qc', '<cmd>cclose<CR>', { desc = 'Close quickfix list', noremap = true })
 
+-- Vertical split
+keymap.set('n', '<leader>|', '<cmd>vsplit<CR>', { desc = 'Vertical split', noremap = true })
+-- Horizontal split
+keymap.set('n', '<leader>-', '<cmd>split<CR>', { desc = 'Horizontal split', noremap = true })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
