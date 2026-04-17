@@ -57,3 +57,9 @@ keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window'
 -- keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- Toggle between source and test/spec file
+local toggle_test = require 'utils.toggle_tests'
+vim.keymap.set('n', '<leader>tt', toggle_test.toggle, {
+  desc = 'Toggle between source and test/spec file',
+})
