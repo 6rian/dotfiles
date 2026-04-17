@@ -1,5 +1,6 @@
 export PATH=$PATH:~/repos/dotfiles/bin
 export PATH=$PATH:/opt/homebrew/bin
+export PATH="$HOME/.local/bin:$PATH"
 
 # ALIASES
 alias ai='llm'
