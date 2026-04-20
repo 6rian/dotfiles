@@ -2,6 +2,8 @@ export PATH=$PATH:~/repos/dotfiles/bin
 export PATH=$PATH:/opt/homebrew/bin
 export PATH="$HOME/.local/bin:$PATH"
 
+export REPOS_DIR="$HOME/repos"
+
 # ALIASES
 alias ai='llm'
 alias cl='clear'
@@ -28,6 +30,35 @@ alias gm="git branch --all | sed "s/^..//" | fzf | xargs git merge"
 alias gco="git branch | sed "s/^..//" | fzf | xargs git switch"
 # (g)it (c)heckout (r)emote branches
 alias gcr="git branch --all | sed "s/^..//" | fzf | xargs git switch"
+
+# select a repo from the list of your GitHub repos and print the name with owner, e.g. "username/repo-name"
+selectRepo() {
+  gh repo list --limit 200 --json nameWithOwner,description \
+    --jq '.[] | "\(.nameWithOwner)\t\(.description // "")"' |
+  fzf --delimiter=$'\t' --with-nth=1,2 --prompt='Repo> ' |
+  cut -f1
+}
+
+# select a repo from the list of your GitHub repos and clone it
+cloneRepo() {
+  gh repo list --limit 200 --json nameWithOwner,description \
+    --jq '.[] | "\(.nameWithOwner)\t\(.description // "")"' |
+  fzf --delimiter=$'\t' --with-nth=1,2 --prompt='Clone repo> ' |
+  cut -f1 |
+  xargs -r gh repo clone
+}
+
+cdRepo() {
+  local repo
+  repo=$(
+    find "$REPOS_DIR" -mindepth 1 -maxdepth 1 -type d |
+    xargs -I{} basename {} |
+    fzf --prompt='Repo> '
+  ) || return
+
+  [ -n "$repo" ] || return
+  cd "$REPOS_DIR/$repo" || return
+}
 
 # Colorize with grc
 alias ls='grc ls'
