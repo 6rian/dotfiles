@@ -1,3 +1,5 @@
+SSH_KEY="$HOME/.ssh/id_ed25519"
+
 export PATH=$PATH:~/repos/dotfiles/bin
 export PATH=$PATH:/opt/homebrew/bin
 export PATH="$HOME/.local/bin:$PATH"
@@ -12,6 +14,7 @@ alias lg='lazygit'
 alias ll='ls -lah'
 # alias pn='pnpm'
 alias sz="source $HOME/.zshrc"
+alias tree="tree -C"
 alias v='nvim'
 
 # Filesystem shortcuts
@@ -106,7 +109,11 @@ esac
 
 # Add SSH keys to ssh-agent
 eval $(ssh-agent -s)
-ssh-add
+
+# Add SSH keys to Apple keychain if not already added
+if ! ssh-add -l | grep -q "$(ssh-keygen -lf "$SSH_KEY" | awk '{print $2}')"; then
+  ssh-add --apple-use-keychain "$SSH_KEY" >/dev/null 2>&1
+fi
 
 # LOAD PRIVATE CONFIG
 if [ -f "$HOME/.zshrc.private" ]; then
