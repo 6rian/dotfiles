@@ -19,6 +19,7 @@
   # log one line with graph and decorations
   lol = log --oneline --decorate --graph
   po = push origin
+  pu = pull origin
   # remote branches
   rb = branch -r
   # rename branch
