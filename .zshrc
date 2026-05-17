@@ -8,6 +8,7 @@ export REPOS_DIR="$HOME/repos"
 
 # ALIASES
 alias ai='llm'
+alias cat='bat'
 alias cl='clear'
 alias h='cd $HOME'
 alias lg='lazygit'
@@ -18,10 +19,16 @@ alias tree="tree -C"
 alias v='nvim'
 
 # Filesystem shortcuts
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 alias cdots="cd $HOME/repos/dotfiles"
 alias dots="cd $HOME/repos/dotfiles/ && nvim ./README.md"
 alias lab="cd $HOME/repos/homelab"
 alias repos="cd $HOME/repos"
+
 
 # fzf helpers
 # (g)it (b)ranch
@@ -105,7 +112,15 @@ esac
 # pnpm end
 
 # Initialize zoxide.
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd j)"
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# bindkey '^w' autosuggest-execute
+# bindkey '^e' autosuggest-accept
+# bindkey '^u' autosuggest-toggle
+# bindkey '^L' vi-forward-word
+# bindkey '^k' up-line-or-search
+# bindkey '^j' down-line-or-search
 
 # Add SSH keys to ssh-agent
 eval $(ssh-agent -s)

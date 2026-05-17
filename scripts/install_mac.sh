@@ -2,8 +2,11 @@
 # - symlink each .config dir
 # - install brew
 # - install brew packages
+#   - zsh
+#   - zsh-autosuggestions
 #   - colorscript
 #   - fzf
+#   - bat
 #   - exiftool
 #   - gemini-cli
 #   - jq
