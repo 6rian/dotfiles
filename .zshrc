@@ -10,10 +10,9 @@ alias cl='clear'
 alias h='cd $HOME'
 alias lg='lazygit'
 alias ll='ls -lah'
-alias pn='pnpm'
-alias sz='source ~/.zshrc'
+# alias pn='pnpm'
+alias sz="source $HOME/.zshrc"
 alias v='nvim'
-alias z="source $HOME/.zshrc"
 
 # Filesystem shortcuts
 alias cdots="cd $HOME/repos/dotfiles"
@@ -101,6 +100,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Initialize zoxide.
+# eval "$(zoxide init zsh)"
 
 # Add SSH keys to ssh-agent
 eval $(ssh-agent -s)

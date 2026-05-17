@@ -18,6 +18,8 @@
 #   - tmux
 #   - starship
 #   - gh
+#   - zoxide
+#   - sesh
 # - menu
 #   - instsall base
 #   - symlinks

@@ -18,11 +18,14 @@ sudo apt install -y \
   nmap \
   ripgrep \
   tmux \
+  sesh \
   unzip \
   vim \
   wget \
   xclip \
-  zsh
+  zsh \
+  starship \
+  zoxide
 
 
 # download and install neovim prebuilt binary to get the latest version
