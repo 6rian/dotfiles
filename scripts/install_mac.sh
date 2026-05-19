@@ -23,6 +23,7 @@
 #   - gh
 #   - zoxide
 #   - sesh
+#   - 1password-cli
 # - menu
 #   - instsall base
 #   - symlinks
