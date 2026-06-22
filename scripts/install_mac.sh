@@ -24,6 +24,7 @@
 #   - zoxide
 #   - sesh
 #   - 1password-cli
+#   - nmap
 # - menu
 #   - instsall base
 #   - symlinks
