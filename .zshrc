@@ -9,6 +9,7 @@ export REPOS_DIR="$HOME/repos"
 # ALIASES
 alias ai='llm'
 alias cat='bat'
+alias ccat='/bin/cat'
 alias cl='clear'
 alias h='cd $HOME'
 alias lg='lazygit'

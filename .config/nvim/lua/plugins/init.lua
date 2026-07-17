@@ -7,13 +7,6 @@ keymap.set('n', '<leader>cd', '<cmd>ColorizerDetachFromBuffer<CR>', { desc = 'Co
 keymap.set('n', '<leader>cr', '<cmd>ColorizerReloadAllBuffers<CR>', { desc = 'Colorizer: Reload all buffers', noremap = true })
 keymap.set('n', '<leader>ct', '<cmd>ColorizerToggle<CR>', { desc = 'Colorizer: Toggle', noremap = true })
 
--- Floaterm
-vim.keymap.set('n', 'to', '<cmd>FloatermNew --width=0.8 --height=0.8<CR>', { desc = 'Open New Floaterm', noremap = true })
-vim.keymap.set('n', 'tt', '<cmd>FloatermToggle<CR>', { desc = 'Toggle Floaterm', noremap = true })
-vim.keymap.set('n', 'tp', '<cmd>FloatermPrev<CR>', { desc = 'Previous Floaterm', noremap = true })
-vim.keymap.set('n', 'tn', '<cmd>FloatermNext<CR>', { desc = 'Next Floaterm', noremap = true })
-vim.keymap.set('n', 'tk', '<cmd>FloatermKill<CR>', { desc = 'Kill Floaterm', noremap = true })
-
 return {
   -- { import = 'plugins.ai.avante' },
   { import = 'plugins.ai.copilot' },
@@ -30,13 +23,11 @@ return {
   -- { import = 'plugins.editor.bufferline' },
   { import = 'plugins.editor.gitsigns' },
   { import = 'plugins.editor.guess-indent' },
-  { import = 'plugins.editor.lazygit' },
   { import = 'plugins.editor.lualine' },
   { import = 'plugins.editor.marks' },
   { import = 'plugins.editor.mini' },
   -- { import = 'plugins.editor.neo-tree' },
   { import = 'plugins.editor.snacks' },
-  { import = 'plugins.editor.telescope' },
   { import = 'plugins.editor.tmux' },
 
   { import = 'plugins.formatting.conform' },
@@ -56,6 +47,4 @@ return {
 
   -- { import = 'plugins.utils.fine-cmdline' },
   -- { import = 'plugins.utils.obsidian' },
-  { import = 'plugins.utils.vim-floaterm' },
-  { import = 'plugins.utils.which-key' },
 }
