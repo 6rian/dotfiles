@@ -201,7 +201,7 @@ return {
         indent_scope_color = '', -- catppuccin color (eg. `lavender`) Default: text
       },
       telescope = {
-        enabled = true,
+        enabled = false,
         style = 'nvchad',
       },
       -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)

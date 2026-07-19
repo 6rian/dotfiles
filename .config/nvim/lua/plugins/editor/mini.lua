@@ -42,6 +42,65 @@ return {
     require('mini.icons').setup()
     require('mini.move').setup()
     require('mini.operators').setup()
+
+    -- Pending-keybind popup (replaces which-key.nvim)
+    local miniclue = require 'mini.clue'
+    miniclue.setup {
+      triggers = {
+        { mode = 'n', keys = '<Leader>' },
+        { mode = 'x', keys = '<Leader>' },
+
+        { mode = 'n', keys = 'g' },
+        { mode = 'x', keys = 'g' },
+
+        { mode = 'n', keys = 'z' },
+        { mode = 'x', keys = 'z' },
+
+        { mode = 'i', keys = '<C-x>' },
+
+        { mode = 'n', keys = "'" },
+        { mode = 'x', keys = "'" },
+        { mode = 'n', keys = '`' },
+        { mode = 'x', keys = '`' },
+
+        { mode = 'n', keys = '"' },
+        { mode = 'x', keys = '"' },
+        { mode = 'i', keys = '<C-r>' },
+        { mode = 'c', keys = '<C-r>' },
+
+        { mode = 'n', keys = '<C-w>' },
+      },
+      clues = {
+        { mode = 'n', keys = '<Leader>c', desc = '+Code' },
+        { mode = 'x', keys = '<Leader>c', desc = '+Code' },
+        { mode = 'n', keys = '<Leader>d', desc = '+Document' },
+        { mode = 'n', keys = '<Leader>r', desc = '+Rename' },
+        { mode = 'n', keys = '<Leader>s', desc = '+Search' },
+        { mode = 'n', keys = '<Leader>w', desc = '+Workspace' },
+        { mode = 'n', keys = '<Leader>t', desc = '+Toggle' },
+        { mode = 'n', keys = '<Leader>h', desc = '+Git Hunk' },
+        { mode = 'x', keys = '<Leader>h', desc = '+Git Hunk' },
+
+        miniclue.gen_clues.builtin_completion(),
+        miniclue.gen_clues.g(),
+        miniclue.gen_clues.marks(),
+        miniclue.gen_clues.registers(),
+        miniclue.gen_clues.windows(),
+        miniclue.gen_clues.z(),
+      },
+      window = {
+        delay = 100,
+        -- Full width, anchored bottom-left, a bit taller than the auto-fit default
+        config = function()
+          return {
+            width = vim.o.columns - 2,
+            height = math.floor(vim.o.lines * 0.4),
+            anchor = 'SW',
+            col = 0,
+          }
+        end,
+      },
+    }
     require('mini.splitjoin').setup {
       mappings = {
         toggle = 'gst',
