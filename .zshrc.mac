@@ -1,7 +1,6 @@
 # macOS-only config, sourced from .zshrc via the OSTYPE case statement.
 # Split out 2026-08-23 so .zshrc itself can be shared with Linux (devbox).
-
-SSH_KEY="$HOME/.ssh/id_ed25519"
+# SSH_KEY and ssh-agent setup live in the shared .zshrc now, not here.
 
 export PATH=$PATH:/opt/homebrew/bin
 
@@ -31,14 +30,6 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # bindkey '^L' vi-forward-word
 # bindkey '^k' up-line-or-search
 # bindkey '^j' down-line-or-search
-
-# Add SSH keys to ssh-agent
-eval $(ssh-agent -s)
-
-# Add SSH keys to Apple keychain if not already added
-if ! ssh-add -l | grep -q "$(ssh-keygen -lf "$SSH_KEY" | awk '{print $2}')"; then
-  ssh-add --apple-use-keychain "$SSH_KEY" >/dev/null 2>&1
-fi
 
 # Obsidian
 export OBSIDIAN_VAULT='$HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Documents/Obsidian\ Vaults/techn0tes/'

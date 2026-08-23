@@ -2,6 +2,11 @@ export PATH=$PATH:~/repos/dotfiles/bin
 export PATH="$HOME/.local/bin:$PATH"
 
 export REPOS_DIR="$HOME/repos"
+export SSH_KEY="$HOME/.ssh/id_ed25519"
+
+# mise (runtime version manager) — shared, not host-specific, so it lives
+# here rather than .zshrc.private
+eval "$(~/.local/bin/mise activate zsh)"
 
 # ALIASES
 alias ai='llm'
@@ -89,6 +94,22 @@ if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
     export EDITOR='nvim'
+fi
+
+# Start ssh-agent if not already running, and add the key if not already
+# loaded. Shared across OSes; only the Apple Keychain flag is Mac-specific.
+# No-ops cleanly on machines with no local $SSH_KEY (e.g. devbox, which
+# relies on agent forwarding instead).
+if [ -z "$SSH_AGENT_PID" ] || ! kill -0 "$SSH_AGENT_PID" 2>/dev/null; then
+  eval "$(ssh-agent -s)" > /dev/null
+fi
+
+if [ -f "$SSH_KEY" ] && ! ssh-add -l 2>/dev/null | grep -q "$(ssh-keygen -lf "$SSH_KEY" | awk '{print $2}')"; then
+  if [[ "$OSTYPE" == darwin* ]]; then
+    ssh-add --apple-use-keychain "$SSH_KEY" >/dev/null 2>&1
+  else
+    ssh-add "$SSH_KEY" >/dev/null 2>&1
+  fi
 fi
 
 # OS-specific config (see .zshrc.mac / .zshrc.linux)
