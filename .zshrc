@@ -19,6 +19,11 @@ alias sz="source $HOME/.zshrc"
 alias tree="tree -C"
 alias v='nvim'
 
+# Claude aliases
+# TODO: .claude should be personal, once I get work moved to my devbox
+alias claude-personal='CLAUDE_CONFIG_DIR="$HOME/.claude-personal" claude'
+alias claude-work='CLAUDE_CONFIG_DIR="$HOME/.claude" claude'
+
 # Filesystem shortcuts
 alias ..="cd .."
 alias ...="cd ../.."
@@ -103,6 +108,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load nvm bash_completion
+nvm use default
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"

@@ -1,3 +1,54 @@
+-- Floating terminal management (mirrors voldikss/vim-floaterm's to/tt/tp/tn/tk)
+local floaterm = { current = 0, count = 0 }
+
+local function floaterm_get(n)
+  return (Snacks.terminal.get(nil, { count = n, create = false }))
+end
+
+local function floaterm_open()
+  local cur = floaterm_get(floaterm.current)
+  if cur then
+    cur:hide()
+  end
+  floaterm.count = floaterm.count + 1
+  floaterm.current = floaterm.count
+  Snacks.terminal.open(nil, { count = floaterm.current })
+end
+
+local function floaterm_toggle()
+  if floaterm.count == 0 then
+    floaterm_open()
+  else
+    Snacks.terminal.toggle(nil, { count = floaterm.current })
+  end
+end
+
+local function floaterm_cycle(step)
+  if floaterm.count == 0 then
+    floaterm_open()
+    return
+  end
+  local cur = floaterm_get(floaterm.current)
+  for _ = 1, floaterm.count do
+    floaterm.current = (floaterm.current - 1 + step) % floaterm.count + 1
+    local term = floaterm_get(floaterm.current)
+    if term then
+      if cur then
+        cur:hide()
+      end
+      term:show()
+      return
+    end
+  end
+end
+
+local function floaterm_kill()
+  local cur = floaterm_get(floaterm.current)
+  if cur then
+    cur:close()
+  end
+end
+
 return {
   'folke/snacks.nvim',
   priority = 1000,
@@ -565,6 +616,13 @@ return {
       desc = 'Lazygit',
     },
     {
+      '<leader>lg',
+      function()
+        Snacks.lazygit()
+      end,
+      desc = 'Lazygit',
+    },
+    {
       '<leader>un',
       function()
         Snacks.notifier.hide()
@@ -585,6 +643,23 @@ return {
       end,
       desc = 'which_key_ignore',
     },
+    { 'to', floaterm_open, desc = 'Open New Terminal' },
+    { 'tt', floaterm_toggle, desc = 'Toggle Terminal' },
+    {
+      'tn',
+      function()
+        floaterm_cycle(1)
+      end,
+      desc = 'Next Terminal',
+    },
+    {
+      'tp',
+      function()
+        floaterm_cycle(-1)
+      end,
+      desc = 'Previous Terminal',
+    },
+    { 'tk', floaterm_kill, desc = 'Kill Terminal' },
     {
       ']]',
       function()
