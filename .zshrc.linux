@@ -1,0 +1,15 @@
+# Linux-only config, sourced from .zshrc via the OSTYPE case statement.
+# Created 2026-08-23 alongside .zshrc.mac, splitting OS-specific bits out of
+# what used to be one Mac-only .zshrc.
+
+# Ubuntu's `bat` and `fd-find` packages install as `batcat`/`fdfind` (name
+# collisions with unrelated existing packages) — alias them back so the
+# shared .zshrc's `alias cat='bat'` and anything expecting `fd` still work.
+command -v batcat >/dev/null 2>&1 && alias bat='batcat'
+command -v fdfind >/dev/null 2>&1 && alias fd='fdfind'
+
+# zsh-autosuggestions (apt package, not Homebrew — same plugin, different
+# install path than .zshrc.mac's Homebrew-based one)
+if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi

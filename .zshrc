@@ -1,7 +1,4 @@
-SSH_KEY="$HOME/.ssh/id_ed25519"
-
 export PATH=$PATH:~/repos/dotfiles/bin
-export PATH=$PATH:/opt/homebrew/bin
 export PATH="$HOME/.local/bin:$PATH"
 
 export REPOS_DIR="$HOME/repos"
@@ -87,13 +84,6 @@ alias nmap='grc nmap'
 alias netstat='grc netstat'
 alias dig='grc dig'
 
-# Obsidian
-export OBSIDIAN_VAULT='$HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Documents/Obsidian\ Vaults/techn0tes/'
-# (o)pen (o)bsidian
-alias oo="$OBSIDIAN_VAULT && nvim ."
-# (o)pen inbox files for (r)
-alias or="$OBSIDIAN_VAULT/inbox/*.md"
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -101,41 +91,18 @@ else
     export EDITOR='nvim'
 fi
 
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load nvm bash_completion
-nvm use default
-
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+# OS-specific config (see .zshrc.mac / .zshrc.linux)
+case "$OSTYPE" in
+  darwin*)
+    [ -f "$HOME/repos/dotfiles/.zshrc.mac" ] && source "$HOME/repos/dotfiles/.zshrc.mac"
+    ;;
+  linux*)
+    [ -f "$HOME/repos/dotfiles/.zshrc.linux" ] && source "$HOME/repos/dotfiles/.zshrc.linux"
+    ;;
 esac
-# pnpm end
 
 # Initialize zoxide.
 eval "$(zoxide init zsh --cmd j)"
-
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# bindkey '^w' autosuggest-execute
-# bindkey '^e' autosuggest-accept
-# bindkey '^u' autosuggest-toggle
-# bindkey '^L' vi-forward-word
-# bindkey '^k' up-line-or-search
-# bindkey '^j' down-line-or-search
-
-# Add SSH keys to ssh-agent
-eval $(ssh-agent -s)
-
-# Add SSH keys to Apple keychain if not already added
-if ! ssh-add -l | grep -q "$(ssh-keygen -lf "$SSH_KEY" | awk '{print $2}')"; then
-  ssh-add --apple-use-keychain "$SSH_KEY" >/dev/null 2>&1
-fi
 
 # LOAD PRIVATE CONFIG
 if [ -f "$HOME/.zshrc.private" ]; then
