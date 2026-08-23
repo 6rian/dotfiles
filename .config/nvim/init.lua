@@ -93,6 +93,21 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Neovim inherits $PATH from whatever shell launched it. `nvm` only puts node
+-- on PATH when .zshrc actually runs (e.g. not in a stale tmux pane, or a
+-- non-interactive launch), which silently breaks Mason-installed LSP servers
+-- (typescript-language-server, tailwindcss-language-server, ...) and Copilot's
+-- language server (spawned via npx). Make node available regardless.
+if vim.fn.executable 'node' == 0 then
+  local nvm_dir = vim.env.NVM_DIR or (vim.env.HOME .. '/.nvm')
+  local versions = vim.fn.glob(nvm_dir .. '/versions/node/*', true, true)
+  table.sort(versions)
+  local latest = versions[#versions]
+  if latest then
+    vim.env.PATH = latest .. '/bin:' .. vim.env.PATH
+  end
+end
+
 require 'keymaps'
 require 'options'
 require 'lazy-init'

@@ -277,6 +277,13 @@ return {
 
     -- mason-lspconfig automatically calls vim.lsp.enable() for every server it
     -- installs, using whatever vim.lsp.config() was registered above.
-    require('mason-lspconfig').setup()
+    -- ts_ls is excluded because typescript-tools.nvim already handles TS/JS;
+    -- otherwise both attach to the same buffer and ts_ls (unconfigured here)
+    -- surfaces as a spurious "exited" error alongside the working client.
+    require('mason-lspconfig').setup {
+      automatic_enable = {
+        exclude = { 'ts_ls' },
+      },
+    }
   end,
 }
