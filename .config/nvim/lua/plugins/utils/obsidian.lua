@@ -1,5 +1,6 @@
 return {
   'obsidian-nvim/obsidian.nvim',
+  enabled = false, -- not in use; config kept in case this changes
   version = '*', -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = 'markdown',
