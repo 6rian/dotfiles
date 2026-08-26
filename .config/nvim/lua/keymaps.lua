@@ -63,3 +63,13 @@ local toggle_test = require 'utils.toggle_tests'
 vim.keymap.set('n', '<leader>tt', toggle_test.toggle, {
   desc = 'Toggle between source and test/spec file',
 })
+
+-- Strip literal ANSI escape sequences (e.g. `^[[27;5;106~`) that sometimes
+-- get pasted in verbatim when pasting text copied from Claude, splitting
+-- the line at each occurrence since they usually mark accidental line joins
+local function strip_ansi_escapes()
+  local view = vim.fn.winsaveview()
+  vim.cmd [[keeppatterns %s/\%x1b\[[0-9;]*\~/\r/ge]]
+  vim.fn.winrestview(view)
+end
+keymap.set('n', '<leader>xa', strip_ansi_escapes, { desc = 'Strip pasted ANSI escape codes' })
