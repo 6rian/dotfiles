@@ -41,6 +41,7 @@ return {
   -- { import = 'plugins.ui.colorschemes.onenord' },
   -- { import = 'plugins.ui.colorschemes.rosepine' },
   -- { import = 'plugins.ui.colorschemes.tokyonight' },
+  { import = 'plugins.ui.colorschemes.xeno' },
   { import = 'plugins.ui.markdown' },
   { import = 'plugins.ui.tabby' },
   { import = 'plugins.ui.treesitter-context' },
