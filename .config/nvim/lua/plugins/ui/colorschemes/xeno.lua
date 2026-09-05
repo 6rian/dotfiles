@@ -77,6 +77,38 @@ return {
           GitSignsDelete = { fg = '@magenta.400' },
           TelescopeSelection = { bg = xeno.opaque('@accent.500', 0.15) },
           TelescopeMatching = { fg = '@indigo.300', bold = true },
+
+          -- Diffview: mirror the GitSigns add/change/delete palette
+          DiffviewPrimary = { fg = '@accent' },
+          DiffviewSecondary = { fg = '@indigo.300' },
+          DiffviewDim1 = { fg = '@background.500' },
+
+          DiffviewFilePanelTitle = { fg = '@accent', bold = true },
+          DiffviewFilePanelCounter = { fg = '@indigo.400', bold = true },
+          DiffviewFilePanelFileName = { fg = '@foreground.200' },
+          DiffviewFilePanelPath = { fg = '@background.500' },
+          DiffviewFilePanelInsertions = { fg = '@green.600' },
+          DiffviewFilePanelDeletions = { fg = '@magenta.400' },
+          DiffviewFilePanelSelected = { fg = '@accent', bold = true },
+
+          DiffviewStatusAdded = { fg = '@green.600' },
+          DiffviewStatusUntracked = { fg = '@green.400' },
+          DiffviewStatusModified = { fg = '@accent' },
+          DiffviewStatusRenamed = { fg = '@cyan.300' },
+          DiffviewStatusCopied = { fg = '@cyan.300' },
+          DiffviewStatusTypeChange = { fg = '@indigo.300' },
+          DiffviewStatusTypeChanged = { fg = '@indigo.300' },
+          DiffviewStatusUnmerged = { fg = '@magenta.300' },
+          DiffviewStatusUnknown = { fg = '@background.500' },
+          DiffviewStatusDeleted = { fg = '@magenta.400' },
+          DiffviewStatusBroken = { fg = '@magenta.400' },
+          DiffviewStatusIgnored = { fg = '@background.500', italic = true },
+
+          DiffviewFolderSign = { fg = '@cyan.300' },
+          DiffviewFolderName = { fg = '@cyan.300' },
+
+          DiffviewReference = { fg = '@cyan.300' },
+          DiffviewHash = { fg = '@background.500', italic = true },
         },
       },
     })

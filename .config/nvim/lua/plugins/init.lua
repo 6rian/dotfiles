@@ -21,6 +21,7 @@ return {
 
   { import = 'plugins.editor.blink' },
   -- { import = 'plugins.editor.bufferline' },
+  { import = 'plugins.editor.diffview' },
   { import = 'plugins.editor.gitsigns' },
   { import = 'plugins.editor.guess-indent' },
   { import = 'plugins.editor.lualine' },
