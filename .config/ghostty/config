@@ -22,3 +22,9 @@ macos-icon = "custom-style"
 macos-icon-frame = "beige"
 macos-icon-ghost-color = "#4E00A1"
 macos-icon-screen-color = "#1D003D"
+
+# xeno.nvim theme colors
+background = 090020
+foreground = bcc1bf
+cursor-color = 6c25ff
+# End xeno.nvim theme colors

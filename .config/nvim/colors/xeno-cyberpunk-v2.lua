@@ -11,13 +11,23 @@ require("xeno").setup({
   transparent = true,
   foreground = "#eef1f0",
   _custom_colors = {
-    magenta = "#FF237D",
     indigo = "#7c83fd",
-    cyan = "#00d7ff",
-    green = "#a6e12d"
+    magenta = "#FF237D",
+    green = "#a6e12d",
+    cyan = "#00d7ff"
   },
   highlights = {
     syntax = {
+      ["@function.builtin"] = {
+        fg = "@accent"
+      },
+      ["@function"] = {
+        fg = "@accent"
+      },
+      ["@keyword"] = {
+        bold = true,
+        fg = "@indigo.400"
+      },
       Type = {
         link = "@type"
       },
@@ -33,9 +43,12 @@ require("xeno").setup({
       ["@string"] = {
         fg = "@green.200"
       },
+      ["@type"] = {
+        fg = "@indigo.300"
+      },
       ["@comment"] = {
-        fg = "@background.500",
-        italic = true
+        italic = true,
+        fg = "@background.500"
       },
       ["@punctuation"] = {
         fg = "@background.500"
@@ -51,41 +64,67 @@ require("xeno").setup({
       },
       ["@variable"] = {
         fg = "@foreground.200"
+      }
+    },
+    plugins = {
+      GitSignsChange = {
+        fg = "@accent"
       },
-      ["@type"] = {
+      GitSignsAdd = {
+        fg = "@green.600"
+      },
+      TelescopeMatching = {
+        bold = true,
         fg = "@indigo.300"
       },
-      ["@function.builtin"] = {
-        fg = "@accent"
+      GitSignsDelete = {
+        fg = "@magenta.400"
       },
-      ["@function"] = {
-        fg = "@accent"
-      },
-      ["@keyword"] = {
-        fg = "@indigo.400",
-        bold = true
+      TelescopeSelection = {
+        bg = {
+          __xeno_opaque = true,
+          fg = "@accent.500",
+          opacity = 0.15
+        }
       }
     },
     editor = {
+      Search = {
+        bg = {
+          __xeno_opaque = true,
+          fg = "@cyan.500",
+          opacity = 0.3
+        }
+      },
+      WarningMsg = {
+        fg = "@accent"
+      },
+      Visual = {
+        bg = {
+          __xeno_opaque = true,
+          fg = "@accent.500",
+          opacity = 0.2
+        }
+      },
       CursorLine = {
         bg = {
-          opacity = 0.05,
           __xeno_opaque = true,
-          fg = "@foreground.50"
+          fg = "@foreground.50",
+          opacity = 0.05
         }
+      },
+      LineNr = {
+        fg = "@background.500"
       },
       CursorLineNr = {
         fg = "@accent"
       },
       IncSearch = {
         bg = {
-          opacity = 0.5,
           __xeno_opaque = true,
-          fg = "@cyan.500"
+          fg = "@cyan.500",
+          opacity = 0.5
         }
-      },
-      WarningMsg = {
-        fg = "@accent"
       },
       ErrorMsg = {
         fg = "@magenta.400"
@@ -95,57 +134,18 @@ require("xeno").setup({
       },
       PmenuSel = {
         bg = {
-          opacity = 0.25,
           __xeno_opaque = true,
-          fg = "@accent.500"
+          fg = "@accent.500",
+          opacity = 0.25
         }
       },
       Pmenu = {
-        bg = "@background.800",
-        fg = "@foreground.200"
-      },
-      Search = {
-        bg = {
-          opacity = 0.3,
-          __xeno_opaque = true,
-          fg = "@cyan.500"
-        }
-      },
-      LineNr = {
-        fg = "@background.500"
-      },
-      Visual = {
-        bg = {
-          opacity = 0.2,
-          __xeno_opaque = true,
-          fg = "@accent.500"
-        }
+        fg = "@foreground.200",
+        bg = "@background.800"
       },
       Normal = {
-        fg = "@foreground.100",
-        bg = "@background.950"
-      }
-    },
-    plugins = {
-      TelescopeMatching = {
-        fg = "@indigo.300",
-        bold = true
-      },
-      GitSignsDelete = {
-        fg = "@magenta.400"
-      },
-      GitSignsChange = {
-        fg = "@accent"
-      },
-      GitSignsAdd = {
-        fg = "@green.600"
-      },
-      TelescopeSelection = {
-        bg = {
-          opacity = 0.15,
-          __xeno_opaque = true,
-          fg = "@accent.500"
-        }
+        bg = "@background.950",
+        fg = "@foreground.100"
       }
     }
   },
