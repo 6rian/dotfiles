@@ -11,60 +11,73 @@ require("xeno").setup({
   transparent = true,
   foreground = "#eef1f0",
   _custom_colors = {
-    green = "#a6e12d",
     indigo = "#7c83fd",
-    cyan = "#00d7ff",
-    magenta = "#FF237D"
+    magenta = "#FF237D",
+    green = "#a6e12d",
+    cyan = "#00d7ff"
   },
   highlights = {
+    syntax = {
+      ["@tag"] = {
+        fg = "@magenta.300"
+      },
+      ["@function.builtin"] = {
+        fg = "@accent"
+      },
+      ["@property"] = {
+        fg = "@foreground.300"
+      },
+      ["@keyword"] = {
+        fg = "@indigo.400",
+        bold = true
+      },
+      ["@constant"] = {
+        fg = "@cyan.300"
+      },
+      ["@number"] = {
+        fg = "@cyan.300"
+      },
+      ["@string"] = {
+        fg = "@green.200"
+      },
+      ["@variable.builtin"] = {
+        fg = "@magenta.300"
+      },
+      ["@comment"] = {
+        fg = "@background.500",
+        italic = true
+      },
+      ["@boolean"] = {
+        fg = "@cyan.400"
+      },
+      ["@punctuation"] = {
+        fg = "@background.500"
+      },
+      ["@function"] = {
+        fg = "@accent"
+      },
+      ["@variable"] = {
+        fg = "@foreground.200"
+      },
+      Type = {
+        link = "@type"
+      },
+      ["@type"] = {
+        fg = "@indigo.300"
+      }
+    },
     plugins = {
-      DiffviewFilePanelTitle = {
-        bold = true,
-        fg = "@accent"
-      },
-      DiffviewDim1 = {
-        fg = "@background.500"
-      },
-      DiffviewSecondary = {
-        fg = "@indigo.300"
-      },
-      DiffviewPrimary = {
-        fg = "@accent"
-      },
-      TelescopeMatching = {
-        bold = true,
-        fg = "@indigo.300"
-      },
-      DiffviewFolderSign = {
-        fg = "@cyan.300"
-      },
-      DiffviewStatusIgnored = {
-        italic = true,
-        fg = "@background.500"
-      },
-      DiffviewStatusBroken = {
-        fg = "@magenta.400"
-      },
-      DiffviewFolderName = {
-        fg = "@cyan.300"
-      },
-      DiffviewStatusDeleted = {
-        fg = "@magenta.400"
-      },
       DiffviewStatusUnknown = {
         fg = "@background.500"
       },
       DiffviewStatusUnmerged = {
         fg = "@magenta.300"
       },
-      DiffviewReference = {
-        fg = "@cyan.300"
-      },
       DiffviewStatusTypeChanged = {
         fg = "@indigo.300"
       },
-      GitSignsAdd = {
-        fg = "@green.600"
+      DiffviewStatusUntracked = {
+        fg = "@green.400"
       },
       DiffviewStatusTypeChange = {
         fg = "@indigo.300"
@@ -78,28 +91,28 @@ require("xeno").setup({
       DiffviewStatusModified = {
         fg = "@accent"
       },
+      DiffviewSecondary = {
+        fg = "@indigo.300"
+      },
       TelescopeSelection = {
         bg = {
-          fg = "@accent.500",
           opacity = 0.15,
-          __xeno_opaque = true
+          __xeno_opaque = true,
+          fg = "@accent.500"
         }
       },
-      DiffviewStatusUntracked = {
-        fg = "@green.400"
-      },
-      GitSignsChange = {
-        fg = "@accent"
+      GitSignsAdd = {
+        fg = "@green.600"
       },
       DiffviewStatusAdded = {
         fg = "@green.600"
       },
-      GitSignsDelete = {
-        fg = "@magenta.400"
+      GitSignsChange = {
+        fg = "@accent"
       },
       DiffviewFilePanelSelected = {
-        bold = true,
-        fg = "@accent"
+        fg = "@accent",
+        bold = true
       },
       DiffviewFilePanelDeletions = {
         fg = "@magenta.400"
@@ -113,121 +126,108 @@ require("xeno").setup({
       DiffviewFilePanelFileName = {
         fg = "@foreground.200"
       },
-      DiffviewHash = {
-        italic = true,
-        fg = "@background.500"
+      GitSignsDelete = {
+        fg = "@magenta.400"
       },
       DiffviewFilePanelCounter = {
-        bold = true,
-        fg = "@indigo.400"
-      }
-    },
-    syntax = {
-      ["@variable.builtin"] = {
-        fg = "@magenta.300"
+        fg = "@indigo.400",
+        bold = true
       },
-      ["@variable"] = {
-        fg = "@foreground.200"
-      },
-      ["@function.builtin"] = {
-        fg = "@accent"
-      },
-      ["@function"] = {
-        fg = "@accent"
-      },
-      ["@keyword"] = {
-        bold = true,
-        fg = "@indigo.400"
-      },
-      ["@boolean"] = {
-        fg = "@cyan.400"
-      },
-      ["@number"] = {
+      DiffviewFolderName = {
         fg = "@cyan.300"
       },
-      ["@string"] = {
-        fg = "@green.200"
+      DiffviewFilePanelTitle = {
+        fg = "@accent",
+        bold = true
       },
-      Type = {
-        link = "@type"
-      },
-      ["@comment"] = {
-        italic = true,
+      DiffviewDim1 = {
         fg = "@background.500"
       },
-      ["@tag"] = {
-        fg = "@magenta.300"
-      },
-      ["@punctuation"] = {
-        fg = "@background.500"
-      },
-      ["@property"] = {
-        fg = "@foreground.300"
-      },
-      ["@type"] = {
-        fg = "@indigo.300"
-      },
-      ["@constant"] = {
+      DiffviewReference = {
         fg = "@cyan.300"
+      },
+      DiffviewPrimary = {
+        fg = "@accent"
+      },
+      TelescopeMatching = {
+        fg = "@indigo.300",
+        bold = true
+      },
+      DiffviewFolderSign = {
+        fg = "@cyan.300"
+      },
+      DiffviewStatusIgnored = {
+        fg = "@background.500",
+        italic = true
+      },
+      DiffviewStatusBroken = {
+        fg = "@magenta.400"
+      },
+      DiffviewHash = {
+        fg = "@background.500",
+        italic = true
+      },
+      DiffviewStatusDeleted = {
+        fg = "@magenta.400"
       }
     },
     editor = {
-      PmenuSel = {
-        bg = {
-          fg = "@accent.500",
-          opacity = 0.25,
-          __xeno_opaque = true
-        }
-      },
-      Search = {
-        bg = {
-          fg = "@cyan.500",
-          opacity = 0.3,
-          __xeno_opaque = true
-        }
+      CursorLineNr = {
+        fg = "@accent"
       },
       Visual = {
         bg = {
-          fg = "@accent.500",
           opacity = 0.2,
-          __xeno_opaque = true
+          __xeno_opaque = true,
+          fg = "@accent.500"
         }
       },
-      WarningMsg = {
-        fg = "@accent"
-      },
-      Normal = {
-        bg = "@background.950",
-        fg = "@foreground.100"
+      IncSearch = {
+        bg = {
+          opacity = 0.5,
+          __xeno_opaque = true,
+          fg = "@cyan.500"
+        }
       },
       CursorLine = {
         bg = {
-          fg = "@foreground.50",
           opacity = 0.05,
-          __xeno_opaque = true
+          __xeno_opaque = true,
+          fg = "@foreground.50"
         }
-      },
-      Directory = {
-        fg = "@cyan.300"
-      },
-      ErrorMsg = {
-        fg = "@magenta.400"
       },
       LineNr = {
         fg = "@background.500"
       },
-      CursorLineNr = {
-        fg = "@accent"
+      Normal = {
+        fg = "@foreground.100",
+        bg = "@background.950"
+      },
+      ErrorMsg = {
+        fg = "@magenta.400"
+      },
+      Directory = {
+        fg = "@cyan.300"
+      },
+      PmenuSel = {
+        bg = {
+          opacity = 0.25,
+          __xeno_opaque = true,
+          fg = "@accent.500"
+        }
       },
       Pmenu = {
-        bg = "@background.800",
-        fg = "@foreground.200"
+        fg = "@foreground.200",
+        bg = "@background.800"
       },
-      IncSearch = {
+      WarningMsg = {
+        fg = "@accent"
+      },
+      Search = {
         bg = {
-          fg = "@cyan.500",
-          opacity = 0.5,
-          __xeno_opaque = true
+          opacity = 0.3,
+          __xeno_opaque = true,
+          fg = "@cyan.500"
         }
       }
     }
