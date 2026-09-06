@@ -112,6 +112,19 @@ if [ -f "$SSH_KEY" ] && ! ssh-add -l 2>/dev/null | grep -q "$(ssh-keygen -lf "$S
   fi
 fi
 
+# Completion: fzf-tab (fuzzy Tab-completion) + fzf's native Ctrl-R/Ctrl-T/
+# Alt-C bindings. Explicit compinit call here rather than relying on
+# whatever implicitly triggers it on a given host (Debian's default
+# /etc/zsh/zshrc on Linux; an unidentified trigger on macOS, confirmed via
+# `compdef` being defined but not traced to a specific line) — calling it
+# ourselves is deterministic and harmless if something else already did.
+# Must load before zsh-autosuggestions (sourced below via the OS-specific
+# case block) — fzf-tab hooks the Tab-completion widget, and a
+# widget-wrapping plugin loading first can break that hook.
+autoload -Uz compinit && compinit
+[ -f "$HOME/.local/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh" ] && source "$HOME/.local/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
+
 # OS-specific config (see .zshrc.mac / .zshrc.linux)
 case "$OSTYPE" in
   darwin*)
