@@ -23,8 +23,8 @@ alias v='nvim'
 
 # Claude aliases
 # TODO: .claude should be personal, once I get work moved to my devbox
-alias claude-personal='CLAUDE_CONFIG_DIR="$HOME/.claude-personal" claude'
-alias claude-work='CLAUDE_CONFIG_DIR="$HOME/.claude" claude'
+alias claude-personal='CLAUDE_CONFIG_DIR="$HOME/.claude" claude'
+alias claude-work='CLAUDE_CONFIG_DIR="$HOME/.claude-work" claude'
 
 # Filesystem shortcuts
 alias ..="cd .."
