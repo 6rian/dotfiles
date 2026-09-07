@@ -39,6 +39,15 @@ return {
 
       min_contrast = 4.5,
 
+      -- ghostty/themes/xeno-cyberpunk-v2 is now a real, static Ghostty theme
+      -- (see the dotfiles repo) -- disable xeno.nvim's own redundant
+      -- ghostty/config auto-write (its default is update_config = true),
+      -- which would otherwise re-clobber that clean setup every time nvim
+      -- runs inside a Ghostty window.
+      integrations = {
+        ghostty = { update_config = false },
+      },
+
       highlights = {
         editor = {
           Normal = { fg = '@foreground.100', bg = '@background.950' },
