@@ -1,7 +1,7 @@
 ## vim:fileencoding=utf-8
 
 # ghostty +list-themes to see all available themes
-theme = "catppuccin-cyberpunk"
+theme = "xeno-cyberpunk-v2"
 
 # ghostty +list-fonts to see all available fonts
 #font-family = "Hack Nerd Font"
@@ -9,7 +9,6 @@ theme = "catppuccin-cyberpunk"
 font-family = "BitstromWera Nerd Font Mono"
 font-size = 13
 
-background = "#000000"
 background-opacity = 0.85
 background-blur-radius = 20
 
@@ -22,9 +21,3 @@ macos-icon = "custom-style"
 macos-icon-frame = "beige"
 macos-icon-ghost-color = "#4E00A1"
 macos-icon-screen-color = "#1D003D"
-
-# xeno.nvim theme colors
-background = 090020
-foreground = bcc1bf
-cursor-color = 6c25ff
-# End xeno.nvim theme colors

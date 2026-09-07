@@ -1,0 +1,46 @@
+# Ghostty theme matching the xeno.nvim "xeno-cyberpunk-v2" colorscheme,
+# adapted from kitty/xeno-cyberpunk-v2.conf (kitty's theme, not the
+# current nvim colorscheme file directly -- see that file's comment for
+# the values this is derived from).
+#
+# background #0b0d10, accent (neon yellow-green) #e8e34a
+# teal #089ED9, green #7EA929, indigo #7E4AE6, magenta #F11FCB
+
+background = #0b0d10
+foreground = #eef1f0
+cursor-color = #e8e34a
+cursor-text = #0b0d10
+selection-foreground = #0b0d10
+selection-background = #e8e34a
+
+# Black
+palette = 0=#0b0d10
+palette = 8=#2a2f36
+
+# Red
+palette = 1=#ff3b52
+palette = 9=#ff7a8a
+
+# Green
+palette = 2=#7EA929
+palette = 10=#a4d94a
+
+# Yellow
+palette = 3=#e8e34a
+palette = 11=#f5f08a
+
+# Blue
+palette = 4=#7E4AE6
+palette = 12=#a98aff
+
+# Magenta
+palette = 5=#F11FCB
+palette = 13=#ff6fe0
+
+# Cyan
+palette = 6=#089ED9
+palette = 14=#4fc4ff
+
+# White
+palette = 7=#c7ccce
+palette = 15=#eef1f0
