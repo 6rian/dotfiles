@@ -14,7 +14,20 @@ duration_ms=$(echo "$input" | jq -r '.cost.total_duration_ms // empty')
 
 bar_width=20
 
-out="$model"
+# Dim variants of each color so segments stay legible against a dimmed
+# status line while still standing apart from one another.
+RESET='\033[0m'
+CYAN='\033[2;36m'
+GREEN='\033[2;32m'
+YELLOW='\033[2;33m'
+RED='\033[2;31m'
+BLUE='\033[2;34m'
+MAGENTA='\033[2;35m'
+DIM_SEP='\033[2m'
+
+segments=()
+
+segments+=("$(printf "${CYAN}\xf0\x9f\xa4\x96 %s${RESET}" "$model")")
 
 if [ -n "$used" ]; then
   used_int=$(printf '%.0f' "$used")
@@ -30,12 +43,20 @@ if [ -n "$used" ]; then
   i=0
   while [ "$i" -lt "$empty" ]; do bar="${bar}-"; i=$((i + 1)); done
 
-  out="$out [$bar] ${used_int}%"
+  if [ "$used_int" -ge 80 ]; then
+    ctx_color="$RED"
+  elif [ "$used_int" -ge 50 ]; then
+    ctx_color="$YELLOW"
+  else
+    ctx_color="$GREEN"
+  fi
+
+  segments+=("$(printf "${ctx_color}\xf0\x9f\xa7\xa0 [%s] %s%%${RESET}" "$bar" "$used_int")")
 fi
 
 if [ -n "$cost" ]; then
   cost_fmt=$(printf '%.2f' "$cost")
-  out="$out \$${cost_fmt}"
+  segments+=("$(printf "${MAGENTA}\xf0\x9f\x92\xb0 \$%s${RESET}" "$cost_fmt")")
 fi
 
 if [ -n "$duration_ms" ]; then
@@ -50,7 +71,15 @@ if [ -n "$duration_ms" ]; then
   else
     dur_fmt=$(printf '%ds' "$d_s")
   fi
-  out="$out ${dur_fmt}"
+  segments+=("$(printf "${BLUE}\xe2\x8f\xb1\xef\xb8\x8f  %s${RESET}" "$dur_fmt")")
 fi
 
-printf '\033[2m%s\033[0m' "$out"
+out=""
+for i in "${!segments[@]}"; do
+  if [ "$i" -gt 0 ]; then
+    out="${out}$(printf "${DIM_SEP} \xc2\xb7 ${RESET}")"
+  fi
+  out="${out}${segments[$i]}"
+done
+
+printf '%s' "$out"
