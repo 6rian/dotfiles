@@ -13,3 +13,8 @@ command -v fdfind >/dev/null 2>&1 && alias fd='fdfind'
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
+
+# Colorize with grc — Linux-only tools, not present on macOS
+alias systemctl='grc systemctl'
+alias ss='grc ss'
+alias ip='grc ip'
