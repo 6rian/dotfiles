@@ -9,14 +9,9 @@ export SSH_KEY="$HOME/.ssh/id_ed25519"
 eval "$(~/.local/bin/mise activate zsh)"
 
 # ALIASES
-alias ai='llm'
-alias cat='bat'
-alias ccat='/bin/cat'
 alias cl='clear'
-alias h='cd $HOME'
 alias lg='lazygit'
 alias ll='ls -lah'
-# alias pn='pnpm'
 alias sz="source $HOME/.zshrc"
 alias tree="tree -C"
 alias v='nvim'
