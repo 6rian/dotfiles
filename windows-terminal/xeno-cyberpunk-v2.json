@@ -1,0 +1,23 @@
+{
+    "name": "Xeno Cyberpunk V2",
+    "background": "#0B0D10",
+    "foreground": "#EEF1F0",
+    "cursorColor": "#E8E34A",
+    "selectionBackground": "#E8E34A",
+    "black": "#0B0D10",
+    "red": "#FF3B52",
+    "green": "#7EA929",
+    "yellow": "#E8E34A",
+    "blue": "#7E4AE6",
+    "purple": "#F11FCB",
+    "cyan": "#089ED9",
+    "white": "#C7CCCE",
+    "brightBlack": "#2A2F36",
+    "brightRed": "#FF7A8A",
+    "brightGreen": "#A4D94A",
+    "brightYellow": "#F5F08A",
+    "brightBlue": "#A98AFF",
+    "brightPurple": "#FF6FE0",
+    "brightCyan": "#4FC4FF",
+    "brightWhite": "#EEF1F0"
+}
