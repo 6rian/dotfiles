@@ -15,6 +15,17 @@
 #
 # Only ever touches destinations named in the manifest below - never scans
 # $HOME for unrelated dangling symlinks.
+#
+# `copy` (not `link`) entries are for files a running app can rewrite in
+# place -- Claude Code does this to .claude/settings.json (harmless
+# reordering, but it happens just from running the app), and a symlink
+# into this git-tracked repo means that rewrite lands directly in the
+# working tree, blocking the next clone/pull with "local modifications
+# exist". A one-way copy re-applies the repo's version on every run
+# instead -- no drift ever accumulates to conflict with git. Genuine
+# per-machine/runtime state belongs in .claude/settings.local.json
+# instead, which is intentionally never tracked or deployed by this
+# script at all.
 
 set -euo pipefail
 
@@ -34,7 +45,7 @@ MANIFEST=(
   "link:tmux/plugins:.config/tmux/plugins"
   "link:.gitconfig:.gitconfig"
   "dir::.claude"
-  "link:.claude/settings.json:.claude/settings.json"
+  "copy:.claude/settings.json:.claude/settings.json"
   "link:.claude/statusline-command.sh:.claude/statusline-command.sh"
 )
 
@@ -77,6 +88,32 @@ ensure_link() {
   changed=$((changed + 1))
 }
 
+ensure_copy() {
+  local src="$REPO_DIR/$1"
+  local dest="$TARGET_HOME/$2"
+  local dest_dir
+  dest_dir="$(dirname "$dest")"
+  [ -d "$dest_dir" ] || mkdir -p "$dest_dir"
+
+  if [ -L "$dest" ]; then
+    rm "$dest"
+    cp "$src" "$dest"
+    log "[migrated-from-symlink] $2"
+    changed=$((changed + 1))
+    return
+  fi
+
+  if [ -f "$dest" ] && cmp -s "$src" "$dest"; then
+    log "[ok] $2"
+    unchanged=$((unchanged + 1))
+    return
+  fi
+
+  cp "$src" "$dest"
+  log "[changed] $2"
+  changed=$((changed + 1))
+}
+
 ensure_real_dir() {
   local dest="$TARGET_HOME/$1"
 
@@ -106,6 +143,7 @@ for entry in "${MANIFEST[@]}"; do
   case "$kind" in
     link) ensure_link "$src" "$dest" ;;
     dir) ensure_real_dir "$dest" ;;
+    copy) ensure_copy "$src" "$dest" ;;
     *)
       log "[error] unknown manifest kind: $kind"
       exit 1
