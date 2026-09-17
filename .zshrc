@@ -4,20 +4,33 @@ export PATH="$HOME/.local/bin:$PATH"
 export REPOS_DIR="$HOME/repos"
 export SSH_KEY="$HOME/.ssh/id_ed25519"
 
-# mise (runtime version manager) — shared, not host-specific, so it lives
-# here rather than .zshrc.private
+# mise (runtime version manager)
 eval "$(~/.local/bin/mise activate zsh)"
 
-# ALIASES
-alias cl='clear'
+# Aliases
+alias c='clear'
+alias calc='bc'
 alias lg='lazygit'
 alias ll='ls -lah'
 alias sz="source $HOME/.zshrc"
 alias tree="tree -C"
-alias v='nvim'
+
+# Aliases for typos
+alias gi='git'
+alias gt'git'
+alias gti='git'
+alias nv='nvim'
+alias nvi='nvim'
+alias tree="tree"
+
+# Aliases for cat and bat:
+# 1) Use the full path to cat to avoid alias recursion
+alias ogcat="which cat >/dev/null 2>&1 && cat || cat"
+# 2) Prefer bat when available
+alias cat="which bat >/dev/null 2>&1 && bat || cat"
 
 # Claude aliases
-# TODO: .claude should be personal, once I get work moved to my devbox
+# TODO: Add a way to switch between personal and work Claude configs
 alias claude-personal='CLAUDE_CONFIG_DIR="$HOME/.claude" claude'
 alias claude-work='CLAUDE_CONFIG_DIR="$HOME/.claude-work" claude'
 
