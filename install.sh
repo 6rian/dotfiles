@@ -47,6 +47,9 @@ MANIFEST=(
   "dir::.claude"
   "copy:.claude/settings.json:.claude/settings.json"
   "link:.claude/statusline-command.sh:.claude/statusline-command.sh"
+  "link:ghostty:.config/ghostty"
+  "link:kitty:.config/kitty"
+  "link:karabiner/karabiner.json:.config/karabiner/karabiner.json"
 )
 
 log() {
