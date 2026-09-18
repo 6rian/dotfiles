@@ -47,7 +47,7 @@ design rationale.
     - Animate opening applications: Off
     - Show suggested and recent apps in Dock: Off
     - Stage Manager: Off
-    - Default Web Browser: Brave
+    - Default Web Browser: Vivaldi
     - Mission Control ->
         - Automatically rearrange Spaces based on most recent use: Off
         - When switching to an application, switch to a Space with open windows for the application: On
