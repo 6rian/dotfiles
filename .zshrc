@@ -42,7 +42,6 @@ alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 alias cdots="cd $HOME/repos/dotfiles"
 alias dots="cd $HOME/repos/dotfiles/ && nvim ./README.md"
-alias lab="cd $HOME/repos/homelab"
 alias repos="cd $HOME/repos"
 
 
@@ -86,26 +85,28 @@ cdRepo() {
 }
 
 # Colorize with grc
-alias ls='grc ls'
-alias ifconfig='grc ifconfig'
-alias df='grc df'
-alias whois='grc whois'
-alias ping='grc ping'
-alias traceroute='grc traceroute'
-alias ps='grc ps'
-alias nmap='grc nmap'
-alias netstat='grc netstat'
-alias dig='grc dig'
-alias docker='grc docker'
-alias curl='grc curl'
-alias tcpdump='grc tcpdump'
-alias lsof='grc lsof'
-alias du='grc du'
-alias env='grc env'
-alias id='grc id'
-alias stat='grc stat'
-alias uptime='grc uptime'
-alias last='grc last'
+if command -v grc &>/dev/null; then
+  alias ls='grc ls'
+  alias ifconfig='grc ifconfig'
+  alias df='grc df'
+  alias whois='grc whois'
+  alias ping='grc ping'
+  alias traceroute='grc traceroute'
+  alias ps='grc ps'
+  alias nmap='grc nmap'
+  alias netstat='grc netstat'
+  alias dig='grc dig'
+  alias docker='grc docker'
+  alias curl='grc curl'
+  alias tcpdump='grc tcpdump'
+  alias lsof='grc lsof'
+  alias du='grc du'
+  alias env='grc env'
+  alias id='grc id'
+  alias stat='grc stat'
+  alias uptime='grc uptime'
+  alias last='grc last'
+fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
