@@ -12,6 +12,9 @@
 #   - a managed "real directory" destination that's actually a stale symlink
 #     from before it needed to hold a mix of managed + unmanaged content
 #     (e.g. ~/.config/tmux, ~/.claude) -> symlink removed, real dir created
+#   - ~/working/repos left over as an empty real directory from before a
+#     legacy ~/repos was accounted for -> emptied dir removed, symlink
+#     created (see ensure_working_repos below)
 #
 # Only ever touches destinations named in the manifest below - never scans
 # $HOME for unrelated dangling symlinks.
@@ -54,7 +57,7 @@ MANIFEST=(
   "link:working/README.md:working/README.md"
   "dir::working/tmp"
   "dir::working/ai"
-  "dir::working/repos"
+  "repos-compat::working/repos"
   "dir::working/daily-notes"
 )
 
@@ -147,12 +150,65 @@ ensure_real_dir() {
   changed=$((changed + 1))
 }
 
+# Backwards compatibility for hosts/repos that still hardcode ~/repos
+# paths: if a legacy ~/repos already exists, point working/repos at it
+# instead of creating a second, empty repos directory. TODO once every
+# reference to ~/repos is updated to ~/working/repos, delete this function,
+# the legacy-~/repos branch's callers, and go back to a plain
+# "dir::working/repos" manifest entry.
+ensure_working_repos() {
+  local dest="$TARGET_HOME/$1"
+  local legacy="$TARGET_HOME/repos"
+
+  if [ ! -d "$legacy" ] || [ -L "$legacy" ]; then
+    ensure_real_dir "$1"
+    return
+  fi
+
+  if [ -L "$dest" ]; then
+    local current
+    current="$(readlink "$dest")"
+    if [ "$current" = "$legacy" ]; then
+      log "[ok] $1"
+      unchanged=$((unchanged + 1))
+      return
+    fi
+    rm "$dest"
+    ln -s "$legacy" "$dest"
+    log "[removed-stale] $1 (was -> $current)"
+    changed=$((changed + 1))
+    return
+  fi
+
+  if [ -d "$dest" ]; then
+    if [ -z "$(ls -A "$dest" 2>/dev/null)" ]; then
+      rmdir "$dest"
+      ln -s "$legacy" "$dest"
+      log "[changed] $1 (empty dir replaced with symlink to ~/repos)"
+      changed=$((changed + 1))
+      return
+    fi
+    log "[error] $1 is a non-empty real directory but ~/repos also exists -- resolve manually"
+    exit 1
+  fi
+
+  if [ -e "$dest" ]; then
+    log "[error] $1 exists and is not a directory or symlink -- resolve manually"
+    exit 1
+  fi
+
+  ln -s "$legacy" "$dest"
+  log "[changed] $1 (symlinked to ~/repos)"
+  changed=$((changed + 1))
+}
+
 for entry in "${MANIFEST[@]}"; do
   IFS=':' read -r kind src dest <<< "$entry"
   case "$kind" in
     link) ensure_link "$src" "$dest" ;;
     dir) ensure_real_dir "$dest" ;;
     copy) ensure_copy "$src" "$dest" ;;
+    repos-compat) ensure_working_repos "$dest" ;;
     *)
       log "[error] unknown manifest kind: $kind"
       exit 1

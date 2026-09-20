@@ -12,7 +12,12 @@ repo, same as the rest of the manifest — edit it here, not in place).
 - **`ai/`** — AI skills, docs, and other context specific to maintaining
   this `working` directory itself (not any one repo's own AI context —
   see "Not included" below).
-- **`repos/`** — All git repos cloned on this host.
+- **`repos/`** — All git repos cloned on this host. Backwards
+  compatibility: if a legacy `~/repos` already exists on a host,
+  `install.sh` symlinks `repos/` to it instead of creating a second, empty
+  directory — TODO once every reference to `~/repos` is updated to
+  `~/working/repos`, drop this symlink handling and make `repos/` a plain
+  real directory again.
 - **`daily-notes/`** — Daily notes, one file per day, named
   `YYYY-MM-DD-daily.md`.
 
