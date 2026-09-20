@@ -23,11 +23,20 @@ alias nv='nvim'
 alias nvi='nvim'
 alias tree="tree"
 
-# Aliases for cat and bat:
-# 1) Use the full path to cat to avoid alias recursion
-alias ogcat="which cat >/dev/null 2>&1 && cat || cat"
-# 2) Prefer bat when available
-alias cat="which bat >/dev/null 2>&1 && bat || cat"
+# Prefer bat over cat when available
+alias ogcat="command cat"
+# unalias first: re-sourcing after this replaced an old `alias cat=...`
+# fails with "defining function based on alias" otherwise, since the
+# stale alias from the running shell survives a `source` and collides
+# with the function definition below.
+unalias cat 2>/dev/null
+cat() {
+  if command -v bat >/dev/null 2>&1; then
+    command bat "$@"
+  else
+    command cat "$@"
+  fi
+}
 
 # Claude aliases
 # TODO: Add a way to switch between personal and work Claude configs
