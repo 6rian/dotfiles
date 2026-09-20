@@ -22,10 +22,9 @@
 # prompt (expressvpn, openvpn-connect, protonvpn, viscosity,
 # karabiner-elements, realvnc-connect-viewer, windows-app, zoom) are
 # deliberately NOT listed here -- `brew bundle` can't satisfy them
-# non-interactively, on a managed host or otherwise. See the homelab
-# repo's infra/ansible/roles/base_mac/README.md "Has a cask, but needs an
-# interactive install" section for the one-time manual install command and
-# why each one needs it.
+# non-interactively, on a managed host or otherwise. See this repo's own
+# README.md for the one-time manual install command and why each one
+# needs it.
 
 # Shell / CLI ergonomics
 brew "bat"

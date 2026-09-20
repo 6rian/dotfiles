@@ -40,10 +40,32 @@ brew bundle --file=~/repos/dotfiles/Brewfile
 ```
 
 A handful of casks need their own interactive sudo/`.pkg` install prompt
-and are deliberately left out of the Brewfile entirely (`brew bundle`
-can't satisfy them non-interactively either way) — see the homelab repo's
-`infra/ansible/roles/base_mac/README.md` for the list and the one-time
-manual install command.
+mid-install and are deliberately left out of the Brewfile entirely —
+`brew bundle` can't satisfy them non-interactively either way, on the
+Ansible path or this one. Install by hand once, same one-time
+human-bootstrap category as Homebrew itself:
+
+```sh
+brew install --cask expressvpn openvpn-connect protonvpn viscosity \
+  karabiner-elements realvnc-connect-viewer windows-app zoom
+```
+
+- **expressvpn** — postflight `sudo mkdir -p /usr/local/bin` (CLI symlink)
+- **realvnc-connect-viewer**, **windows-app**, **zoom** — ship as a
+  `.pkg`, need `sudo installer -pkg ... -target /` (macOS's native
+  installer, not brew-specific)
+- **openvpn-connect**, **karabiner-elements** — confirmed via a `pkg`
+  artifact in `brew info --cask <name> --json=v2`
+- **protonvpn**, **viscosity** — predicted same pattern (no `pkg`
+  artifact, but not individually verified against the postflight-script
+  case the way expressvpn was)
+
+`brew cat` and grepping the cask tap's local files don't work for
+checking this — modern Homebrew installs from a remote API with no local
+tap clone (`brew cat` returns `{}`); `brew info --cask <name>
+--json=v2`'s `artifacts` array is the only reliable way. Every other cask
+in the Brewfile was checked that way — none have a `pkg` or `postflight`
+artifact, so no further additions are expected.
 
 > [!IMPORTANT] Your terminal must have a [Nerd Font](https://www.nerdfonts.com/) installed.
 
