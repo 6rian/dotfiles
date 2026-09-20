@@ -50,6 +50,12 @@ MANIFEST=(
   "link:ghostty:.config/ghostty"
   "link:kitty:.config/kitty"
   "link:karabiner/karabiner.json:.config/karabiner/karabiner.json"
+  "dir::working"
+  "link:working/README.md:working/README.md"
+  "dir::working/tmp"
+  "dir::working/ai"
+  "dir::working/repos"
+  "dir::working/daily-notes"
 )
 
 log() {
