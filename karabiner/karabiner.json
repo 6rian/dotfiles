@@ -307,6 +307,70 @@
                                 }
                             }
                         ]
+                    },
+                    {
+                        "description": "Double-tap Right Command opens ChatGPT",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "right_command_double_tap",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a ChatGPT"
+                                    },
+                                    {
+                                        "set_variable": {
+                                            "name": "right_command_double_tap",
+                                            "value": 0
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "right_command_double_tap",
+                                            "value": 1
+                                        }
+                                    },
+                                    { "key_code": "right_command" }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "right_command_double_tap",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "right_command_double_tap",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
                     }
                 ]
             },

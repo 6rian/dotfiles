@@ -46,6 +46,14 @@ key alone. Uses Karabiner's standard double-tap pattern (a variable plus a
 400ms `to_delayed_action` window); a single tap or a held Command still
 works normally as a modifier.
 
+### Double-tap right ⌘ → open ChatGPT
+
+Opens the ChatGPT desktop app (`open -a ChatGPT`) on two quick taps of the
+right Command key alone. Same double-tap pattern as the left ⌘ → MindChuk
+rule above, mirrored onto `right_command` with its own variable
+(`right_command_double_tap`) so the two don't interfere; a single tap or a
+held right Command still works normally as a modifier.
+
 ### Caps Lock → Control
 
 Device-level `simple_modifications` remap, applied to any keyboard
@@ -53,7 +61,11 @@ Device-level `simple_modifications` remap, applied to any keyboard
 
 ## Not managed here
 
-`Shift+Cmd+D` (toggle Do Not Disturb) is bound via native macOS Keyboard
+- `Shift+Cmd+D` (toggle Do Not Disturb) is bound via native macOS Keyboard
 Shortcuts (System Settings → Keyboard → Keyboard Shortcuts → Mission
 Control), documented in the top-level `README.md`'s Mac Setup section —
 deliberately not duplicated in Karabiner.
+## Managed outside of Karabiner
+
+- `Cmd + Tab` launches [AltTab](https://alt-tab-macos.netlify.app/), replacing
+  the native macOS App Switcher.
