@@ -202,6 +202,29 @@ ensure_working_repos() {
   changed=$((changed + 1))
 }
 
+ensure_submodules() {
+  local status
+  status="$(git -C "$REPO_DIR" submodule status)"
+  [ -n "$status" ] || return
+
+  local uninitialized
+  uninitialized="$(printf '%s\n' "$status" | grep '^-' || true)"
+
+  if [ -z "$uninitialized" ]; then
+    log "[ok] git submodules"
+    unchanged=$((unchanged + 1))
+    return
+  fi
+
+  git -C "$REPO_DIR" submodule update --init --recursive
+  while IFS= read -r line; do
+    log "[changed] submodule $(printf '%s\n' "$line" | awk '{print $2}') initialized"
+  done <<< "$uninitialized"
+  changed=$((changed + 1))
+}
+
+ensure_submodules
+
 for entry in "${MANIFEST[@]}"; do
   IFS=':' read -r kind src dest <<< "$entry"
   case "$kind" in
