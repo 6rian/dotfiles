@@ -3,6 +3,6 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {
     always_show_tabline = false,
-    theme = 'catppuccin',
+    theme = 'auto',
   },
 }
