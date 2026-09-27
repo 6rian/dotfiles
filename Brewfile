@@ -46,6 +46,7 @@ brew "zsh-autosuggestions"
 brew "bash"
 brew "coreutils"
 brew "wget"
+brew "raine/workmux/workmux"
 
 # Git / GitHub
 brew "gh"
@@ -53,9 +54,6 @@ brew "lazygit"
 brew "mkcert"
 
 # Terminal UI / dashboard eye-candy
-# neofetch removed (2026-09-17): no longer exists in homebrew-core --
-# confirmed live on nurv, upstream's archived and Homebrew dropped the
-# formula. nerdfetch already covers the same job and installs fine.
 brew "chafa"
 brew "nerdfetch"
 

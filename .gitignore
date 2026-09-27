@@ -4,4 +4,4 @@
 # what's on disk, so it never needs to be committed; tracking it only
 # produced spurious diffs from Lua's non-deterministic table iteration
 # order on each write.
-nvim/colors/xeno-cyberpunk-v2.lua
+nvim/colors/xeno-*.lua
