@@ -5,7 +5,11 @@ export REPOS_DIR="$HOME/repos"
 export SSH_KEY="$HOME/.ssh/id_ed25519"
 
 # mise (runtime version manager)
-eval "$(~/.local/bin/mise activate zsh)"
+if mise_path=$(whence -p mise 2>/dev/null); then
+  eval "$("$mise_path" activate zsh)"
+else
+  echo "warning: mise not found on PATH; skipping activation" >&2
+fi
 
 # Aliases
 alias c='clear'
