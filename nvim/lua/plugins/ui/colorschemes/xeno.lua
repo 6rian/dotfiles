@@ -168,8 +168,11 @@ return {
 
       min_contrast = 4.5,
 
+      -- Preview-only: don't touch Ghostty at all yet, not even live (xeno's
+      -- ghostty integration pushes bg/fg straight to the terminal via OSC
+      -- while this colorscheme is active, regardless of update_config).
       integrations = {
-        ghostty = { update_config = false },
+        ghostty = { enabled = false, update_config = false },
       },
 
       highlights = {
@@ -263,7 +266,7 @@ return {
       transparent = true,
 
       properties = {
-        contrast = -0.15,
+        contrast = 0.15,
         variation = 0.2,
         chroma = 0.5,
         lightness = 0,
@@ -271,8 +274,10 @@ return {
 
       min_contrast = 4.5,
 
+      -- Preview-only, like xeno-light-v1 -- no matching static Ghostty theme
+      -- exists for this one, so don't let it touch the live terminal either.
       integrations = {
-        ghostty = { update_config = false },
+        ghostty = { enabled = false, update_config = false },
       },
 
       highlights = {
@@ -378,8 +383,10 @@ return {
 
       min_contrast = 4.5,
 
+      -- Preview-only, like xeno-light-v1 -- no matching static Ghostty theme
+      -- exists for this one, so don't let it touch the live terminal either.
       integrations = {
-        ghostty = { update_config = false },
+        ghostty = { enabled = false, update_config = false },
       },
 
       highlights = {
@@ -471,6 +478,20 @@ return {
       callback = function(args)
         local light_schemes = { ['xeno-light-v1'] = true, ['xeno-cyberpunk-v3-light'] = true }
         vim.o.background = light_schemes[args.match] and 'light' or 'dark'
+      end,
+    })
+
+    -- xeno's ghostty integration (integrations/ghostty.lua) pushes the active
+    -- colorscheme's bg/fg straight to the terminal via raw OSC 10/11 escape
+    -- codes (bypassing Neovim's own rendering) whenever Ghostty env vars are
+    -- present -- it ships a reset_ghostty_colors() that sends the matching
+    -- OSC 111/110/112 "restore default" codes, but nothing in the plugin
+    -- ever calls it. OSC-set terminal colors persist until something resets
+    -- them, so without this, whichever colorscheme was active keeps
+    -- recoloring the Ghostty window after nvim quits.
+    vim.api.nvim_create_autocmd('VimLeave', {
+      callback = function()
+        require('xeno.integrations.ghostty').reset_ghostty_colors()
       end,
     })
 
