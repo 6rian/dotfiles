@@ -18,6 +18,7 @@ alias lg='lazygit'
 alias ll='ls -lah'
 alias sz="source $HOME/.zshrc"
 alias tree="tree -C"
+alias wm="workmux"
 
 # Aliases for typos
 alias gi='git'
