@@ -62,12 +62,12 @@ return {
       pane_gap = 8,
       sections = {
         { section = 'header' },
-        {
-          pane = 2,
-          section = 'terminal',
-          cmd = 'colorscript -e pukeskull',
-          height = 40,
-        },
+        -- {
+        --   pane = 2,
+        --   section = 'terminal',
+        --   cmd = 'colorscript -e pukeskull',
+        --   height = 40,
+        -- },
         { section = 'keys', gap = 3, padding = 3 },
         { section = 'startup' },
       },

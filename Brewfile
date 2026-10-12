@@ -47,11 +47,12 @@ brew "bash"
 brew "coreutils"
 brew "wget"
 brew "raine/workmux/workmux"
+brew "mkcert"
 
 # Git / GitHub
 brew "gh"
 brew "lazygit"
-brew "mkcert"
+brew "tuicr"
 
 # Terminal UI / dashboard eye-candy
 brew "chafa"
