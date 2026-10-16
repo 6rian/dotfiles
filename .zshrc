@@ -18,7 +18,6 @@ alias lg='lazygit'
 alias ll='ls -lah'
 alias sz="source $HOME/.zshrc"
 alias tree="tree -C"
-alias wm="workmux"
 
 # Aliases for typos
 alias gi='git'
@@ -58,6 +57,9 @@ alias cdots="cd $HOME/repos/dotfiles"
 alias dots="cd $HOME/repos/dotfiles/ && nvim ./README.md"
 alias repos="cd $HOME/repos"
 
+# Workmux
+alias wm="workmux"
+eval "$(workmux completions zsh)"
 
 # fzf helpers
 # (g)it (b)ranch
