@@ -100,6 +100,27 @@ cdRepo() {
   cd "$REPOS_DIR/$repo" || return
 }
 
+# (c)ode (r)eview: wrap tuicr, choosing to save the review to a file or open it directly.
+# Extra args are passed through to tuicr. Run `tuicr` itself to skip the prompt.
+cr() {
+  local repo branch default_file choice file
+  repo=$(basename "$(git rev-parse --show-toplevel 2>/dev/null)")
+  branch=$(git branch --show-current 2>/dev/null)
+  default_file="/tmp/review_${repo:-review}_${branch//\//-}.md"
+
+  echo "Starting code review via tuicr for repo: ${repo:-unknown}, branch: ${branch:-unknown}"
+  read "choice?Save review to a file or open directly? [S]ave/[o]pen: "
+  case "$choice" in
+    o|O) tuicr "$@" ;;
+    ""|s|S)
+      read "file?File name [$default_file]: "
+      file="${file:-$default_file}"
+      tuicr --stdout "$@" > "$file" && echo "Review saved to $file"
+      ;;
+    *) echo "Cancelled" >&2; return 1 ;;
+  esac
+}
+
 # Colorize with grc
 if command -v grc &>/dev/null; then
   alias ls='grc ls'
