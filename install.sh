@@ -52,6 +52,7 @@ MANIFEST=(
   "link:.claude/statusline-command.sh:.claude/statusline-command.sh"
   "link:ghostty:.config/ghostty"
   "link:kitty:.config/kitty"
+  "link:tuicr:.config/tuicr"
   "link:karabiner/karabiner.json:.config/karabiner/karabiner.json"
   "dir::working"
   "link:working/README.md:working/README.md"

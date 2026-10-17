@@ -1,0 +1,11 @@
+# tuicr theme matching the xeno-cyberpunk-v2 ghostty theme.
+# Neon yellow-green accent (#e8e34a) on near-black (#0b0d10).
+panel_bg = "#0b0d10"
+bg_highlight = "#1a1f26"
+fg_primary = "#eef1f0"
+fg_secondary = "#8a9399"
+
+diff_add = "#a4d94a"
+diff_del = "#ff3b52"
+status_bar_bg = "#2a2f36"
+mode_bg = "#e8e34a"
