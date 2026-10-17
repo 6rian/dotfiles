@@ -1,0 +1,10 @@
+theme = "dark"
+appearance = "system"
+
+diff_view = "side-by-side"
+ignore_whitespace = "auto" # or true / false; omitted defaults to false
+editor = "nvim"
+comment_vim = true
+comment_tab_width = 2
+single_file_view = true
+username = "6rian"
