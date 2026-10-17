@@ -50,6 +50,7 @@ MANIFEST=(
   "dir::.claude"
   "copy:.claude/settings.json:.claude/settings.json"
   "link:.claude/statusline-command.sh:.claude/statusline-command.sh"
+  "link:.claude/themes:.claude/themes"
   "link:ghostty:.config/ghostty"
   "link:kitty:.config/kitty"
   "link:tuicr:.config/tuicr"

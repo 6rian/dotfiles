@@ -1,7 +1,7 @@
 {
   "model": "sonnet",
   "tui": "fullscreen",
-  "theme": "dark",
+  "theme": "custom:xeno-cyberpunk-v2",
   "editorMode": "vim",
   "autoCompactEnabled": true,
   "autoContinueAtUsageLimit": false,
