@@ -1,0 +1,13 @@
+# Host-specific sesh sessions. NOT tracked in git; seeded once by
+# ~/repos/dotfiles/install.sh and never overwritten. Only list repos that
+# exist on THIS host. Can use [[window]]s defined in sesh.toml.
+#
+# Don't delete this file -- sesh.toml imports it, and sesh hard-fails on a
+# missing import. Re-run install.sh to re-seed it if it's ever lost.
+#
+# [[session]]
+# name = "my-project"
+# path = "~/repos/my-project"
+# alias = "mp"
+# startup_command = "nvim"
+# windows = ["shell"]

@@ -1,0 +1,27 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+# Shared across every host -- this repo is public. Host-specific sessions
+# (anything naming a repo that isn't on every host, including all work
+# repos) go in the untracked ~/.config/sesh/local.toml instead, which
+# install.sh seeds from local.toml.example. It must always exist: sesh
+# hard-fails on a missing import.
+import = ["~/.config/sesh/local.toml"]
+
+# Any repo opened from zoxide gets this, on every host, with no config.
+[[wildcard]]
+pattern = "~/repos/*"
+startup_command = "nvim"
+windows = ["shell"]
+
+# A [[session]] is always listed in the picker, and sesh never checks that
+# its path exists -- a missing one silently opens in $HOME. Only list
+# paths here that exist on every host.
+[[session]]
+name = "dotfiles"
+path = "~/repos/dotfiles"
+startup_command = "nvim"
+windows = ["shell"]
+
+# Reusable windows -- local.toml sessions can reference these too.
+[[window]]
+name = "shell"

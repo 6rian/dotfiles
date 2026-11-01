@@ -29,6 +29,13 @@
 # per-machine/runtime state belongs in .claude/settings.local.json
 # instead, which is intentionally never tracked or deployed by this
 # script at all.
+#
+# `seed` entries are the opposite of `copy`: the destination is genuinely
+# per-machine state that this repo must never track (e.g.
+# ~/.config/sesh/local.toml, which can name work repos), but something
+# else hard-fails if it's missing (sesh errors out on a missing `import`).
+# The template is copied only when the destination doesn't exist yet, and
+# an existing file is never compared or overwritten.
 
 set -euo pipefail
 
@@ -54,6 +61,9 @@ MANIFEST=(
   "link:ghostty:.config/ghostty"
   "link:kitty:.config/kitty"
   "link:tuicr:.config/tuicr"
+  "dir::.config/sesh"
+  "link:sesh/sesh.toml:.config/sesh/sesh.toml"
+  "seed:sesh/local.toml.example:.config/sesh/local.toml"
   "link:karabiner/karabiner.json:.config/karabiner/karabiner.json"
   "dir::working"
   "link:working/README.md:working/README.md"
@@ -125,6 +135,24 @@ ensure_copy() {
 
   cp "$src" "$dest"
   log "[changed] $2"
+  changed=$((changed + 1))
+}
+
+ensure_seed() {
+  local src="$REPO_DIR/$1"
+  local dest="$TARGET_HOME/$2"
+  local dest_dir
+  dest_dir="$(dirname "$dest")"
+  [ -d "$dest_dir" ] || mkdir -p "$dest_dir"
+
+  if [ -e "$dest" ] || [ -L "$dest" ]; then
+    log "[ok] $2"
+    unchanged=$((unchanged + 1))
+    return
+  fi
+
+  cp "$src" "$dest"
+  log "[seeded] $2"
   changed=$((changed + 1))
 }
 
@@ -233,6 +261,7 @@ for entry in "${MANIFEST[@]}"; do
     link) ensure_link "$src" "$dest" ;;
     dir) ensure_real_dir "$dest" ;;
     copy) ensure_copy "$src" "$dest" ;;
+    seed) ensure_seed "$src" "$dest" ;;
     repos-compat) ensure_working_repos "$dest" ;;
     *)
       log "[error] unknown manifest kind: $kind"
