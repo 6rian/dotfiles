@@ -5,29 +5,31 @@ return {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     -- Mason must be loaded before its dependents so we need to set it up here.
     -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-    { 'mason-org/mason.nvim', opts = {
-    ui = {
-        -- Whether to automatically check for new versions when opening the :Mason window.
-        check_outdated_packages_on_open = true,
+    {
+      'mason-org/mason.nvim',
+      opts = {
+        ui = {
+          -- Whether to automatically check for new versions when opening the :Mason window.
+          check_outdated_packages_on_open = true,
 
-        -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-        -- Defaults to `:h 'winborder'` if nil.
-        border = 'rounded',
+          -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+          -- Defaults to `:h 'winborder'` if nil.
+          border = 'rounded',
 
-        -- The backdrop opacity. 0 is fully opaque, 100 is fully transparent.
-        backdrop = 60,
+          -- The backdrop opacity. 0 is fully opaque, 100 is fully transparent.
+          backdrop = 60,
 
-        -- Width of the window. Accepts:
-        -- - Integer greater than 1 for fixed width.
-        -- - Float in the range of 0-1 for a percentage of screen width.
-        width = 0.8,
+          -- Width of the window. Accepts:
+          -- - Integer greater than 1 for fixed width.
+          -- - Float in the range of 0-1 for a percentage of screen width.
+          width = 0.8,
 
-        -- Height of the window. Accepts:
-        -- - Integer greater than 1 for fixed height.
-        -- - Float in the range of 0-1 for a percentage of screen height.
-        height = 0.9,
-    }
-    }
+          -- Height of the window. Accepts:
+          -- - Integer greater than 1 for fixed height.
+          -- - Float in the range of 0-1 for a percentage of screen height.
+          height = 0.9,
+        },
+      },
     },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -81,6 +83,10 @@ return {
           vim.keymap.set(mode, keys, func, { buf = event.buf, desc = 'LSP: ' .. desc })
         end
 
+        -- These must be set here even though Neovim 0.11+ has built-in gr*
+        -- LSP defaults: mini.operators (mini.lua) uses `gr` as its replace
+        -- prefix and deletes those built-in mappings on setup.
+        --
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
         map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -118,26 +124,13 @@ return {
         --  the definition of its *type*, not where it was *defined*.
         map('grt', Snacks.picker.lsp_type_definitions, '[G]oto [T]ype Definition')
 
-        -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-        ---@param client vim.lsp.Client
-        ---@param method vim.lsp.protocol.Method
-        ---@param bufnr? integer some lsp support methods only in specific files
-        ---@return boolean
-        local function client_supports_method(client, method, bufnr)
-          if vim.fn.has 'nvim-0.11' == 1 then
-            return client:supports_method(method, bufnr)
-          else
-            return client.supports_method(method, { bufnr = bufnr })
-          end
-        end
-
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         --    See `:help CursorHold` for information about when this is executed
         --
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
@@ -164,7 +157,7 @@ return {
         -- code, if the language server you are using supports them
         --
         -- This may be unwanted, since they displace some of your code
-        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
           map('<leader>th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, '[T]oggle Inlay [H]ints')
@@ -189,15 +182,6 @@ return {
       virtual_text = {
         source = 'if_many',
         spacing = 2,
-        format = function(diagnostic)
-          local diagnostic_message = {
-            [vim.diagnostic.severity.ERROR] = diagnostic.message,
-            [vim.diagnostic.severity.WARN] = diagnostic.message,
-            [vim.diagnostic.severity.INFO] = diagnostic.message,
-            [vim.diagnostic.severity.HINT] = diagnostic.message,
-          }
-          return diagnostic_message[diagnostic.severity]
-        end,
       },
     }
 
@@ -233,8 +217,9 @@ return {
       tailwindcss = {},
       cssls = {},
       jsonls = {},
-      phpcs = {},
-      pylsp = {},
+      -- One Python server only: pylsp + pyright together produced duplicate
+      -- diagnostics/completions. pylsp is also excluded from automatic_enable
+      -- below, since mason-lspconfig enables every *installed* server.
       pyright = {},
       lua_ls = {
         -- cmd = { ... },
@@ -280,9 +265,10 @@ return {
     -- ts_ls is excluded because typescript-tools.nvim already handles TS/JS;
     -- otherwise both attach to the same buffer and ts_ls (unconfigured here)
     -- surfaces as a spurious "exited" error alongside the working client.
+    -- pylsp is excluded in favor of pyright (see `servers` above).
     require('mason-lspconfig').setup {
       automatic_enable = {
-        exclude = { 'ts_ls' },
+        exclude = { 'ts_ls', 'pylsp' },
       },
     }
   end,

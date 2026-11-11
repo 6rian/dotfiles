@@ -3,6 +3,14 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- ui2: Neovim 0.12's experimental redesign of the message area and cmdline
+-- (no "Press ENTER" prompts, cmdline highlighting, :messages as a pager
+-- buffer). See `:help ui2`. Delete this block to go back to the legacy UI.
+-- pcall so an older Neovim (no ui2) still starts cleanly.
+pcall(function()
+  require('vim._core.ui2').enable()
+end)
+
 -- Make line numbers default
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
