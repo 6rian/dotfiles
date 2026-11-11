@@ -15,6 +15,15 @@ vim.o.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
 
+-- Over SSH there's no local clipboard tool, so use the built-in OSC 52
+-- provider: the terminal (Ghostty, via tmux) reads/writes the client machine's
+-- clipboard. Locally (macOS) the auto-detected pbcopy/pbpaste provider wins.
+-- Paste needs `clipboard-read = allow` in Ghostty and, inside tmux,
+-- `get-clipboard request` — see `:help clipboard-osc52`.
+if vim.env.SSH_CONNECTION or vim.env.SSH_TTY then
+  vim.g.clipboard = 'osc52'
+end
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
