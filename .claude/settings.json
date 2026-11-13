@@ -4,6 +4,7 @@
   "theme": "custom:xeno-cyberpunk-v2",
   "editorMode": "vim",
   "autoCompactEnabled": true,
+  "cleanupPeriodDays": 365,
   "autoContinueAtUsageLimit": false,
   "remoteControlAtStartup": true,
   "statusLine": {
