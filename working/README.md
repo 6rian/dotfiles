@@ -25,9 +25,10 @@ repo, same as the rest of the manifest — edit it here, not in place).
   real directory again.
 - **`daily-notes/`** — Daily notes, one file per day, named
   `YYYY-MM-DD-daily.md`.
-- **`projects/`** — Project/task-tracking, one directory per project.
-  Todoist is the source of truth for task state and due dates. Task files
-  hold context, and their status line mirrors Todoist.
+- **`projects/`** — High-level project/task tracking (WorkerBee's), one
+  directory per project. Detailed specs and plans stay in planning repos and
+  are linked, not copied. Todoist is read for due dates and priorities and
+  isn't changed without an explicit request.
   - **YYYY-MM-DD-project-name/** — Each project directory contains:
     - `README.md` for a description of the project
     - `ideas/YYYY-MM-DD-idea.md` for each idea, with the date of creation in the filename

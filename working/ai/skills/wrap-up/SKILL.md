@@ -9,9 +9,11 @@ agent: workerbee
 End-of-day wrap-up. Extra notes from the user (may be empty): $ARGUMENTS
 
 1. `date`. Open today's daily note (create from template if missing).
-2. Sort `## Inbox`: each item → Todoist task, project idea, memory, or
-   drop if it's clearly done. Leave only things you truly can't place.
-3. `## Done`: add finished work from Todoist completed-today and from today's
+2. Sort `## Inbox`: each item → project task/idea note, memory, or drop if
+   it's clearly done. Leave only things you truly can't place. Anything that
+   looks like it belongs in Todoist → `## Todoist?` (≤3 lines). Don't add
+   it yourself; the user decides.
+3. `## Done`: add finished work from Todoist completed-today (read) and from today's
    Bee log / dispatches. Keep the user's own entries.
 4. `## Left off`: one line per project touched today → next step.
 5. Regenerate `status.md` for every project touched today.

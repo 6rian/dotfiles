@@ -6,7 +6,9 @@ context: fork
 agent: workerbee
 ---
 
-Direct request from the user (not from another agent):
+Direct request from the user (not from another agent). If it explicitly asks
+for a Todoist change (add, move, complete…), that counts as the user's
+explicit instruction, so make the change.
 
 $ARGUMENTS
 

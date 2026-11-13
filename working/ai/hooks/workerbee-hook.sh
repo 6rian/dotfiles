@@ -88,7 +88,7 @@ if [ "$mode" = "harvest-worker" ]; then
   cd "$W" || exit 0
   echo "--- $(date '+%F %H:%M') harvest $sid lines $off-$total" >>"$STATE/harvest.log"
   if WORKERBEE_HEADLESS=1 claude -p --agent workerbee --permission-mode acceptEdits \
-    "Harvest mode. Read $out: the text of a Claude session (cwd: ${cwd:-?}, branch: ${branch:-none}). File anything worth keeping per your rules: finished work, where work left off, tasks, ideas, decisions, facts about the user. The main agent may already have dispatched some of it, so dedupe against existing notes and Todoist. Reply noop if nothing is worth filing." \
+    "Harvest mode. Read $out: the text of a Claude session (cwd: ${cwd:-?}, branch: ${branch:-none}). File anything worth keeping per your rules: finished work, where work left off, tasks, ideas, decisions, facts about the user. Headline level only: if the session was in a planning repo, record what was started/finished/blocked/due with a plan: link, never its spec or task detail. Never write to Todoist in harvest mode. The main agent may already have dispatched some of it, so dedupe against existing notes. Reply noop if nothing is worth filing." \
     </dev/null >>"$STATE/harvest.log" 2>&1; then
     echo "$total" >"$off_f" # only mark harvested once it actually ran
   fi

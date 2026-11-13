@@ -1,6 +1,7 @@
 ---
-todoist_project: {{id}}
+todoist_project: {{id, if there is one}}
 repo: {{repo name or none}}
+plan: {{planning repo PROJECT.md / task README, if detail lives there}}
 ---
 
 # {{Project name}}

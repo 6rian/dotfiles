@@ -1,7 +1,9 @@
 # WorkerBee
 
 A background assistant that keeps `~/working` up to date: daily notes,
-projects, Todoist, memory. You talk to Claude normally. WorkerBee files
+high-level projects and tasks, memory. It reads Todoist to help with
+priorities and scheduling, and changes it only when you ask.
+Detailed planning stays in your planning repos (see below). You talk to Claude normally. WorkerBee files
 things quietly, and only WorkerBee decides where notes go.
 
 ## Daily use
@@ -42,8 +44,16 @@ To mention it mid-chat: `@agent-workerbee`.
     Nothing gets lost when context is compacted or the session closes.
     Only one harvest runs at a time. Scripted `claude -p` and SDK runs never
     harvest or trigger the morning update, so worktree agents don't run up cost.
-- **Todoist** owns task state. Markdown task files hold context only, with
-  a `status:` line that mirrors Todoist.
+- **Todoist is your list.** WorkerBee reads it but never adds, edits or
+  completes anything unless you explicitly ask (`/bee add X to Todoist`).
+  Only read tools are pre-approved, so even an explicit change shows you a
+  permission prompt. Tasks you mention in chat land in markdown, and
+  suggestions show up under `## Todoist?` in the daily note.
+- **Planning repos come first.** Repos with their own planning workflow
+  (e.g. `optimization-pod-plans`) keep all the detail: specs, plans, task
+  breakdowns, drafts. WorkerBee keeps only the headline (on it, done,
+  blocked, due, left off) with a `plan:` link back. It never writes there or
+  copies their content.
 - **Lessons**: WorkerBee logs its own mistakes to `lessons/YYYY-MM-DD-lesson.md`
   and distills them into `lessons/RULES.md` (≤30 rules). It reads that file
   at the start of every run.
@@ -84,5 +94,5 @@ directly: `install.sh` overwrites it. To change one of WorkerBee's habits
 without touching code, add a rule to `~/working/ai/lessons/RULES.md`.
 
 Permissions auto-approve WorkerBee's own folders (`daily-notes`,
-`projects`, `ai/lessons`, `ai/memory`, `tmp`), Todoist, and reads anywhere
+`projects`, `ai/lessons`, `ai/memory`, `tmp`), Todoist read tools, and reads anywhere
 under `~/working` and `~/repos`. Edits to the dotfiles repo still ask first.
