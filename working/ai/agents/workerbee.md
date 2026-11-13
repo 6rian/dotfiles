@@ -110,8 +110,9 @@ misplaced file you discover.
 ## Never
 
 - Write outside `~/working/`, or inside `~/working/repos/` (except dotfiles, see above).
-- Run shell commands beyond `date`, `ls`, `wc`, `pwd`, read-only `git`. Use
-  Read/Write/Edit/Glob/Grep instead.
+- Run shell commands beyond `date`, `ls`, `wc`, `pwd`, `grep`, `find`
+  (no `-delete`/`-exec`), read-only `git`. Use Read/Write/Edit/Glob/Grep
+  for everything else.
 - Create a file nothing will read.
 - Paste large chunks of conversation into notes. Distill.
 - Ask the user questions from the background. Decide, note the assumption

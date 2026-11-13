@@ -30,7 +30,7 @@ To mention it mid-chat: `@agent-workerbee`.
 - **Guard** `hooks/workerbee-guard.sh` runs before WorkerBee's writes and
   shell commands. WorkerBee can read `~/working/repos/` but can't write there,
   except in `~/working/repos/dotfiles`. Its shell is limited to `date`, `ls`,
-  `wc`, `pwd` and read-only git. Main agents aren't restricted.
+  `wc`, `pwd`, `grep`, `find` (no `-delete`/`-exec`) and read-only git. Main agents aren't restricted.
 - **Hooks** `hooks/workerbee-hook.sh`:
   - *SessionStart* injects the protocol. If the morning update hasn't run
     today, it triggers `/morning-update`: once per day across all sessions,

@@ -13,7 +13,8 @@
 #       symlinks into it). ~/working/repos may itself be a symlink (to ~/repos
 #       on some hosts), so every path is compared after resolving symlinks.
 #   Bash
-#       Only date / ls / wc / pwd and read-only git (status, log, branch,
+#       Only date / ls / wc / pwd / grep, find (no -delete, -exec*, -ok*,
+#       -fprint*, -fls), and read-only git (status, log, branch,
 #       diff, show, rev-parse, optionally after `-C <path>`), with no shell
 #       metacharacters, so a command can't chain or redirect into a write.
 #   Anything else
@@ -31,7 +32,7 @@
 set -uo pipefail
 
 WRITE_REASON='WorkerBee may write only inside ~/working (excluding ~/working/repos, except ~/working/repos/dotfiles).'
-BASH_REASON="WorkerBee's Bash is limited to date/ls/wc/pwd and read-only git; use Read/Write/Edit/Glob/Grep"
+BASH_REASON="WorkerBee's Bash is limited to date/ls/wc/pwd/grep, find without -delete/-exec, and read-only git; use Read/Write/Edit/Glob/Grep"
 
 have_jq=0
 command -v jq >/dev/null 2>&1 && have_jq=1
@@ -141,7 +142,17 @@ check_bash() {
   n=${#w[@]}
   [ "$n" -gt 0 ] || deny "$BASH_REASON"
   case "${w[0]}" in
-    date | ls | wc | pwd) exit 0 ;;
+    date | ls | wc | pwd | grep) exit 0 ;;
+    find)
+      # find can delete, run commands, or write files via these actions.
+      for ((a = 1; a < n; a++)); do
+        case "${w[$a]}" in
+          -delete | -exec | -execdir | -ok | -okdir | -fprint | -fprint0 | -fprintf | -fls)
+            deny "$BASH_REASON (find ${w[$a]} isn't allowed)" ;;
+        esac
+      done
+      exit 0
+      ;;
     git) ;;
     *) deny "$BASH_REASON" ;;
   esac
