@@ -5,3 +5,9 @@
 # produced spurious diffs from Lua's non-deterministic table iteration
 # order on each write.
 nvim/colors/xeno-*.lua
+
+# Personal WorkerBee data belongs in ~/working (real per-host dirs), never
+# in this repo -- backstop in case something writes through a symlink.
+working/ai/lessons/
+working/ai/memory/
+working/ai/.state/

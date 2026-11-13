@@ -65,6 +65,15 @@ MANIFEST=(
   "copy:.claude/settings.json:.claude/settings.json"
   "link:.claude/statusline-command.sh:.claude/statusline-command.sh"
   "link:.claude/themes:.claude/themes"
+  # WorkerBee (see working/ai/README.md): agent + skills live under working/ai/
+  "dir::.claude/agents"
+  "link:working/ai/CLAUDE.global.md:.claude/CLAUDE.md"
+  "link:working/ai/agents/workerbee.md:.claude/agents/workerbee.md"
+  "dir::.claude/skills"
+  "link:working/ai/skills/bee:.claude/skills/bee"
+  "link:working/ai/skills/morning-update:.claude/skills/morning-update"
+  "link:working/ai/skills/wrap-up:.claude/skills/wrap-up"
+  "link:working/ai/skills/where:.claude/skills/where"
   "link:ghostty:.config/ghostty"
   "link:kitty:.config/kitty"
   "link:tuicr:.config/tuicr"
@@ -76,8 +85,20 @@ MANIFEST=(
   "link:working/README.md:working/README.md"
   "dir::working/tmp"
   "dir::working/ai"
+  # Code is symlinked from this repo; ai/lessons and ai/memory are real
+  # per-host dirs so personal notes never land in this git tree.
+  "link:working/ai/README.md:working/ai/README.md"
+  "link:working/ai/agents:working/ai/agents"
+  "link:working/ai/skills:working/ai/skills"
+  "link:working/ai/hooks:working/ai/hooks"
+  "link:working/ai/templates:working/ai/templates"
+  "dir::working/ai/lessons"
+  "dir::working/ai/memory"
+  "seed:working/ai/templates/RULES.md:working/ai/lessons/RULES.md"
+  "seed:working/ai/templates/about-me.md:working/ai/memory/about-me.md"
   "repos-compat::working/repos"
   "dir::working/daily-notes"
+  "dir::working/projects"
 )
 
 log() {
