@@ -28,6 +28,46 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f ~/working/ai/hooks/workerbee-hook.sh && bash ~/working/ai/hooks/workerbee-hook.sh session-start || true"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f ~/working/ai/hooks/workerbee-hook.sh && bash ~/working/ai/hooks/workerbee-hook.sh prompt || true"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f ~/working/ai/hooks/workerbee-hook.sh && bash ~/working/ai/hooks/workerbee-hook.sh pre-compact || true"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f ~/working/ai/hooks/workerbee-hook.sh && bash ~/working/ai/hooks/workerbee-hook.sh session-end || true"
+          }
+        ]
+      }
     ]
   }
 }
