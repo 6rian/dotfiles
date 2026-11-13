@@ -42,6 +42,11 @@
 # <dest>.bak-YYYYmmdd-HHMMSS first, so the overwrite never silently loses
 # a local edit. No drift means no backup, so a clean re-run stays at
 # changed=0.
+#
+# `mcp` entries (mcp:name:url) register a user-scope HTTP MCP server with
+# `claude mcp add` if `claude mcp get` doesn't already know it. Skipped
+# when the claude CLI isn't installed. Authentication is still a manual
+# one-time /mcp inside Claude.
 
 set -euo pipefail
 
@@ -99,6 +104,7 @@ MANIFEST=(
   "repos-compat::working/repos"
   "dir::working/daily-notes"
   "dir::working/projects"
+  "mcp:todoist:https://ai.todoist.net/mcp"
 )
 
 log() {
@@ -277,6 +283,32 @@ ensure_working_repos() {
   changed=$((changed + 1))
 }
 
+ensure_mcp() {
+  local name="$1"
+  local url="$2"
+
+  if ! command -v claude >/dev/null 2>&1; then
+    log "[skipped] mcp $name (claude CLI not found)"
+    unchanged=$((unchanged + 1))
+    return
+  fi
+
+  if claude mcp get "$name" >/dev/null 2>&1; then
+    log "[ok] mcp $name"
+    unchanged=$((unchanged + 1))
+    return
+  fi
+
+  local output
+  if ! output="$(claude mcp add --transport http --scope user "$name" "$url" 2>&1)"; then
+    printf '%s\n' "$output" >&2
+    log "[error] mcp $name: claude mcp add failed"
+    exit 1
+  fi
+  log "[changed] mcp $name (run /mcp in Claude once to authenticate)"
+  changed=$((changed + 1))
+}
+
 ensure_submodules() {
   local status
   status="$(git -C "$REPO_DIR" submodule status)"
@@ -308,6 +340,7 @@ for entry in "${MANIFEST[@]}"; do
     copy) ensure_copy "$src" "$dest" ;;
     seed) ensure_seed "$src" "$dest" ;;
     bak) ensure_backup "$src" "$dest" ;;
+    mcp) ensure_mcp "$src" "$dest" ;;
     repos-compat) ensure_working_repos "$dest" ;;
     *)
       log "[error] unknown manifest kind: $kind"
