@@ -1,5 +1,13 @@
 {
-  "model": "sonnet",
+  "model": "opus",
+  "enabledPlugins": {
+    "nhumphrey@fandom-plugins": true
+  },
+  "permissions": {
+    "allow": [
+      "mcp__fandom-knowledgebase"
+    ]
+  },
   "tui": "fullscreen",
   "theme": "custom:xeno-cyberpunk-v2",
   "editorMode": "vim",
