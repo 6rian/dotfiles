@@ -9,8 +9,7 @@ reboots.
 tmux/
 ├── .tmux.conf        # the whole config
 ├── plugins/tmux2k/   # vendored status-bar theme (loaded manually, not via TPM)
-├── setup.sh          # legacy standalone bootstrap (prefer ../install.sh)
-└── status/           # legacy theme snippets, not loaded by anything
+└── setup.sh          # legacy standalone bootstrap (prefer ../install.sh)
 ```
 
 ## Install
@@ -41,6 +40,9 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 - **Prefix:** `C-Space` (press `C-Space C-Space` to send it through to the app).
 - Windows and panes are numbered **from 1**, and windows renumber when one closes.
 - **The status bar is at the top.**
+- **Popups and menus use the terminal's own colours**, with a purple
+  (`#a15bff`) border. tmux 3.8 otherwise draws them gray, and it misdetects
+  Ghostty's dark background as light.
 - **Every window is auto-named "Window"** (`automatic-rename-format`), so
   rename the ones that matter with `prefix ,`. This also shows in sessionx's
   window mode.
