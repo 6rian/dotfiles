@@ -5,7 +5,18 @@
   },
   "permissions": {
     "allow": [
-      "mcp__fandom-knowledgebase"
+      "mcp__fandom-knowledgebase",
+      "Read(~/working/**)",
+      "Read(~/repos/**)",
+      "Edit(~/working/daily-notes/**)",
+      "Edit(~/working/projects/**)",
+      "Edit(~/working/ai/lessons/**)",
+      "Edit(~/working/ai/memory/**)",
+      "Edit(~/working/ai/.state/**)",
+      "Edit(~/working/tmp/**)",
+      "Bash(date:*)",
+      "mcp__todoist",
+      "mcp__claude_ai_Todoist"
     ]
   },
   "tui": "fullscreen",
