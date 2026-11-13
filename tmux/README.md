@@ -9,7 +9,8 @@ reboots.
 tmux/
 ├── .tmux.conf        # the whole config
 ├── plugins/tmux2k/   # vendored status-bar theme (loaded manually, not via TPM)
-└── setup.sh          # legacy standalone bootstrap (prefer ../install.sh)
+├── setup.sh          # legacy standalone bootstrap (prefer ../install.sh)
+└── status/           # legacy theme snippets, not loaded by anything
 ```
 
 ## Install
@@ -28,10 +29,11 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 
 | Tool | Used by | Notes |
 |---|---|---|
-| `fzf` ≥ 0.53 | sessionx | On Linux, mise's fzf has to come before apt's (0.29) on tmux's `PATH` |
+| `fzf` ≥ 0.53 | sessionx | `Brewfile` covers macOS. On Linux without brew, use mise's fzf and make sure it comes before apt's (0.29) on tmux's `PATH`. tmux has to be started from a shell that has mise loaded |
 | `zoxide` | sessionx, file picker | Typing a name that isn't a session falls through to zoxide |
 | `sesh` | `prefix L` | Only used for "last session" now (see below) |
-| `tmux-file-picker` | `prefix f` / `F` | In `~/.local/bin` |
+| `tmux-file-picker` | `prefix f` / `F` | **Installed by hand** to `~/.local/bin`. Not in this repo or `install.sh` |
+| `fd` / `fdfind` | file picker | Ubuntu's `fdfind` name works too, because the picker falls back to it |
 | `workmux` | `prefix a` | `Brewfile`: `raine/workmux/workmux` |
 
 ## Core behavior
@@ -39,6 +41,9 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 - **Prefix:** `C-Space` (press `C-Space C-Space` to send it through to the app).
 - Windows and panes are numbered **from 1**, and windows renumber when one closes.
 - **The status bar is at the top.**
+- **Every window is auto-named "Window"** (`automatic-rename-format`), so
+  rename the ones that matter with `prefix ,`. This also shows in sessionx's
+  window mode.
 - **`detach-on-destroy off`:** closing the last window of a session switches
   you to another session instead of detaching.
 - **New splits open in the current pane's directory.**
@@ -68,16 +73,19 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 
 | Keys | Action |
 |---|---|
-| `Enter` | Switch to the session, or create one from the typed name or zoxide match |
+| `Enter` | Switch to the session. A name that isn't a session creates one in that name's zoxide match. A picked directory creates a session named after the directory |
+| `C-p` / `C-n` | Move the selection up / down |
+| `C-u` / `C-d` | Scroll the preview up / down |
 | `Alt-Backspace` | Kill the selected session |
 | `C-r` | Rename the session |
 | `C-w` | List windows instead of sessions |
-| `C-t` | Show a tree of sessions and windows |
+| `C-t` | Preview as a tree of sessions and windows |
 | `C-f` | List zoxide directories |
 | `C-x` | Browse `~/repos` |
-| `C-e` | Browse subdirectories of the current directory |
+| `C-e` | Browse subdirectories of the directory tmux's config was last loaded from (sessionx reads the path at load time) |
 | `C-b` | Back to the session list |
 | `?` | Show or hide the preview |
+| `Esc` | Close |
 
 ### Windows
 
@@ -96,7 +104,7 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 |---|---|
 | `prefix v` / `prefix -` | Split top/bottom |
 | `prefix h` / `prefix \|` | Split left/right |
-| `C-h` `C-j` `C-k` `C-l` | Move between panes **and nvim splits** (vim-tmux-navigator; `C-←`/`C-→` also work) |
+| `C-h` `C-j` `C-k` `C-l` | Move between panes **and nvim splits** (vim-tmux-navigator; `C-←`/`C-→` also work). Passed through to fzf when fzf has focus |
 | `prefix C-l` | Clear screen (since `C-l` is taken by navigation) |
 | `M-h` `M-j` `M-k` `M-l` | Resize the pane by 8 (passed through to nvim when nvim is focused) |
 | `prefix z` | Zoom / unzoom |
@@ -111,10 +119,12 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 |---|---|
 | `prefix t` | **floax**: floating scratch shell (90%, follows the current directory) |
 | `prefix P` | floax menu (resize, embed into the window, etc.) |
+| `C-M-s` / `C-M-b` / `C-M-f` / `C-M-r` | Inside floax: shrink / grow / full size / reset size |
+| `C-M-e` | Inside floax: embed the popup as a regular window |
 | `prefix f` | Fuzzy-pick a **file** and insert its path into the pane |
 | `prefix F` | Fuzzy-pick a **directory** and insert its path |
 | `prefix a` | workmux dashboard |
-| `prefix \` | tmux-menus (mouse-friendly menus for everything) |
+| `prefix \` or `prefix Enter` | tmux-menus (mouse-friendly menus for everything) |
 | `prefix ?` | which-key menu |
 
 ### Copy mode (vi)
@@ -130,7 +140,7 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 
 | Keys | Action |
 |---|---|
-| `prefix r` | Reload `~/.tmux.conf` |
+| `prefix r` | Reload `~/.tmux.conf` (tmux-sensible's `prefix R` does the same) |
 | `prefix I` | TPM: install plugins |
 | `prefix U` | TPM: update plugins |
 | `prefix M-u` | TPM: remove plugins no longer in the config |
