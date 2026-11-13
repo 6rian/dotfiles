@@ -29,7 +29,7 @@ repo, same as the rest of the manifest — edit it here, not in place).
   directory per project. Detailed specs and plans stay in planning repos and
   are linked, not copied. Todoist is read for due dates and priorities and
   isn't changed without an explicit request.
-  - **YYYY-MM-DD-project-name/** — Each project directory contains:
+  - **project-name/** (no date prefix) — Each project directory contains:
     - `README.md` for a description of the project
     - `ideas/YYYY-MM-DD-idea.md` for each idea, with the date of creation in the filename
     - `tasks/YYYY-MM-DD-task.md` for each task, with the date of creation in the filename, with a simple syntax for marking them done or in progress

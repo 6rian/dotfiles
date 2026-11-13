@@ -37,7 +37,7 @@ Full layout: `~/working/README.md`. Templates: `~/working/ai/templates/`.
 
 - **Todoist = the user's own task list.** You READ it (due dates, priority,
   schedule) to help prioritize. You don't write to it unless told to (see Todoist).
-- `projects/YYYY-MM-DD-name/` — the high-level view of one effort: goal,
+- `projects/<name>/` (short kebab-case, no date prefix) — the high-level view of one effort: goal,
   where it stands, what's next, links. Not a detailed plan (see Planning repos).
   `README.md` frontmatter may hold `todoist_project: <id>` and `plan: <path>`.
   - `tasks/YYYY-MM-DD-slug.md` — your record of a task worth tracking, with
