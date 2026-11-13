@@ -36,6 +36,12 @@
 # else hard-fails if it's missing (sesh errors out on a missing `import`).
 # The template is copied only when the destination doesn't exist yet, and
 # an existing file is never compared or overwritten.
+#
+# `bak` entries go right before a `copy` of the same file: if the
+# destination has drifted from the repo's version, it's copied aside to
+# <dest>.bak-YYYYmmdd-HHMMSS first, so the overwrite never silently loses
+# a local edit. No drift means no backup, so a clean re-run stays at
+# changed=0.
 
 set -euo pipefail
 
@@ -55,6 +61,7 @@ MANIFEST=(
   "link:tmux/plugins:.config/tmux/plugins"
   "link:.gitconfig:.gitconfig"
   "dir::.claude"
+  "bak:.claude/settings.json:.claude/settings.json"
   "copy:.claude/settings.json:.claude/settings.json"
   "link:.claude/statusline-command.sh:.claude/statusline-command.sh"
   "link:.claude/themes:.claude/themes"
@@ -136,6 +143,23 @@ ensure_copy() {
   cp "$src" "$dest"
   log "[changed] $2"
   changed=$((changed + 1))
+}
+
+ensure_backup() {
+  local src="$REPO_DIR/$1"
+  local dest="$TARGET_HOME/$2"
+
+  if [ -f "$dest" ] && [ ! -L "$dest" ] && ! cmp -s "$src" "$dest"; then
+    local backup
+    backup="${dest}.bak-$(date +%Y%m%d-%H%M%S)"
+    cp -p "$dest" "$backup"
+    log "[backed-up] $2 -> $(basename "$backup")"
+    changed=$((changed + 1))
+    return
+  fi
+
+  log "[ok] $2 (backup not needed)"
+  unchanged=$((unchanged + 1))
 }
 
 ensure_seed() {
@@ -262,6 +286,7 @@ for entry in "${MANIFEST[@]}"; do
     dir) ensure_real_dir "$dest" ;;
     copy) ensure_copy "$src" "$dest" ;;
     seed) ensure_seed "$src" "$dest" ;;
+    bak) ensure_backup "$src" "$dest" ;;
     repos-compat) ensure_working_repos "$dest" ;;
     *)
       log "[error] unknown manifest kind: $kind"
