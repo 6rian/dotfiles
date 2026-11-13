@@ -1,5 +1,45 @@
 {
-  "model": "sonnet",
+  "model": "opus",
+  "enabledPlugins": {
+    "nhumphrey@fandom-plugins": true
+  },
+  "permissions": {
+    "allow": [
+      "mcp__fandom-knowledgebase",
+      "Read(~/working/**)",
+      "Read(~/repos/**)",
+      "Edit(~/working/daily-notes/**)",
+      "Edit(~/working/projects/**)",
+      "Edit(~/working/ai/lessons/**)",
+      "Edit(~/working/ai/memory/**)",
+      "Edit(~/working/ai/.state/**)",
+      "Edit(~/working/tmp/**)",
+      "Bash(date:*)",
+      "mcp__todoist__find-activity",
+      "mcp__todoist__find-comments",
+      "mcp__todoist__find-completed-tasks",
+      "mcp__todoist__find-filters",
+      "mcp__todoist__find-labels",
+      "mcp__todoist__find-project-collaborators",
+      "mcp__todoist__find-projects",
+      "mcp__todoist__find-reminders",
+      "mcp__todoist__find-sections",
+      "mcp__todoist__find-tasks",
+      "mcp__todoist__find-tasks-by-date",
+      "mcp__todoist__get-overview",
+      "mcp__todoist__get-productivity-stats",
+      "mcp__todoist__get-project-activity-stats",
+      "mcp__todoist__get-project-health",
+      "mcp__todoist__get-user-status",
+      "mcp__todoist__get-workspace-insights",
+      "mcp__todoist__list-workspaces",
+      "mcp__todoist__search",
+      "mcp__todoist__fetch",
+      "mcp__todoist__fetch-object",
+      "mcp__todoist__user-info",
+      "mcp__todoist__view-attachment"
+    ]
+  },
   "tui": "fullscreen",
   "theme": "custom:xeno-cyberpunk-v2",
   "editorMode": "vim",
@@ -17,6 +57,46 @@
           {
             "type": "command",
             "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f ~/working/ai/hooks/workerbee-hook.sh && bash ~/working/ai/hooks/workerbee-hook.sh session-start || true"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f ~/working/ai/hooks/workerbee-hook.sh && bash ~/working/ai/hooks/workerbee-hook.sh prompt || true"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f ~/working/ai/hooks/workerbee-hook.sh && bash ~/working/ai/hooks/workerbee-hook.sh pre-compact || true"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f ~/working/ai/hooks/workerbee-hook.sh && bash ~/working/ai/hooks/workerbee-hook.sh session-end || true"
           }
         ]
       }

@@ -46,6 +46,7 @@ cat() {
 # TODO: Add a way to switch between personal and work Claude configs
 alias claude-personal='CLAUDE_CONFIG_DIR="$HOME/.claude" claude'
 alias claude-work='CLAUDE_CONFIG_DIR="$HOME/.claude-work" claude'
+alias workerbee="cd ~/working && claude --agent workerbee"
 
 # Filesystem shortcuts
 alias ..="cd .."

@@ -36,6 +36,17 @@
 # else hard-fails if it's missing (sesh errors out on a missing `import`).
 # The template is copied only when the destination doesn't exist yet, and
 # an existing file is never compared or overwritten.
+#
+# `bak` entries go right before a `copy` of the same file: if the
+# destination has drifted from the repo's version, it's copied aside to
+# <dest>.bak-YYYYmmdd-HHMMSS first, so the overwrite never silently loses
+# a local edit. No drift means no backup, so a clean re-run stays at
+# changed=0.
+#
+# `mcp` entries (mcp:name:url) register a user-scope HTTP MCP server with
+# `claude mcp add` if `claude mcp get` doesn't already know it. Skipped
+# when the claude CLI isn't installed. Authentication is still a manual
+# one-time /mcp inside Claude.
 
 set -euo pipefail
 
@@ -55,9 +66,19 @@ MANIFEST=(
   "link:tmux/plugins:.config/tmux/plugins"
   "link:.gitconfig:.gitconfig"
   "dir::.claude"
+  "bak:.claude/settings.json:.claude/settings.json"
   "copy:.claude/settings.json:.claude/settings.json"
   "link:.claude/statusline-command.sh:.claude/statusline-command.sh"
   "link:.claude/themes:.claude/themes"
+  # WorkerBee (see working/ai/README.md): agent + skills live under working/ai/
+  "dir::.claude/agents"
+  "link:working/ai/CLAUDE.global.md:.claude/CLAUDE.md"
+  "link:working/ai/agents/workerbee.md:.claude/agents/workerbee.md"
+  "dir::.claude/skills"
+  "link:working/ai/skills/bee:.claude/skills/bee"
+  "link:working/ai/skills/morning-update:.claude/skills/morning-update"
+  "link:working/ai/skills/wrap-up:.claude/skills/wrap-up"
+  "link:working/ai/skills/where:.claude/skills/where"
   "link:ghostty:.config/ghostty"
   "link:kitty:.config/kitty"
   "link:tuicr:.config/tuicr"
@@ -69,8 +90,21 @@ MANIFEST=(
   "link:working/README.md:working/README.md"
   "dir::working/tmp"
   "dir::working/ai"
+  # Code is symlinked from this repo; ai/lessons and ai/memory are real
+  # per-host dirs so personal notes never land in this git tree.
+  "link:working/ai/README.md:working/ai/README.md"
+  "link:working/ai/agents:working/ai/agents"
+  "link:working/ai/skills:working/ai/skills"
+  "link:working/ai/hooks:working/ai/hooks"
+  "link:working/ai/templates:working/ai/templates"
+  "dir::working/ai/lessons"
+  "dir::working/ai/memory"
+  "seed:working/ai/templates/RULES.md:working/ai/lessons/RULES.md"
+  "seed:working/ai/templates/about-me.md:working/ai/memory/about-me.md"
   "repos-compat::working/repos"
   "dir::working/daily-notes"
+  "dir::working/projects"
+  "mcp:todoist:https://ai.todoist.net/mcp"
 )
 
 log() {
@@ -136,6 +170,23 @@ ensure_copy() {
   cp "$src" "$dest"
   log "[changed] $2"
   changed=$((changed + 1))
+}
+
+ensure_backup() {
+  local src="$REPO_DIR/$1"
+  local dest="$TARGET_HOME/$2"
+
+  if [ -f "$dest" ] && [ ! -L "$dest" ] && ! cmp -s "$src" "$dest"; then
+    local backup
+    backup="${dest}.bak-$(date +%Y%m%d-%H%M%S)"
+    cp -p "$dest" "$backup"
+    log "[backed-up] $2 -> $(basename "$backup")"
+    changed=$((changed + 1))
+    return
+  fi
+
+  log "[ok] $2 (backup not needed)"
+  unchanged=$((unchanged + 1))
 }
 
 ensure_seed() {
@@ -232,6 +283,32 @@ ensure_working_repos() {
   changed=$((changed + 1))
 }
 
+ensure_mcp() {
+  local name="$1"
+  local url="$2"
+
+  if ! command -v claude >/dev/null 2>&1; then
+    log "[skipped] mcp $name (claude CLI not found)"
+    unchanged=$((unchanged + 1))
+    return
+  fi
+
+  if claude mcp get "$name" >/dev/null 2>&1; then
+    log "[ok] mcp $name"
+    unchanged=$((unchanged + 1))
+    return
+  fi
+
+  local output
+  if ! output="$(claude mcp add --transport http --scope user "$name" "$url" 2>&1)"; then
+    printf '%s\n' "$output" >&2
+    log "[error] mcp $name: claude mcp add failed"
+    exit 1
+  fi
+  log "[changed] mcp $name (run /mcp in Claude once to authenticate)"
+  changed=$((changed + 1))
+}
+
 ensure_submodules() {
   local status
   status="$(git -C "$REPO_DIR" submodule status)"
@@ -262,6 +339,8 @@ for entry in "${MANIFEST[@]}"; do
     dir) ensure_real_dir "$dest" ;;
     copy) ensure_copy "$src" "$dest" ;;
     seed) ensure_seed "$src" "$dest" ;;
+    bak) ensure_backup "$src" "$dest" ;;
+    mcp) ensure_mcp "$src" "$dest" ;;
     repos-compat) ensure_working_repos "$dest" ;;
     *)
       log "[error] unknown manifest kind: $kind"
