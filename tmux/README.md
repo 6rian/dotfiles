@@ -7,10 +7,45 @@ reboots.
 
 ```
 tmux/
-├── .tmux.conf        # the whole config
-├── plugins/tmux2k/   # vendored status-bar theme (loaded manually, not via TPM)
-└── setup.sh          # legacy standalone bootstrap (prefer ../install.sh)
+├── .tmux.conf          # entry file: sources the parts below, runs TPM
+├── options.conf        # options
+├── clipboard.conf      # OSC 52 clipboard settings
+├── bindings.conf       # key bindings
+├── popups.conf         # popup/menu look and popup bindings
+├── plugins.conf        # TPM plugins and their options
+├── theme.conf          # tmux2k status bar
+├── after-plugins.conf  # overrides that must follow TPM
+└── plugins/tmux2k/     # vendored status-bar theme (loaded manually, not via TPM)
 ```
+
+## Where things live
+
+`~/.tmux.conf` is only the entry file. It sources the parts from
+`~/.config/tmux/` in this order:
+
+| Order | File | Holds |
+|---|---|---|
+| 1 | `options.conf` | Terminal features and extended keys, mouse, vi copy mode / emacs prompt, indexes, window naming, `detach-on-destroy`, status position, scrollback, titles, `repeat-time`, `focus-events`, `allow-passthrough`, and the values that used to come from tmux-sensible |
+| 2 | `clipboard.conf` | `set-clipboard on` and `get-clipboard request`, nothing else |
+| 3 | `bindings.conf` | Reload (`prefix r`), prefix, splits, window/pane movement, `C-S-←/→`, resizing, `prefix L` |
+| 4 | `popups.conf` | Popup/menu style and borders, `prefix a` / `f` / `F` / `g` |
+| 5 | `plugins.conf` | Every `@plugin` line and plugin option. resurrect/continuum stay last |
+| 6 | `theme.conf` | tmux2k options, then loads tmux2k |
+| 7 | TPM | `run ~/.tmux/plugins/tpm/tpm`, in `.tmux.conf` itself |
+| 8 | `after-plugins.conf` | Bindings that must override a plugin (`prefix Space`, `prefix ?`) |
+| 9 | `local.conf` | **Untracked**, optional per-host overrides (`source-file -q`). Create it by hand in `~/.config/tmux/` |
+
+Rules for editing:
+- **Source parts with literal `source-file ~/.config/tmux/X.conf` lines in
+  `.tmux.conf`.** TPM finds `@plugin` lines by scanning the entry file's text
+  and follows only plain, one-level `source-file` lines, so `plugins.conf`
+  must be sourced directly from `.tmux.conf`. No `-F`, no nesting, no
+  trailing comments on those lines.
+- **Nothing after TPM may set `status-right`**, including `local.conf`, or
+  continuum's autosave silently stops.
+- **A new part needs an `install.sh` manifest entry** (`link:tmux/X.conf:.config/tmux/X.conf`).
+- **`prefix r` doesn't unset anything.** After removing a setting, restart the
+  server (or set it back by hand) to see the real result.
 
 ## Install
 
@@ -19,6 +54,7 @@ tmux/
 | Link | Target |
 |---|---|
 | `~/.tmux.conf` | `tmux/.tmux.conf` |
+| `~/.config/tmux/*.conf` | `tmux/*.conf`, one link per part (see [Where things live](#where-things-live)) |
 | `~/.config/tmux/plugins` | `tmux/plugins` (for tmux2k) |
 
 The config clones TPM itself on first start and installs the plugins. After
@@ -188,7 +224,7 @@ accent `#e8e34a`, indigo `#7E4AE6`, green `#7EA929`, magenta `#F11FCB`).
 - **Right:** cpu · ram · battery · network · time
 
 Segment foregrounds were picked for WCAG contrast. The comments in
-`.tmux.conf` explain the choices and an upstream tmux2k bug where `pink`
+`theme.conf` explain the choices and an upstream tmux2k bug where `pink`
 reads `@tmux2k-light-purple`.
 
 ## Gotchas
