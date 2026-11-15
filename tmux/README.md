@@ -25,7 +25,7 @@ tmux/
 
 | Order | File | Holds |
 |---|---|---|
-| 1 | `options.conf` | Terminal features and extended keys, mouse, vi copy mode / emacs prompt, indexes, window naming, `detach-on-destroy`, status position, scrollback, titles, `repeat-time`, `focus-events`, `allow-passthrough`, and the values that used to come from tmux-sensible |
+| 1 | `options.conf` | Terminal features and extended keys, mouse, vi copy mode and command prompt, indexes, window naming, `detach-on-destroy`, status position, scrollback, titles, `repeat-time`, `focus-events`, `allow-passthrough`, and the values that used to come from tmux-sensible |
 | 2 | `clipboard.conf` | `set-clipboard on` and `get-clipboard request`, nothing else |
 | 3 | `bindings.conf` | Reload (`prefix r`), prefix, splits, window/pane movement, `C-S-←/→`, resizing, `prefix L` |
 | 4 | `popups.conf` | Popup/menu style and borders, `prefix a` / `f` / `F` / `g` |
@@ -97,8 +97,8 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 - **No prefix key repeat** (`repeat-time 0`): a key pressed after a prefix
   command is always a fresh key. The built-in repeatable keys (`prefix ←↑↓→`
   and `prefix M-←↑↓→` resizing) don't repeat.
-- **The command prompt (`prefix :`) uses emacs keys** (`status-keys emacs`),
-  even though copy mode is vi and `EDITOR` is nvim.
+- **vi keys everywhere:** copy mode (`mode-keys vi`) and the command prompt
+  (`prefix :`, `status-keys vi`). Press `Esc` in the prompt for normal mode.
 - **`TERM` inside tmux is `tmux-256color`** (tmux's default), so italics and
   undercurl work in nvim.
 - **Clipboard over OSC 52, both ways.** Yanks reach the outer terminal, and
