@@ -34,27 +34,41 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 | `tmux-file-picker` | `prefix f` / `F` | **Installed by hand** to `~/.local/bin`. Not in this repo or `install.sh` |
 | `fd` / `fdfind` | file picker | Ubuntu's `fdfind` name works too, because the picker falls back to it |
 | `workmux` | `prefix a` | `Brewfile`: `raine/workmux/workmux` |
+| `lazygit` | `prefix g` | `Brewfile` on macOS; installed by the homelab Ansible on Linux |
 
 ## Core behavior
 
 - **Prefix:** `C-Space` (press `C-Space C-Space` to send it through to the app).
 - Windows and panes are numbered **from 1**, and windows renumber when one closes.
 - **The status bar is at the top.**
-- **Popups and menus use the terminal's own colours**, with a purple
+- **Popups and menus use the terminal's own colours**, with a rounded purple
   (`#a15bff`) border. tmux 3.8 otherwise draws them gray, and it misdetects
   Ghostty's dark background as light.
-- **Every window is auto-named "Window"** (`automatic-rename-format`), so
-  rename the ones that matter with `prefix ,`. This also shows in sessionx's
-  window mode.
+- **Windows are auto-named after their directory** (`automatic-rename-format
+  "#{b:pane_current_path}"`). Rename one with `prefix ,` to pin its name.
+- **The terminal's title follows tmux** (`set-titles`): Ghostty's tab/window
+  title shows `session: pane title`.
 - **`detach-on-destroy off`:** closing the last window of a session switches
   you to another session instead of detaching.
 - **New splits open in the current pane's directory.**
-- **Mouse on, vi copy mode, 100k lines of scrollback, `escape-time 0`.**
+- **Mouse on, vi copy mode, 100k lines of scrollback.** `escape-time` is left
+  at tmux's default (10ms).
+- **No prefix key repeat** (`repeat-time 0`): a key pressed after a prefix
+  command is always a fresh key. The built-in repeatable keys (`prefix ←↑↓→`
+  and `prefix M-←↑↓→` resizing) don't repeat.
+- **vi keys everywhere:** copy mode (`mode-keys vi`) and the command prompt
+  (`prefix :`, `status-keys vi`). Press `Esc` in the prompt for normal mode.
+- **`TERM` inside tmux is `tmux-256color`** (tmux's default), so italics and
+  undercurl work in nvim.
 - **Clipboard over OSC 52, both ways.** Yanks reach the outer terminal, and
   paste requests (e.g. from nvim) ask the outer terminal, so the system
   clipboard works over SSH.
 - **Extended keys are on** (`xterm*:extkeys`), so modified keys reach nvim intact.
-- **`focus-events off`** because it breaks Claude Code.
+- **`focus-events on`**, so nvim notices when you come back to a pane (it
+  re-reads files an agent changed).
+- **`allow-passthrough all`:** apps can send escape sequences (e.g. desktop
+  notifications) to Ghostty even from windows that aren't visible, such as a
+  background agent's window. `on` would drop those.
 
 ## Keymaps
 
@@ -95,6 +109,7 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 |---|---|
 | `prefix c` | New window |
 | `Shift-←` / `Shift-→` | Previous / next window (no prefix) |
+| `Ctrl-Shift-←` / `Ctrl-Shift-→` | Move the current window left / right (no prefix) |
 | `prefix 1`…`9` | Go to window N |
 | `prefix l` | Last window |
 | `prefix ,` | Rename window |
@@ -126,6 +141,7 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 | `prefix f` | Fuzzy-pick a **file** and insert its path into the pane |
 | `prefix F` | Fuzzy-pick a **directory** and insert its path |
 | `prefix a` | workmux dashboard |
+| `prefix g` | lazygit in a popup, in the current pane's directory (replaces tmux 3.8's default `prefix g` "move" key table for floating panes) |
 | `prefix \` or `prefix Enter` | tmux-menus (mouse-friendly menus for everything) |
 | `prefix ?` | which-key menu |
 
@@ -142,7 +158,7 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 
 | Keys | Action |
 |---|---|
-| `prefix r` | Reload `~/.tmux.conf` (tmux-sensible's `prefix R` does the same) |
+| `prefix r` | Reload `~/.tmux.conf` |
 | `prefix I` | TPM: install plugins |
 | `prefix U` | TPM: update plugins |
 | `prefix M-u` | TPM: remove plugins no longer in the config |
@@ -153,7 +169,6 @@ Managed by [TPM](https://github.com/tmux-plugins/tpm) unless noted:
 
 | Plugin | Purpose |
 |---|---|
-| [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) | Sane defaults |
 | [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) | Same `C-hjkl` moves across nvim and tmux. Its `C-\` and `C-Space` bindings are removed so they don't clash with the prefix |
 | [tmux-sessionx](https://github.com/omerxx/tmux-sessionx) | Session picker (`prefix s`). Hides floax's `scratch` session |
 | [tmux-floax](https://github.com/omerxx/tmux-floax) | Floating scratch pane (`prefix t`) |
