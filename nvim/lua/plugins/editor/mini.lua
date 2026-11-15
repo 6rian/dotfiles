@@ -41,7 +41,11 @@ return {
     require('mini.colors').setup()
     require('mini.icons').setup()
     require('mini.move').setup()
-    require('mini.operators').setup()
+    -- Exchange on cx/cxx (the vim-exchange convention mini.operators is based
+    -- on) so gx stays the built-in open-URL.
+    require('mini.operators').setup {
+      exchange = { prefix = 'cx' },
+    }
 
     -- Pending-keybind popup (replaces which-key.nvim)
     local miniclue = require 'mini.clue'
@@ -78,6 +82,8 @@ return {
         { mode = 'n', keys = '<Leader>s', desc = '+Search' },
         { mode = 'n', keys = '<Leader>w', desc = '+Workspace' },
         { mode = 'n', keys = '<Leader>t', desc = '+Toggle' },
+        { mode = 'n', keys = '<Leader>T', desc = '+Terminal' },
+        { mode = 'n', keys = '<Leader>q', desc = '+Quickfix' },
         { mode = 'n', keys = '<Leader>h', desc = '+Git Hunk' },
         { mode = 'x', keys = '<Leader>h', desc = '+Git Hunk' },
 

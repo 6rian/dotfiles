@@ -3,7 +3,6 @@ local opts = { noremap = true, silent = true }
 
 -- Press jk fast to exit insert mode
 keymap.set('i', 'jk', '<ESC>', opts)
-keymap.set('i', 'jk', '<ESC>', opts)
 
 -- Deletes, changes and x/X do NOT affect clipboard or yank register
 keymap.set({ 'n', 'v' }, 'd', '"_d', opts)
@@ -29,7 +28,7 @@ keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 keymap.set('n', 'swf', '<cmd>noautocmd write<cr>', { desc = 'Save Without Formatting' })
 
 -- Diagnostic keymaps
-keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+keymap.set('n', '<leader>qd', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
