@@ -1,21 +1,29 @@
 -- Adds git related signs to the gutter, as well as utilities for managing changes
--- Branch to review the current worktree against: origin/HEAD, else main, else
--- master. Run from the buffer's directory so worktrees resolve correctly.
+-- What to review the current worktree against: the merge-base of HEAD and the
+-- base branch (origin/HEAD, else main, else master), so commits that landed on
+-- the base branch after the agent branched don't show up as reversed hunks.
+-- Returns the branch name and the merge-base commit. Runs from the buffer's
+-- directory so worktrees resolve correctly.
 local function detect_base(bufnr)
   local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
   local function git(args)
     local res = vim.system(vim.list_extend({ 'git' }, args), { cwd = dir, text = true }):wait()
     return res.code == 0 and vim.trim(res.stdout) or nil
   end
-  local origin_head = git { 'symbolic-ref', '--quiet', '--short', 'refs/remotes/origin/HEAD' }
-  if origin_head and origin_head ~= '' then
-    return origin_head
-  end
-  for _, branch in ipairs { 'main', 'master' } do
-    if git { 'rev-parse', '--verify', '--quiet', 'refs/heads/' .. branch } then
-      return branch
+  local branch = git { 'symbolic-ref', '--quiet', '--short', 'refs/remotes/origin/HEAD' }
+  if not branch or branch == '' then
+    branch = nil
+    for _, b in ipairs { 'main', 'master' } do
+      if git { 'rev-parse', '--verify', '--quiet', 'refs/heads/' .. b } then
+        branch = b
+        break
+      end
     end
   end
+  if not branch then
+    return nil
+  end
+  return branch, git { 'merge-base', 'HEAD', branch }
 end
 
 return {
@@ -90,14 +98,18 @@ return {
         -- Review against the base branch (e.g. an agent's worktree vs main).
         -- `true` applies it to every buffer, and setqflist above follows it.
         map('n', '<leader>ghc', function()
-          local base = detect_base(bufnr)
-          if not base then
+          local branch, merge_base = detect_base(bufnr)
+          if not branch then
             vim.notify('No base branch found (origin/HEAD, main, master)', vim.log.levels.WARN)
             return
           end
-          gitsigns.change_base(base, true)
-          vim.notify('Gitsigns base: ' .. base, vim.log.levels.INFO)
-        end, { desc = 'Diff against base branch' })
+          if not merge_base then
+            vim.notify('No merge-base with ' .. branch, vim.log.levels.WARN)
+            return
+          end
+          gitsigns.change_base(merge_base, true)
+          vim.notify(('Gitsigns base: merge-base with %s (%s)'):format(branch, merge_base:sub(1, 7)), vim.log.levels.INFO)
+        end, { desc = 'Diff against base branch (merge-base)' })
         map('n', '<leader>ghC', function()
           gitsigns.reset_base(true)
           vim.notify('Gitsigns base: index', vim.log.levels.INFO)
