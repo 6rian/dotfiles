@@ -111,6 +111,7 @@ end
 require 'keymaps'
 require 'options'
 require 'lazy-init'
+require 'agent-review'
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
