@@ -16,6 +16,10 @@ return {
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
+      -- Toggled with <leader>uf (buffer) / <leader>uF (global), see agent-review.lua
+      if vim.b[bufnr].disable_autoformat or vim.g.disable_autoformat then
+        return nil
+      end
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
