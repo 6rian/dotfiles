@@ -100,7 +100,16 @@ return {
     dim = { enabled = true },
     explorer = { enabled = true, replace_netrw = true },
     git = { enabled = true },
-    gitbrowse = { enabled = true },
+    gitbrowse = {
+      enabled = true,
+      notify = false, -- the built-in one says "Opening"; open() notifies instead
+      -- Copy instead of opening a browser: devbox has no opener, and `+` reaches
+      -- the Mac's clipboard through OSC 52 (see options.lua).
+      open = function(url)
+        vim.fn.setreg('+', url)
+        Snacks.notify('Copied ' .. url, { title = 'Git Browse' })
+      end,
+    },
     health = { enabled = true },
     image = { enabled = true },
     indent = { enabled = true },
