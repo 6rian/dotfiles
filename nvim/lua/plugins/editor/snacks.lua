@@ -104,7 +104,23 @@ return {
     image = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
-    lazygit = { enabled = true },
+    lazygit = {
+      enabled = true,
+      -- `e` opens the file in the window lazygit was started from and quits
+      -- lazygit, instead of the nvim-remote preset's new tab. POSIX sh only.
+      -- See lua/utils/lazygit.lua. Without $NVIM, fall back to a plain nvim.
+      config = {
+        os = {
+          edit = [[if [ -z "$NVIM" ]; then nvim -- {{filename}}; else ]]
+            .. [[nvim --server "$NVIM" --remote-expr "v:lua.require'utils.lazygit'.leave()" >/dev/null && ]]
+            .. [[nvim --server "$NVIM" --remote {{filename}}; fi]],
+          editAtLine = [[if [ -z "$NVIM" ]; then nvim +{{line}} -- {{filename}}; else ]]
+            .. [[nvim --server "$NVIM" --remote-expr "v:lua.require'utils.lazygit'.leave()" >/dev/null && ]]
+            .. [[nvim --server "$NVIM" --remote {{filename}} && ]]
+            .. [[nvim --server "$NVIM" --remote-expr "execute('{{line}}')" >/dev/null; fi]],
+        },
+      },
+    },
     notifier = {
       enabled = true,
       timeout = 3000,
