@@ -121,6 +121,9 @@ return {
 
         -- Text object
         map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, { desc = 'Select hunk' })
+
+        -- Full-buffer blame (D38)
+        map('n', '<leader>ghB', gitsigns.blame, { desc = 'Blame buffer' })
       end,
     }
   end,
