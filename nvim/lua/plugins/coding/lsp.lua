@@ -12,9 +12,7 @@ return {
           -- Whether to automatically check for new versions when opening the :Mason window.
           check_outdated_packages_on_open = true,
 
-          -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-          -- Defaults to `:h 'winborder'` if nil.
-          border = 'rounded',
+          -- No `border`: it defaults to `:h 'winborder'` (set in options.lua).
 
           -- The backdrop opacity. 0 is fully opaque, 100 is fully transparent.
           backdrop = 60,
@@ -169,7 +167,7 @@ return {
     -- See :help vim.diagnostic.Opts
     vim.diagnostic.config {
       severity_sort = true,
-      float = { border = 'rounded', source = 'if_many' },
+      float = { source = 'if_many' }, -- border comes from 'winborder'
       underline = { severity = vim.diagnostic.severity.ERROR },
       signs = vim.g.have_nerd_font and {
         text = {
@@ -180,7 +178,7 @@ return {
         },
       } or {},
       virtual_text = {
-        source = 'if_many',
+        source = true,
         spacing = 2,
       },
     }
