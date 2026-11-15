@@ -550,6 +550,13 @@ return {
       end,
       desc = 'LSP Workspace Symbols',
     },
+    {
+      '<leader>ci',
+      function()
+        Snacks.picker.lsp_incoming_calls()
+      end,
+      desc = 'LSP Incoming Calls',
+    },
     -- Other
     {
       '<leader>z',
@@ -592,6 +599,13 @@ return {
         Snacks.bufdelete()
       end,
       desc = 'Delete Buffer',
+    },
+    {
+      '<leader>bo',
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = 'Delete Other Buffers',
     },
     {
       '<leader>cR',
