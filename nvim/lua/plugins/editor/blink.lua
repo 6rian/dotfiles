@@ -6,7 +6,6 @@ return {
     'folke/lazydev.nvim',
     'mgalliou/blink-cmp-tmux',
     'alexandre-abrioux/blink-cmp-npm.nvim',
-    'Kaiser-Yang/blink-cmp-avante',
     -- 'bydlw98/blink-cmp-env',
   },
   --- @module 'blink.cmp'
@@ -79,15 +78,8 @@ return {
     },
 
     sources = {
-      default = { 'avante', 'lsp', 'buffer', 'npm' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'npm' },
       providers = {
-        avante = {
-          module = 'blink-cmp-avante',
-          name = 'Avante',
-          opts = {
-            -- options for blink-cmp-avante
-          },
-        },
         npm = {
           name = 'npm',
           module = 'blink-cmp-npm',

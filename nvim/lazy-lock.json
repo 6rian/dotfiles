@@ -1,5 +1,4 @@
 {
-  "blink-cmp-avante": { "branch": "master", "commit": "4f494c6e124acbe31a8f5d58effa0c14aa38a6d5" },
   "blink-cmp-npm.nvim": { "branch": "main", "commit": "7a95a0a25e8b444b06c72bd2d4f744cb1e186f3d" },
   "blink-cmp-tmux": { "branch": "main", "commit": "112ddbf2e09d9cb4736de70dd01eb9654cf01d70" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
