@@ -83,7 +83,14 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 - **Windows are auto-named after their directory** (`automatic-rename-format
   "#{b:pane_current_path}"`). Rename one with `prefix ,` to pin its name.
 - **The terminal's title follows tmux** (`set-titles`): Ghostty's tab/window
-  title shows `session: pane title`.
+  title shows `session: window`, or `session: pane title` when an app has set
+  one (Claude Code sets its current task, e.g. `✳ Fix the tests`). When the
+  tmux server was started over SSH, the title starts with the host:
+  `[devbox] session: window`.
+- **workmux agent status shows in the window list:** 🤖 working, 💬 waiting
+  for you, ✅ done (💬/✅ clear when you visit the window). The icon comes
+  from `@tmux2k-window-list-format` in `theme.conf`; workmux's own format
+  rewrite is turned off in `workmux/config.yaml`.
 - **`detach-on-destroy off`:** closing the last window of a session switches
   you to another session instead of detaching.
 - **New splits open in the current pane's directory.**

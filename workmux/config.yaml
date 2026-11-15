@@ -1,0 +1,7 @@
+# workmux global config (~/.config/workmux/config.yaml, symlinked by install.sh).
+# Reference: `workmux config reference`.
+nerdfont: true
+
+# Don't rewrite each session's tmux window-status-format. tmux2k draws the
+# window list, and tmux/theme.conf adds the @workmux_status icon to it.
+status_format: false

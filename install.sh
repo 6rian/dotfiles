@@ -68,6 +68,7 @@ MANIFEST=(
   "link:ghostty:.config/ghostty"
   "link:kitty:.config/kitty"
   "link:tuicr:.config/tuicr"
+  "link:workmux/config.yaml:.config/workmux/config.yaml"
   "dir::.config/sesh"
   "link:sesh/sesh.toml:.config/sesh/sesh.toml"
   "seed:sesh/local.toml.example:.config/sesh/local.toml"
