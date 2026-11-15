@@ -2,19 +2,14 @@
 return {
   'nvim-treesitter/nvim-treesitter-context',
   event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
-  opts = function()
-    local tsc = require 'treesitter-context'
-
-    local function toggle_treesitter_context()
-      if tsc.enabled then
-        tsc.disable()
-      else
-        tsc.enable()
-      end
-    end
-
-    vim.api.nvim_set_keymap('n', '<leader>ut', ':lua toggle_treesitter_context()<CR>', { noremap = true, silent = true })
-
-    return { mode = 'cursor', max_lines = 3 }
-  end,
+  keys = {
+    {
+      '<leader>ut',
+      function()
+        require('treesitter-context').toggle()
+      end,
+      desc = 'Toggle Treesitter Context',
+    },
+  },
+  opts = { mode = 'cursor', max_lines = 3 },
 }

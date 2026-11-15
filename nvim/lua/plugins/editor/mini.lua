@@ -41,7 +41,15 @@ return {
     require('mini.colors').setup()
     require('mini.icons').setup()
     require('mini.move').setup()
-    require('mini.operators').setup()
+    -- Exchange on cx/cxx (the vim-exchange convention mini.operators is based
+    -- on) so gx stays the built-in open-URL. Replace on gR/gRR, not gr: on gr
+    -- it deleted nvim's default LSP gr* maps and was itself shadowed by the
+    -- buffer-local grr/gri/grt the LSP config sets. Costs built-in virtual
+    -- replace (gR).
+    require('mini.operators').setup {
+      exchange = { prefix = 'cx' },
+      replace = { prefix = 'gR' },
+    }
 
     -- Pending-keybind popup (replaces which-key.nvim)
     local miniclue = require 'mini.clue'
@@ -78,6 +86,8 @@ return {
         { mode = 'n', keys = '<Leader>s', desc = '+Search' },
         { mode = 'n', keys = '<Leader>w', desc = '+Workspace' },
         { mode = 'n', keys = '<Leader>t', desc = '+Toggle' },
+        { mode = 'n', keys = '<Leader>T', desc = '+Terminal' },
+        { mode = 'n', keys = '<Leader>q', desc = '+Quickfix' },
         { mode = 'n', keys = '<Leader>h', desc = '+Git Hunk' },
         { mode = 'x', keys = '<Leader>h', desc = '+Git Hunk' },
 
@@ -116,20 +126,7 @@ return {
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
-    -- Simple and easy statusline.
-    --  You could remove this setup call if you don't like it,
-    --  and try some other statusline plugin
-    local statusline = require 'mini.statusline'
-    -- set use_icons to true if you have a Nerd Font
-    statusline.setup { use_icons = vim.g.have_nerd_font }
-
-    -- You can configure sections in the statusline by overriding their
-    -- default behavior. For example, here we set the section for
-    -- cursor location to LINE:COLUMN
-    ---@diagnostic disable-next-line: duplicate-set-field
-    statusline.section_location = function()
-      return '%2l:%-2v'
-    end
+    -- Statusline is lualine (plugins/editor/lualine.lua), not mini.statusline.
 
     -- require('mini.tabline').setup()
 

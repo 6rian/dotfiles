@@ -3,13 +3,14 @@ local opts = { noremap = true, silent = true }
 
 -- Press jk fast to exit insert mode
 keymap.set('i', 'jk', '<ESC>', opts)
-keymap.set('i', 'jk', '<ESC>', opts)
 
--- Deletes and changes do NOT affect clipboard or yank register
+-- Deletes, changes and x/X do NOT affect clipboard or yank register
 keymap.set({ 'n', 'v' }, 'd', '"_d', opts)
 keymap.set({ 'n', 'v' }, 'c', '"_c', opts)
 keymap.set('n', 'D', '"_D', opts)
 keymap.set('n', 'C', '"_C', opts)
+keymap.set({ 'n', 'x' }, 'x', '"_x', opts) -- 'x' not 'v': select mode must still type x
+keymap.set('n', 'X', '"_X', opts)
 
 -- Close quickfix list
 keymap.set('n', '<leader>qc', '<cmd>cclose<CR>', { desc = 'Close quickfix list', noremap = true })
@@ -27,7 +28,7 @@ keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 keymap.set('n', 'swf', '<cmd>noautocmd write<cr>', { desc = 'Save Without Formatting' })
 
 -- Diagnostic keymaps
-keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+keymap.set('n', '<leader>qd', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -43,14 +44,7 @@ keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 -- keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- CTRL+<hjkl> split/pane navigation is owned by tmux.nvim (plugins/editor/tmux.lua)
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })

@@ -1,4 +1,5 @@
--- Floating terminal management (mirrors voldikss/vim-floaterm's to/tt/tp/tn/tk)
+-- Floating terminal management (mirrors voldikss/vim-floaterm's to/tt/tp/tn/tk,
+-- mapped under <leader>T so they don't hijack the t{char} motion)
 local floaterm = { current = 0, count = 0 }
 
 local function floaterm_get(n)
@@ -99,7 +100,16 @@ return {
     dim = { enabled = true },
     explorer = { enabled = true, replace_netrw = true },
     git = { enabled = true },
-    gitbrowse = { enabled = true },
+    gitbrowse = {
+      enabled = true,
+      notify = false, -- the built-in one says "Opening"; open() notifies instead
+      -- Copy instead of opening a browser: devbox has no opener, and `+` reaches
+      -- the Mac's clipboard through OSC 52 (see options.lua).
+      open = function(url)
+        vim.fn.setreg('+', url)
+        Snacks.notify('Copied ' .. url, { title = 'Git Browse' })
+      end,
+    },
     health = { enabled = true },
     image = { enabled = true },
     indent = { enabled = true },
@@ -187,13 +197,6 @@ return {
       desc = 'Command History',
     },
     {
-      '<leader>n',
-      function()
-        Snacks.picker.notifications()
-      end,
-      desc = 'Notification History',
-    },
-    {
       '<leader>e',
       function()
         Snacks.explorer()
@@ -273,14 +276,14 @@ return {
       desc = 'Git Status',
     },
     {
-      '<leader>gS',
+      '<leader>gz',
       function()
         Snacks.picker.git_stash()
       end,
       desc = 'Git Stash',
     },
     {
-      '<leader>gd',
+      '<leader>gD',
       function()
         Snacks.picker.git_diff()
       end,
@@ -372,13 +375,6 @@ return {
         Snacks.picker.autocmds()
       end,
       desc = 'Autocmds',
-    },
-    {
-      '<leader>sb',
-      function()
-        Snacks.picker.lines()
-      end,
-      desc = 'Buffer Lines',
     },
     {
       '<leader>sc',
@@ -515,14 +511,6 @@ return {
       desc = 'Goto Declaration',
     },
     {
-      'gr',
-      function()
-        Snacks.picker.lsp_references()
-      end,
-      nowait = true,
-      desc = 'References',
-    },
-    {
       'gI',
       function()
         Snacks.picker.lsp_implementations()
@@ -643,23 +631,23 @@ return {
       end,
       desc = 'which_key_ignore',
     },
-    { 'to', floaterm_open, desc = 'Open New Terminal' },
-    { 'tt', floaterm_toggle, desc = 'Toggle Terminal' },
+    { '<leader>To', floaterm_open, desc = 'Open New Terminal' },
+    { '<leader>Tt', floaterm_toggle, desc = 'Toggle Terminal' },
     {
-      'tn',
+      '<leader>Tn',
       function()
         floaterm_cycle(1)
       end,
       desc = 'Next Terminal',
     },
     {
-      'tp',
+      '<leader>Tp',
       function()
         floaterm_cycle(-1)
       end,
       desc = 'Previous Terminal',
     },
-    { 'tk', floaterm_kill, desc = 'Kill Terminal' },
+    { '<leader>Tk', floaterm_kill, desc = 'Kill Terminal' },
     {
       ']]',
       function()

@@ -40,6 +40,7 @@ return {
     -- Highlighting/indent are no longer enabled via opts; start them per-buffer.
     -- pcall guards filetypes with no installed parser (no per-language allowlist needed).
     vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup('treesitter-start', { clear = true }),
       callback = function(args)
         local ok = pcall(vim.treesitter.start, args.buf)
         if ok then
