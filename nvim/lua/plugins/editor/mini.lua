@@ -80,6 +80,10 @@ return {
         { mode = 'n', keys = '<Leader>t', desc = '+Toggle' },
         { mode = 'n', keys = '<Leader>h', desc = '+Git Hunk' },
         { mode = 'x', keys = '<Leader>h', desc = '+Git Hunk' },
+        { mode = 'n', keys = '<Leader>gh', desc = '+Git Hunk' },
+        { mode = 'x', keys = '<Leader>gh', desc = '+Git Hunk' },
+        { mode = 'n', keys = '<Leader>y', desc = '+Yank/Send ref' },
+        { mode = 'x', keys = '<Leader>y', desc = '+Yank/Send ref' },
 
         miniclue.gen_clues.builtin_completion(),
         miniclue.gen_clues.g(),
