@@ -101,3 +101,11 @@ vim.o.termguicolors = true
 
 -- Always show the tabline
 vim.o.showtabline = 2
+
+-- Treesitter folding: fold by syntax tree (functions, blocks, tables), but
+-- open every file fully unfolded. `za` toggles the fold under the cursor.
+-- Buffers with no treesitter parser simply get no folds.
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldlevelstart = 99
+
