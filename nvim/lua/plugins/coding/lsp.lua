@@ -83,18 +83,11 @@ return {
           vim.keymap.set(mode, keys, func, { buf = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        -- These must be set here even though Neovim 0.11+ has built-in gr*
-        -- LSP defaults: mini.operators (mini.lua) uses `gr` as its replace
-        -- prefix and deletes those built-in mappings on setup.
+        -- Rename (grn), code action (gra, n/x) and codelens (grx) come from
+        -- Neovim's built-in global LSP maps; mini.operators' replace is on gR
+        -- (mini.lua) so it no longer deletes them. The maps below override
+        -- the built-in grr/gri/grt with Snacks pickers.
         --
-        -- Rename the variable under your cursor.
-        --  Most Language Servers support renaming across files, etc.
-        map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-
-        -- Execute a code action, usually your cursor needs to be on top of an error
-        -- or a suggestion from your LSP for this to activate.
-        map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-
         -- Find references for the word under your cursor.
         map('grr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
 

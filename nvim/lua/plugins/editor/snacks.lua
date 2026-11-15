@@ -502,14 +502,6 @@ return {
       desc = 'Goto Declaration',
     },
     {
-      'gr',
-      function()
-        Snacks.picker.lsp_references()
-      end,
-      nowait = true,
-      desc = 'References',
-    },
-    {
       'gI',
       function()
         Snacks.picker.lsp_implementations()

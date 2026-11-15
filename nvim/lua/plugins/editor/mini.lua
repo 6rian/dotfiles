@@ -42,9 +42,13 @@ return {
     require('mini.icons').setup()
     require('mini.move').setup()
     -- Exchange on cx/cxx (the vim-exchange convention mini.operators is based
-    -- on) so gx stays the built-in open-URL.
+    -- on) so gx stays the built-in open-URL. Replace on gR/gRR, not gr: on gr
+    -- it deleted nvim's default LSP gr* maps and was itself shadowed by the
+    -- buffer-local grr/gri/grt the LSP config sets. Costs built-in virtual
+    -- replace (gR).
     require('mini.operators').setup {
       exchange = { prefix = 'cx' },
+      replace = { prefix = 'gR' },
     }
 
     -- Pending-keybind popup (replaces which-key.nvim)
