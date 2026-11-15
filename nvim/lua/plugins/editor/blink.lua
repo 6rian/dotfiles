@@ -49,10 +49,9 @@ return {
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 500,
-        window = { border = 'single' },
+        -- window/menu borders: unset, so blink uses 'winborder' (options.lua)
       },
       menu = {
-        border = 'single',
         draw = {
           components = {
             kind_icon = {
@@ -143,7 +142,6 @@ return {
     -- Shows a signature help window while you type arguments for a function
     signature = {
       enabled = true,
-      window = { border = 'single' },
     },
   },
 }

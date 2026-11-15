@@ -101,3 +101,18 @@ vim.o.termguicolors = true
 
 -- Always show the tabline
 vim.o.showtabline = 2
+
+-- Treesitter folding: fold by syntax tree (functions, blocks, tables), but
+-- open every file fully unfolded. `za` toggles the fold under the cursor.
+-- Buffers with no treesitter parser simply get no folds.
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldlevelstart = 99
+
+-- Default border for every floating window that doesn't set its own
+-- (LSP hover/signature, diagnostic float, blink, Mason, gitsigns preview,
+-- mini.clue, Snacks windows with `border = true`). Set before lazy loads.
+vim.o.winborder = 'rounded'
+
+-- Diagonal hatching for deleted-line filler in diff mode (diffview, :diffthis)
+vim.opt.fillchars:append { diff = '╱' }
