@@ -1,4 +1,23 @@
 -- Adds git related signs to the gutter, as well as utilities for managing changes
+-- Branch to review the current worktree against: origin/HEAD, else main, else
+-- master. Run from the buffer's directory so worktrees resolve correctly.
+local function detect_base(bufnr)
+  local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+  local function git(args)
+    local res = vim.system(vim.list_extend({ 'git' }, args), { cwd = dir, text = true }):wait()
+    return res.code == 0 and vim.trim(res.stdout) or nil
+  end
+  local origin_head = git { 'symbolic-ref', '--quiet', '--short', 'refs/remotes/origin/HEAD' }
+  if origin_head and origin_head ~= '' then
+    return origin_head
+  end
+  for _, branch in ipairs { 'main', 'master' } do
+    if git { 'rev-parse', '--verify', '--quiet', 'refs/heads/' .. branch } then
+      return branch
+    end
+  end
+end
+
 return {
   'lewis6991/gitsigns.nvim',
   config = function()
@@ -51,7 +70,7 @@ return {
         map('n', '<leader>gS', gitsigns.stage_buffer, { desc = 'Stage buffer' })
         map('n', '<leader>gR', gitsigns.reset_buffer, { desc = 'Reset buffer' })
         -- map('n', '<leader>gp', gitsigns.preview_hunk, { desc = 'Preview hunk' })
-        -- map('n', '<leader>gi', gitsigns.preview_hunk_inline, { desc = 'Preview hunk inline' })
+        map('n', '<leader>ghp', gitsigns.preview_hunk_inline, { desc = 'Preview hunk inline' })
 
         map('n', '<leader>ghb', function()
           gitsigns.blame_line { full = true }
@@ -68,8 +87,25 @@ return {
         end, { desc = 'Set qflist (all hunks)' })
         map('n', '<leader>ghq', gitsigns.setqflist, { desc = 'Set qflist (buffer hunks)' })
 
+        -- Review against the base branch (e.g. an agent's worktree vs main).
+        -- `true` applies it to every buffer, and setqflist above follows it.
+        map('n', '<leader>ghc', function()
+          local base = detect_base(bufnr)
+          if not base then
+            vim.notify('No base branch found (origin/HEAD, main, master)', vim.log.levels.WARN)
+            return
+          end
+          gitsigns.change_base(base, true)
+          vim.notify('Gitsigns base: ' .. base, vim.log.levels.INFO)
+        end, { desc = 'Diff against base branch' })
+        map('n', '<leader>ghC', function()
+          gitsigns.reset_base(true)
+          vim.notify('Gitsigns base: index', vim.log.levels.INFO)
+        end, { desc = 'Reset base to index' })
+
         -- Toggles
         map('n', '<leader>gtb', gitsigns.toggle_current_line_blame, { desc = 'Toggle current line blame' })
+        map('n', '<leader>ghw', gitsigns.toggle_word_diff, { desc = 'Toggle word diff' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, { desc = 'Select hunk' })
