@@ -1,7 +1,7 @@
 #!/bin/bash
 # Claude Code status line: model name + context usage progress bar + session cost/duration
 #
-# Managed in 6rian/dotfiles, symlinked into ~/.claude/statusline-command.sh
+# Managed in 6rian/dotfiles, copied into ~/.claude/statusline-command.sh
 # by the Ansible `dotfiles` role (infra/ansible/roles/dotfiles in the
 # cyberdelia.lab repo) -- edit here, not in place on a host.
 

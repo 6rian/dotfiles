@@ -20,15 +20,23 @@
 # $HOME for unrelated dangling symlinks.
 #
 # `copy` (not `link`) entries are for files a running app can rewrite in
-# place -- Claude Code does this to .claude/settings.json (harmless
+# place -- Claude Code does this to ~/.claude/settings.json (harmless
 # reordering, but it happens just from running the app), and a symlink
 # into this git-tracked repo means that rewrite lands directly in the
 # working tree, blocking the next clone/pull with "local modifications
 # exist". A one-way copy re-applies the repo's version on every run
-# instead -- no drift ever accumulates to conflict with git. Genuine
-# per-machine/runtime state belongs in .claude/settings.local.json
+# instead -- no drift ever accumulates to conflict with git. The repo's
+# claude/ directory is deployed to ~/.claude entirely by copy. A `copy`
+# src that is a directory is copied file by file. Genuine
+# per-machine/runtime state belongs in ~/.claude/settings.local.json
 # instead, which is intentionally never tracked or deployed by this
 # script at all.
+#
+# `copy-guarded` entries are `copy` entries whose live destination may
+# hold edits worth keeping (e.g. a setting changed via Claude Code's
+# /config). If the destination differs from the repo's version, the diff
+# is printed and the script exits without touching anything further;
+# re-run with -o/--overwrite to replace it.
 #
 # `seed` entries are the opposite of `copy`: the destination is genuinely
 # per-machine state that this repo must never track (e.g.
@@ -44,6 +52,20 @@ TARGET_HOME="${HOME}"
 
 changed=0
 unchanged=0
+overwrite=0
+
+usage() {
+  printf 'Usage: %s [-o|--overwrite]\n' "$(basename "$0")"
+}
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -o|--overwrite) overwrite=1 ;;
+    -h|--help) usage; exit 0 ;;
+    *) usage >&2; exit 1 ;;
+  esac
+  shift
+done
 
 # kind:src (relative to REPO_DIR, empty for "dir"):dest (relative to $HOME)
 MANIFEST=(
@@ -62,9 +84,9 @@ MANIFEST=(
   "link:tmux/after-plugins.conf:.config/tmux/after-plugins.conf"
   "link:.gitconfig:.gitconfig"
   "dir::.claude"
-  "copy:.claude/settings.json:.claude/settings.json"
-  "link:.claude/statusline-command.sh:.claude/statusline-command.sh"
-  "link:.claude/themes:.claude/themes"
+  "copy-guarded:claude/settings.json:.claude/settings.json"
+  "copy:claude/statusline-command.sh:.claude/statusline-command.sh"
+  "copy:claude/themes:.claude/themes"
   "link:ghostty:.config/ghostty"
   "link:kitty:.config/kitty"
   "link:tuicr:.config/tuicr"
@@ -123,6 +145,12 @@ ensure_link() {
 ensure_copy() {
   local src="$REPO_DIR/$1"
   local dest="$TARGET_HOME/$2"
+
+  if [ -d "$src" ]; then
+    ensure_copy_dir "$1" "$2"
+    return
+  fi
+
   local dest_dir
   dest_dir="$(dirname "$dest")"
   [ -d "$dest_dir" ] || mkdir -p "$dest_dir"
@@ -144,6 +172,40 @@ ensure_copy() {
   cp "$src" "$dest"
   log "[changed] $2"
   changed=$((changed + 1))
+}
+
+# A destination that's still a symlink from the old `link` layout points
+# back into this repo, so copying files into it would write into the
+# working tree -- replace it with a real directory first.
+ensure_copy_dir() {
+  local dest="$TARGET_HOME/$2"
+
+  if [ -L "$dest" ]; then
+    local current
+    current="$(readlink "$dest")"
+    rm "$dest"
+    log "[removed-stale] $2 (was a symlink -> $current, now a real directory)"
+    changed=$((changed + 1))
+  fi
+  mkdir -p "$dest"
+
+  local file
+  while IFS= read -r file; do
+    ensure_copy "$1/$file" "$2/$file"
+  done < <(cd "$REPO_DIR/$1" && find . -type f | sed 's|^\./||' | sort)
+}
+
+ensure_copy_guarded() {
+  local src="$REPO_DIR/$1"
+  local dest="$TARGET_HOME/$2"
+
+  if [ "$overwrite" -eq 0 ] && [ -f "$dest" ] && [ ! -L "$dest" ] && ! cmp -s "$src" "$dest"; then
+    log "[error] $2 differs from the repo's $1 -- pass -o or --overwrite to replace it"
+    diff -u "$dest" "$src" || true
+    exit 1
+  fi
+
+  ensure_copy "$1" "$2"
 }
 
 ensure_seed() {
@@ -269,6 +331,7 @@ for entry in "${MANIFEST[@]}"; do
     link) ensure_link "$src" "$dest" ;;
     dir) ensure_real_dir "$dest" ;;
     copy) ensure_copy "$src" "$dest" ;;
+    copy-guarded) ensure_copy_guarded "$src" "$dest" ;;
     seed) ensure_seed "$src" "$dest" ;;
     repos-compat) ensure_working_repos "$dest" ;;
     *)
