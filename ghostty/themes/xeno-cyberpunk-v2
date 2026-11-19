@@ -13,6 +13,8 @@ cursor-text = #0b0d10
 selection-foreground = #0b0d10
 selection-background = #e8e34a
 
+background-opacity = 0.85
+
 # Black
 palette = 0=#0b0d10
 palette = 8=#2a2f36

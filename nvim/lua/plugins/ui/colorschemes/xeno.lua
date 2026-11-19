@@ -383,8 +383,10 @@ return {
 
       min_contrast = 4.5,
 
-      -- Preview-only, like xeno-light-v1 -- no matching static Ghostty theme
-      -- exists for this one, so don't let it touch the live terminal either.
+      -- ghostty/themes/xeno-cyberpunk-v3-light is a static Ghostty theme
+      -- derived from this one (Ghostty picks it when macOS is in light mode).
+      -- Keep xeno's integration off so nvim never rewrites or OSC-overrides
+      -- the terminal's colors.
       integrations = {
         ghostty = { enabled = false, update_config = false },
       },
