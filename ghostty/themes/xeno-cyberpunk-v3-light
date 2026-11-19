@@ -1,0 +1,60 @@
+# Ghostty light theme derived from the xeno.nvim "xeno-cyberpunk-v3-light"
+# colorscheme (nvim/lua/plugins/ui/colorschemes/xeno.lua). xeno computes its
+# shades at activation time, so these hex values were read from the resolved
+# highlight groups (nvim_get_hl), not from the seed colors in xeno.lua.
+#
+# Used when macOS is in light mode -- see `theme = light:...,dark:...` in
+# ../config. Mirrors xeno-cyberpunk-v2's structure: one hue per ANSI slot,
+# bright = same hue one step more vivid, accent on cursor/selection. Grays
+# are inverted for a light background (0/8 = surfaces/dim, 7/15 = dark
+# text) so programs that print "white" stay readable.
+#
+# Background is a lighter tint than nvim's own Normal bg (#cbbbdd) for
+# better contrast, so nvim's canvas won't match exactly. Normal slots are
+# all >= 4.5:1 (WCAG) on the background; brights >= 3.5:1.
+#
+# background #e9dff5, foreground #1e0039, accent (purple-600) #9600fa
+# cyberBlue #0059c4, cyberPink #a3005f, cyberCyan #00707f
+
+background = #e9dff5
+foreground = #1e0039
+cursor-color = #9600fa
+cursor-text = #f3e8ff
+selection-foreground = #f3e8ff
+selection-background = #9600fa
+
+# Nearly opaque: translucency costs more readability on a light background.
+# (The dark theme sets its own; the main config deliberately doesn't.)
+background-opacity = 0.95
+
+# Black (surface / dim text)
+palette = 0=#d6c8e6
+palette = 8=#7a6b8c
+
+# Red
+palette = 1=#a8001f
+palette = 9=#d1002a
+
+# Green
+palette = 2=#006b1c
+palette = 10=#008022
+
+# Yellow (dark amber -- real yellow is unreadable on a light background)
+palette = 3=#7a4d00
+palette = 11=#9a6400
+
+# Blue
+palette = 4=#0059c4
+palette = 12=#0067de
+
+# Magenta
+palette = 5=#a3005f
+palette = 13=#c40076
+
+# Cyan
+palette = 6=#00707f
+palette = 14=#00838f
+
+# White (dark text)
+palette = 7=#4a3a5c
+palette = 15=#2a1a3c

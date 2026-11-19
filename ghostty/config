@@ -1,7 +1,8 @@
 ## vim:fileencoding=utf-8
 
 # ghostty +list-themes to see all available themes
-theme = "xeno-cyberpunk-v2"
+# Follows macOS light/dark mode; both themes live in ./themes.
+theme = light:xeno-cyberpunk-v3-light,dark:xeno-cyberpunk-v2
 
 # ghostty +list-fonts to see all available fonts
 #font-family = "Hack Nerd Font"
@@ -9,7 +10,8 @@ theme = "xeno-cyberpunk-v2"
 font-family = "BitstromWera Nerd Font Mono"
 font-size = 14
 
-background-opacity = 0.85
+# background-opacity is set per theme (dark 0.85, light 0.95): a value here
+# would override both theme files.
 background-blur-radius = 20
 
 cursor-style = "underline"
