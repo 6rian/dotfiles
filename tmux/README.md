@@ -260,6 +260,12 @@ upstream tmux2k bug where `pink` reads `@tmux2k-light-purple`.
   hooks into `status-right` and silently stops if tmux2k overwrites it
   afterwards. `apply-theme.sh` re-runs tmux2k after TPM, so it copies
   continuum's interpolation over to the new `status-right` itself.
+- **Don't reload while another tmux server is running** (e.g. a
+  `tmux -L test` server). When the config loads, continuum counts tmux
+  processes, and if it finds another server it leaves autosave off for the
+  server you reloaded. Autosave stays off until a reload with no other
+  server running. Check that it's on with
+  `tmux show -gv status-right | grep continuum_save`.
 - **The resurrect save dir is pinned** to `~/.local/share/tmux/resurrect`, so
   it's the same on every host.
 - **`prefix L` uses sesh,** because tmux's native last-session loses track of
