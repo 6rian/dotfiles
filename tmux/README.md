@@ -3,7 +3,7 @@
 My tmux setup: `C-Space` prefix, vim-style navigation shared with Neovim,
 popups for everything (sessions, files, scratch shell), a cyberpunk status
 bar matched to the Neovim/kitty/Ghostty theme, and sessions that survive
-reboots.
+reboots. The status bar follows Ghostty's (and so macOS's) light/dark mode.
 
 ```
 tmux/
@@ -14,6 +14,9 @@ tmux/
 ├── popups.conf         # popup/menu look and popup bindings
 ├── plugins.conf        # TPM plugins and their options
 ├── theme.conf          # tmux2k status bar
+├── theme-dark.conf     # dark palette (status bar, popup borders)
+├── theme-light.conf    # light palette
+├── apply-theme.sh      # switches palettes when the terminal's theme changes
 ├── after-plugins.conf  # overrides that must follow TPM
 └── plugins/tmux2k/     # vendored status-bar theme (loaded manually, not via TPM)
 ```
@@ -30,7 +33,7 @@ tmux/
 | 3 | `bindings.conf` | Reload (`prefix r`), prefix, splits, window/pane movement, `C-S-←/→`, resizing, `prefix L` |
 | 4 | `popups.conf` | Popup/menu style and borders, `prefix a` / `f` / `F` / `g` |
 | 5 | `plugins.conf` | Every `@plugin` line and plugin option. resurrect/continuum stay last |
-| 6 | `theme.conf` | tmux2k options, then loads tmux2k |
+| 6 | `theme.conf` | tmux2k options, the palette for the current theme (`theme-dark.conf` or `theme-light.conf`), then loads tmux2k and sets the light/dark hooks |
 | 7 | TPM | `run ~/.tmux/plugins/tpm/tpm`, in `.tmux.conf` itself |
 | 8 | `after-plugins.conf` | Bindings that must override a plugin (`prefix Space`, `prefix ?`) |
 | 9 | `local.conf` | **Untracked**, optional per-host overrides (`source-file -q`). Create it by hand in `~/.config/tmux/` |
@@ -55,6 +58,7 @@ Rules for editing:
 |---|---|
 | `~/.tmux.conf` | `tmux/.tmux.conf` |
 | `~/.config/tmux/*.conf` | `tmux/*.conf`, one link per part (see [Where things live](#where-things-live)) |
+| `~/.config/tmux/apply-theme.sh` | `tmux/apply-theme.sh` |
 | `~/.config/tmux/plugins` | `tmux/plugins` (for tmux2k) |
 
 The config clones TPM itself on first start and installs the plugins. After
@@ -78,7 +82,7 @@ adding or removing a plugin, use `prefix I` to install or `prefix U` to update.
 - Windows and panes are numbered **from 1**, and windows renumber when one closes.
 - **The status bar is at the top.**
 - **Popups and menus use the terminal's own colours**, with a rounded purple
-  (`#a15bff`) border. tmux 3.8 otherwise draws them gray, and it misdetects
+  border (`#a15bff` dark, `#9600fa` light). tmux 3.8 otherwise draws them gray, and it misdetects
   Ghostty's dark background as light.
 - **Windows are auto-named after their directory** (`automatic-rename-format
   "#{b:pane_current_path}"`). Rename one with `prefix ,` to pin its name.
@@ -223,22 +227,39 @@ Managed by [TPM](https://github.com/tmux-plugins/tpm) unless noted:
 
 ## Status bar
 
-tmux2k with the `cyberpunk` theme, and every color overridden to match the
-`xeno-cyberpunk-v2` palette used by Neovim and kitty (background `#0b0d10`,
-accent `#e8e34a`, indigo `#7E4AE6`, green `#7EA929`, magenta `#F11FCB`).
+tmux2k with the `cyberpunk` theme and every color overridden, in two palettes:
 
-- **Left:** session · git · cwd
-- **Right:** cpu · ram · battery · network · time
+| Palette | File | Matches |
+|---|---|---|
+| Dark | `theme-dark.conf` | `xeno-cyberpunk-v2` (Neovim, kitty, Ghostty dark): background `#0b0d10`, accent `#e8e34a`, indigo `#7E4AE6`, green `#7EA929`, magenta `#F11FCB`. Dark text on bright segments |
+| Light | `theme-light.conf` | Ghostty's `xeno-cyberpunk-v3-light`: background `#e9dff5`, purple `#9600fa`, blue `#0059c4`, pink `#a3005f`, green `#006b1c`. Light text on deep segments |
 
-Segment foregrounds were picked for WCAG contrast. The comments in
-`theme.conf` explain the choices and an upstream tmux2k bug where `pink`
-reads `@tmux2k-light-purple`.
+- **Left:** session · git
+- **Right:** cpu · ram · time
+
+**Light/dark switching.** Ghostty follows macOS and reports each switch to
+tmux, which runs its `client-light-theme` / `client-dark-theme` hooks. They
+call `apply-theme.sh`, which sources the matching palette and re-runs
+tmux2k. The palette also sets the popup, menu and floax borders. Startup and
+`prefix r` pick the palette from `#{client_theme}`. A server's very first
+start has no client yet, so it starts dark and switches as soon as Ghostty
+reports light. Over SSH, the remote tmux follows the local Ghostty.
+
+- **The palette is server-wide.** With two clients in different themes
+  attached, the last one to switch wins.
+- **Both palette files must set the same options.** Switching sources one on
+  top of the other, so an option only one of them sets would stick.
+
+Segment foregrounds were picked for WCAG contrast (every light pair is at
+least 4.5:1). The comments in the palette files explain the choices and an
+upstream tmux2k bug where `pink` reads `@tmux2k-light-purple`.
 
 ## Gotchas
 
 - **resurrect/continuum must stay the last plugins.** continuum's autosave
   hooks into `status-right` and silently stops if tmux2k overwrites it
-  afterwards.
+  afterwards. `apply-theme.sh` re-runs tmux2k after TPM, so it copies
+  continuum's interpolation over to the new `status-right` itself.
 - **The resurrect save dir is pinned** to `~/.local/share/tmux/resurrect`, so
   it's the same on every host.
 - **`prefix L` uses sesh,** because tmux's native last-session loses track of
